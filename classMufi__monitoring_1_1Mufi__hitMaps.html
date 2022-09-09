@@ -94,11 +94,20 @@ $(document).ready(function(){initNavTree('classMufi__monitoring_1_1Mufi__hitMaps
 Inheritance diagram for Mufi_monitoring.Mufi_hitMaps:</div>
 <div class="dyncontent">
 <div class="center"><img src="classMufi__monitoring_1_1Mufi__hitMaps__inherit__graph.png" border="0" usemap="#Mufi__monitoring_8Mufi__hitMaps_inherit__map" alt="Inheritance graph"/></div>
+<map name="Mufi__monitoring_8Mufi__hitMaps_inherit__map" id="Mufi__monitoring_8Mufi__hitMaps_inherit__map">
+<area shape="rect" title=" " alt="" coords="5,80,165,121"/>
+<area shape="rect" title=" " alt="" coords="48,5,123,32"/>
+</map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
 Collaboration diagram for Mufi_monitoring.Mufi_hitMaps:</div>
 <div class="dyncontent">
 <div class="center"><img src="classMufi__monitoring_1_1Mufi__hitMaps__coll__graph.png" border="0" usemap="#Mufi__monitoring_8Mufi__hitMaps_coll__map" alt="Collaboration graph"/></div>
+<map name="Mufi__monitoring_8Mufi__hitMaps_coll__map" id="Mufi__monitoring_8Mufi__hitMaps_coll__map">
+<area shape="rect" title=" " alt="" coords="8,124,168,165"/>
+<area shape="rect" title=" " alt="" coords="5,5,80,32"/>
+<area shape="rect" title=" " alt="" coords="104,5,163,32"/>
+</map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -332,7 +341,7 @@ Static Public Attributes</h2></td></tr>
 <div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;           posMom = {}</div>
 <div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;           fstate =  aTrack.getFittedState()</div>
 <div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;           posMom[<span class="stringliteral">&#39;first&#39;</span>] = [fstate.getPos(),fstate.getMom()]</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;           fstate =  aTrack.getFittedState(aTrack.getNumPointsWithMeasurement()-1)</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;           <span class="comment"># fstate =  aTrack.getFittedState(aTrack.getNumPointsWithMeasurement()-1) does not make a difference</span></div>
 <div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;           posMom[<span class="stringliteral">&#39;last&#39;</span>] = [fstate.getPos(),fstate.getMom()]</div>
 <div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;           <span class="keywordflow">for</span> aHit <span class="keywordflow">in</span> event.Digi_MuFilterHits:</div>
 <div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;              <span class="keywordflow">if</span> <span class="keywordflow">not</span> aHit.isValid(): <span class="keywordflow">continue</span></div>
@@ -1111,7 +1120,7 @@ Static Public Attributes</h2></td></tr>
 <div class="ttc" id="anamespacemufiHitMaps_html_aa4f418ba90b748ec8340602cae66318b"><div class="ttname"><a href="namespacemufiHitMaps.html#aa4f418ba90b748ec8340602cae66318b">mufiHitMaps.smallSiPMchannel</a></div><div class="ttdeci">def smallSiPMchannel(i)</div><div class="ttdef"><b>Definition:</b> <a href="mufiHitMaps_8py_source.html#l00042">mufiHitMaps.py:42</a></div></div>
 <div class="ttc" id="anamespacemufiHitMaps_html_a2ae7e3ec8b69548cb60b825664520d34"><div class="ttname"><a href="namespacemufiHitMaps.html#a2ae7e3ec8b69548cb60b825664520d34">mufiHitMaps.beamSpot</a></div><div class="ttdeci">def beamSpot()</div><div class="ttdef"><b>Definition:</b> <a href="mufiHitMaps_8py_source.html#l00319">mufiHitMaps.py:319</a></div></div>
 <div class="ttc" id="aclassMuFilter_html_a2525ccc41592f3cc117c18424e8dc7ac"><div class="ttname"><a href="classMuFilter.html#a2525ccc41592f3cc117c18424e8dc7ac">MuFilter::GetPosition</a></div><div class="ttdeci">void GetPosition(Int_t id, TVector3 &amp;vLeft, TVector3 &amp;vRight)</div><div class="ttdef"><b>Definition:</b> <a href="MuFilter_8cxx_source.html#l00504">MuFilter.cxx:504</a></div></div>
-<div class="ttc" id="anamespaceSurvey-MufiScifi_html_a01cdeb8a7bc5f981ebe5849e735a87d4"><div class="ttname"><a href="namespaceSurvey-MufiScifi.html#a01cdeb8a7bc5f981ebe5849e735a87d4">Survey-MufiScifi.map2Dict</a></div><div class="ttdeci">def map2Dict(aHit, T='GetAllSignals', mask=True)</div><div class="ttdef"><b>Definition:</b> <a href="Survey-MufiScifi_8py_source.html#l00062">Survey-MufiScifi.py:62</a></div></div>
+<div class="ttc" id="anamespaceSurvey-MufiScifi_html_a01cdeb8a7bc5f981ebe5849e735a87d4"><div class="ttname"><a href="namespaceSurvey-MufiScifi.html#a01cdeb8a7bc5f981ebe5849e735a87d4">Survey-MufiScifi.map2Dict</a></div><div class="ttdeci">def map2Dict(aHit, T='GetAllSignals', mask=True)</div><div class="ttdef"><b>Definition:</b> <a href="Survey-MufiScifi_8py_source.html#l00063">Survey-MufiScifi.py:63</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

@@ -210,6 +210,7 @@ var hierarchy =
     [ "genfit::fieldCache", "structgenfit_1_1fieldCache.html", null ],
     [ "ShipFieldMaker::fieldInfo", "structShipFieldMaker_1_1fieldInfo.html", null ],
     [ "genfit::FieldManager", "classgenfit_1_1FieldManager.html", null ],
+    [ "FillingScheme.fillingScheme", "classFillingScheme_1_1fillingScheme.html", null ],
     [ "genfit::FitStatus", "classgenfit_1_1FitStatus.html", [
       [ "genfit::KalmanFitStatus", "classgenfit_1_1KalmanFitStatus.html", null ]
     ] ],
@@ -309,8 +310,8 @@ var hierarchy =
     [ "SndlhcDigi.SndlhcDigi", "classSndlhcDigi_1_1SndlhcDigi.html", null ],
     [ "genfit::StepLimits", "classgenfit_1_1StepLimits.html", null ],
     [ "shipVeto.Task", "classshipVeto_1_1Task.html", null ],
-    [ "shipVertex.Task", "classshipVertex_1_1Task.html", null ],
     [ "shipPid.Task", "classshipPid_1_1Task.html", null ],
+    [ "shipVertex.Task", "classshipVertex_1_1Task.html", null ],
     [ "TestCase", null, [
       [ "test_shipGeoConfig.TestInheritance", "classtest__shipGeoConfig_1_1TestInheritance.html", null ],
       [ "test_shipGeoConfig.TestSingleConfig", "classtest__shipGeoConfig_1_1TestSingleConfig.html", null ],
@@ -326,7 +327,8 @@ var hierarchy =
       [ "ecalStructure", "classecalStructure.html", null ],
       [ "genfit::EventDisplay", "classgenfit_1_1EventDisplay.html", null ],
       [ "hcalLightMap", "classhcalLightMap.html", null ],
-      [ "hcalStructure", "classhcalStructure.html", null ]
+      [ "hcalStructure", "classhcalStructure.html", null ],
+      [ "SNDLHCEventHeader", "classSNDLHCEventHeader.html", null ]
     ] ],
     [ "TObject", null, [
       [ "ecalCell", "classecalCell.html", [

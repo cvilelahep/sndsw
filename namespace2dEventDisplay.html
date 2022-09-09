@@ -726,7 +726,7 @@ Variables</h2></td></tr>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;               status, jsonStr = f.read()</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;               f.close()</div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;      date = json.loads(jsonStr)</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;      time_str = date[<span class="stringliteral">&#39;start_time&#39;</span>]</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;      time_str = date[<span class="stringliteral">&#39;start_time&#39;</span>].replace(<span class="stringliteral">&#39;Z&#39;</span>,<span class="stringliteral">&#39;&#39;</span>)</div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;      time_obj = time.strptime(time_str, <span class="stringliteral">&#39;%Y-%m-%dT%H:%M:%S&#39;</span>)</div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;      startTimeOfRun[runNumber] = time.mktime(time_obj)</div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;      <span class="keywordflow">return</span> startTimeOfRun[runNumber]</div>
@@ -965,7 +965,7 @@ Variables</h2></td></tr>
 <div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;                   <span class="keywordflow">if</span> qdc &lt; 0 <span class="keywordflow">and</span> qdc &gt; -900:  h[F][systems[system]][1]+=1</div>
 <div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;                   <span class="keywordflow">elif</span> <span class="keywordflow">not</span> qdc&lt;0:   </div>
 <div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;                       h[F][systems[system]][0]+=1</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;                       <span class="comment">#h[F][systems[system]][2+side]+=qdc</span></div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;                       h[F][systems[system]][2+side]+=qdc</div>
 <div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    h[<span class="stringliteral">&#39;hitCollectionY&#39;</span>][<span class="stringliteral">&#39;Scifi&#39;</span>][1].SetMarkerColor(ROOT.kBlue+2)</div>
 <div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;    h[<span class="stringliteral">&#39;hitCollectionX&#39;</span>][<span class="stringliteral">&#39;Scifi&#39;</span>][1].SetMarkerColor(ROOT.kBlue+2)</div>
 <div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    k = 1</div>
