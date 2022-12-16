@@ -1,5 +1,15 @@
 var NAVTREEINDEX20 =
 {
+"classScifiPoint.html#a177215f3064270fdaafcfedadc3cb12b":[12,0,146,3],
+"classScifiPoint.html#a472987272ed6b44c7d76c42727cf9874":[12,0,146,9],
+"classScifiPoint.html#a512c395ab0546697c23568df28569d24":[12,0,146,2],
+"classScifiPoint.html#a51c1eda19b3785bf6da29c7c72c7cc89":[12,0,146,0],
+"classScifiPoint.html#a604ee79c09c830028c2960ab851306a1":[12,0,146,7],
+"classScifiPoint.html#a61946e66bd87cdbfe49a691a8e233865":[12,0,146,11],
+"classScifiPoint.html#a971db9b9e5fb61923462b2290ef325d0":[12,0,146,4],
+"classScifiPoint.html#ab66d0fae856baff64d2e668c6e4fd631":[12,0,146,1],
+"classScifiPoint.html#adb9695a85c6b955609bab11c81aadfef":[12,0,146,5],
+"classScifiPoint.html#ae19a1f0fc9448a586855b7e607a92ae3":[12,0,146,10],
 "classScifiPoint.html#af0095d62da1f8b3119f2b6847077c06f":[12,0,146,12],
 "classScifiPoint.html#afbcb6d64c44af59638350cf873e473e0":[12,0,146,8],
 "classScifi__monitoring_1_1Scifi__hitMaps.html":[12,0,29,0],
@@ -239,15 +249,5 @@ var NAVTREEINDEX20 =
 "classShipFieldMaker.html#a86b97bf8ceebc3cc4f8d02eb72adf245":[12,0,155,49],
 "classShipFieldMaker.html#a899a97b15a3d1fd31046b37894ff2ea2":[12,0,155,35],
 "classShipFieldMaker.html#a8dd099f27be8e0c6b489038b1b4ce681":[12,0,155,21],
-"classShipFieldMaker.html#a9bce0db7ef2f464add2086488ace8d2c":[12,0,155,25],
-"classShipFieldMaker.html#a9cfbe7d555af8b29e81e58674bf768c1":[12,0,155,11],
-"classShipFieldMaker.html#a9da15b26eea1a0d7eb588e2689c87e99":[12,0,155,24],
-"classShipFieldMaker.html#a9ff3dcbc4d8b9f5ec3082940c94cc6fa":[12,0,155,9],
-"classShipFieldMaker.html#aa1285e47407cd3a8dd8e6d7f9cd9acd6":[12,0,155,20],
-"classShipFieldMaker.html#aa1e6a61468cf4047a817ebba21dca3ac":[12,0,155,2],
-"classShipFieldMaker.html#aa6ea6ea385a201195ce579e19175072a":[12,0,155,52],
-"classShipFieldMaker.html#aa91385b42a28a955456c64b358a2c96d":[12,0,155,23],
-"classShipFieldMaker.html#aa9e331f6a407033d03face9ea9ab79f5":[12,0,155,18],
-"classShipFieldMaker.html#aaf3b3aa3a47860e97f72f3c028ba3a30":[12,0,155,16],
-"classShipFieldMaker.html#aaf44333a99dd882247caa811db06e56d":[12,0,155,43]
+"classShipFieldMaker.html#a9bce0db7ef2f464add2086488ace8d2c":[12,0,155,25]
 };

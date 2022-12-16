@@ -1,24 +1,26 @@
 /*
-@licstart  The following is the entire license notice for the
-JavaScript code in this file.
+ @licstart  The following is the entire license notice for the JavaScript code in this file.
 
-Copyright (C) 1997-2019 by Dimitri van Heesch
+ The MIT License (MIT)
 
-This program is free software; you can redistribute it and/or modify
-it under the terms of version 2 of the GNU General Public License as published by
-the Free Software Foundation
+ Copyright (C) 1997-2020 by Dimitri van Heesch
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU General Public License for more details.
+ Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+ and associated documentation files (the "Software"), to deal in the Software without restriction,
+ including without limitation the rights to use, copy, modify, merge, publish, distribute,
+ sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
 
-You should have received a copy of the GNU General Public License along
-with this program; if not, write to the Free Software Foundation, Inc.,
-51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ The above copyright notice and this permission notice shall be included in all copies or
+ substantial portions of the Software.
 
-@licend  The above is the entire license notice
-for the JavaScript code in this file
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
+ BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+ DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+ @licend  The above is the entire license notice for the JavaScript code in this file
 */
 var NAVTREE =
 [
@@ -109,72 +111,96 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "2dEventDisplay_8py.html",
-"EmulsionMagnet_8cxx_source.html",
-"MagneticSpectrometer_8cxx.html",
-"RKTools_8h.html#a6154edc550af3e20a8b596b9c22e9a6e",
+"EmulsionMagnet_8h_source.html",
+"MagneticSpectrometer_8h_source.html",
+"RKTools_8h.html#a7842d42c75a8456ef78ccc4ddf08373f",
 "ShipAna_8py.html#a3f6bdfc6146bff59ceb9bf9a8151a3b1",
 "ShipReco_8py.html#a5d79d13160dfaad7ee80f62adb0ee67e",
-"TTCluster_8py.html#a42b4435305ad9f3df9bb8ea5c6ceaa45",
-"ana__ShipMuon_8py.html#ab54b0884f0d0e9af5430d755b0f116b8",
-"cfortran_8h.html#a2d0f7f75b22529ec4c20c182a476d335",
-"cfortran_8h.html#a7156e897c3b2b0fca2340db0a77a1b1d",
-"cfortran_8h.html#abb1d97c00c03880d9a28d7c153cb9eaa",
-"charm-geometry__config_8py.html#a0518e417b04c2c165dee6fb2056aa262",
-"charm-geometry__config_8py.html#ae255f0e71a39128f624085e9de2fcbd9",
-"classDPPythia8Generator.html#a704acb88857d5fc89fbc4f1cd3a8300a",
-"classEventDisplay__Task_1_1twod.html#a6e9ea2d486ee9c8c31b783a8a1ee10c6",
-"classGenieGenerator.html#a77e78530e38097137b31418b438a5c21",
-"classMagneticSpectrometer.html#a93a6c57dedebf996419b289935b59106",
-"classMufi__monitoring_1_1Veto__Efficiency.html#ae7e00cc5021c4f08d680559258964e75",
-"classNuTauMudet.html#a371d8b00f4898b9fa37a79fdf57cd920",
-"classPythia8Generator.html#a115f4c756a4644f7ad98d3d4bd4c97fd",
-"classScifiPoint.html#af0095d62da1f8b3119f2b6847077c06f",
-"classShipFieldMaker.html#ab664b64d707783cf30521c2ac9bd5192",
-"classShipParticle.html#a0c0d50d9c61c8d5dd2912b546fb0c663",
-"classSndlhcMuonReco_1_1hough.html#aae04bb8114db8174f406709091b3b74c",
-"classTimeDet.html#a1864367ffaccae6e8b6364155e6bc2b0",
-"classUpstreamTaggerHit.html#a92335746653758ad0804566cc1c51de3",
-"classecalAnalysisSimple.html",
-"classecalDrawer.html#aab66668052f4987c9e03447803cde94d",
-"classecalReconstructed.html#aa44240b738b5de349ad4d8f868596d18",
-"classg4Ex_1_1MyEventAction.html",
-"classgbl_1_1VVector.html#ac9f8ffefffd733c42b7e64630ff934f1",
-"classgenfit_1_1DetPlane.html#a317f4b2b190a13218b4f88c1b14ead9a",
-"classgenfit_1_1GFRaveTrackParameters.html#a3f130c9f329dd3ea4216dece733dce1d",
-"classgenfit_1_1KalmanFitterRefTrack.html#affda7c9ad9495fd91828d1b43adcc904",
-"classgenfit_1_1RKTrackRep.html#a71750034f38aa93a3941ae3ae3d3533e",
-"classgenfit_1_1Track.html#a382f914b973369c468153100d40e540e",
-"classhcal.html#a8070a832344499131797d6f1e6998925",
-"classhcalStructureFiller.html#a101be04071d0b6b0ccf05fb336d323b4",
-"classreverseMapping_1_1reversChannelMapping.html#a5f378124e7f9df764074aca9849c76d0",
-"classshipVertex_1_1Task.html#addd8543c8b936f987f6a48f7a520aff9",
-"classsplitcalHit.html#a64acc8a6654ba82c1de1455deb4bdfce",
-"classveto.html#a1bfadee7c27e2bf78131c8ab92157cf3",
-"convertRawData__muTestbeam_8py.html#a00b34fa95f6f88bac775774b3bfe7277",
-"drifttubeMonitoring_8py.html#a0d98277f81c8004ce25f56f889aeaeff",
-"drifttubeMonitoring_8py.html#ade954df4c1d1245a6df92095151f86cc",
-"eventDisplay__shipLHC_8py.html#acdb1d86b83e6bda0cf9777c0119aed92",
-"g4Ex__args_8py.html#a2aa38719b09994b7fc4d95794640169f",
-"geometry__config_8py.html#a364d459d3ece8e7662b713d3c613c4e8",
-"geometry__config_8py.html#ad587d8bd035f2b80e4ab452fbff9dc39",
-"hcalModule_8h_source.html",
-"logger_8hxx.html#a113b6bb3527bb2ff3507ec12731aaafe",
-"makeMuonDIS_8py.html#a0baff85fde4aefea404a4f1933e8dcfb",
-"mpdalc_8f90.html#a53659fb2ebde6c8c36d004045bef3465",
-"mpmod_8f90.html#ade9e2f7c5771cc50bf7aa563f636d46f",
-"muonDis_8py.html#adf81ccc070bb8d23eeb5fc6b2260713f",
-"namespacemembers_o.html",
-"pede_8f90.html#ad0e1b3c263ba5e50c1a0da7ee9d60864",
-"runMufluxDigi_8py.html#a58d89ff0b58402da2689343a4eedb05a",
-"run__MufluxfixedTarget_8py.html#abe37b1152ead82fee05bf0f589221cca",
-"run__simPgun_8py.html#a30335991481110021b626f2cab0a6565",
-"scifiHitMaps_8py.html#af6da5c8b8c09ad3d283552bfd98c3954",
-"shipRoot__conf_8py.html#a7f5e35cee75ea5f10f147c798b1694ae",
-"sndLHC__H6geom__config_8py.html#a0e00a91829354326c064905e41230354",
-"sndLHC__TI18geom__config_8py.html#a52fb096e576414661dd78fe215bc4636",
-"sndLHC__geom__config_8py.html#a903782e5f765e73031d146ad946396da",
-"structgenfit_1_1ExtrapStep.html#ace3dd7154d264707a7ab92f5dacb9061",
-"test__shipGeoConfig_8py_source.html"
+"TTCluster_8py.html#a476e0ec4254b639967a6b178819552f3",
+"ana__ShipMuon_8py.html#ab656cf0d31e63d2dde09ceb18dbdb7a7",
+"cfortran_8h.html#a2d1bb19ee5010c0322c39c51ac16c7dc",
+"cfortran_8h.html#a71c2feb0c615c88153c1158b7c1dec6a",
+"cfortran_8h.html#abb2612b3bbb50e08aa6619702b708f14",
+"charm-geometry__config_8py.html#a060ccb32ed5eabeb7bb503bde0fa4814",
+"charm-geometry__config_8py.html#ae42a97bd0a1083a44d6d2c7a73f882d2",
+"classDPPythia8Generator.html#a722bfda314cdc37c7624d0923927cc04",
+"classEventDisplay__Task_1_1twod.html#a83e2e478302f106c856d2c08cf2572b1",
+"classGenieGenerator.html#a5a39ccddc811b97e7e61500af96c508b",
+"classMagneticSpectrometer.html#a824b23caa34f2d821e815ab1dead7547",
+"classMufi__monitoring_1_1Mufi__largeVSsmall.html#aad79c78f6050fb581360fbdd68dc1484",
+"classNuTauMudet.html#a2a45e25844e81f504363e4201e5ca385",
+"classPythia6Generator.html#ab58bde8b6a45bd79ebecf0129eeac58f",
+"classScifiPoint.html#a177215f3064270fdaafcfedadc3cb12b",
+"classShipFieldMaker.html#a9cfbe7d555af8b29e81e58674bf768c1",
+"classShipMuonShield.html#ae1294cde7a395ed44475486d2c2c564a",
+"classSndlhcMuonReco_1_1MuonReco.html#aa532191b63ec34cd148bb36754590a6d",
+"classTargetTracker.html#a86afa822fb9373e8359e5701ffbcfaba",
+"classUpstreamTagger.html#aeb6222c3bc74669a3c77fb211a2936c6",
+"classecal.html#adb36cb2249f413411f83a59fc9cf0ff1",
+"classecalDrawer.html#a2c9b644f1638557256620df3abc73f4c",
+"classecalPrepare.html#af45b796fad074e5026eece59bbcad4be",
+"classexitHadronAbsorber.html#a3025f1b6fe73a81081c0ac4e153b65f0",
+"classgbl_1_1VMatrix.html#a6ef11bdaa9325b517b3269d79069a95e",
+"classgenfit_1_1ConstField.html#ab767d04d93a611fbca848d6792b4a33e",
+"classgenfit_1_1GFGbl.html#a9f9db27a5a8cc602bdbee25e48c48b2d",
+"classgenfit_1_1KalmanFitterInfo.html#acd03bf43edc9d67c757706290f6c097a",
+"classgenfit_1_1RKTrackRep.html#a248147a042b603431d22bd285ee14adc",
+"classgenfit_1_1TGeoMaterialInterface.html#a8efab4baa48efa1bcf0cf7e664d4c3cf",
+"classhcal.html#a281e63e59e41522eaf32dd94dbc772ba",
+"classhcalStructure.html#a0a996a5bfa54ba8e8a787020e05495a0",
+"classpreshower.html#ae2fb3177e386fda907328a75fde9859e",
+"classshipPid_1_1Task.html#ab0ea410577c3529632b5c1d9a8c2907d",
+"classsplitcal.html#a2472a223fb4a41eb2550780d6a6de6c5",
+"classstrawtubes.html#ab683c19901a645b1f78a524a8f202384",
+"classvetoHit.html#abfe4b714c3d35c5e057c5d9c5819b86a",
+"decorators_8py.html#a4b26142ef5f8607846f202a7a1fe66f4",
+"drifttubeMonitoring_8py.html#a6e25b62d9536d053f8e8d9175ab8f7cf",
+"ecalMatch_8h_source.html",
+"fittersLinkDef_8h_source.html",
+"g4Ex__gap__mergeFiles_8py.html#afe47ccb715ab0cebfc45785ef0aaf2bc",
+"geometry__config_8py.html#a812fd0b98d10c0b4efd8bbe8527c2d0f",
+"getconditions__condDB_8py.html#a3cb6e5eccd6029a299325277145c1d7b",
+"hepunit_8py.html#aa02eb6e6c7bf411c9b6a958b76d36dd3",
+"makeCascade_8py.html#a14cea4d78b73e5ff8a7eefb813be9886",
+"md_README.html#autotoc_md30",
+"mpmod_8f90.html#a46fe780b490c7ebf29ce9beaca53f4b6",
+"mptest2_8f90.html#a23987ca5e0bf06d8b1325b9efddb4cc6",
+"namespace2dMuEventBuilderDisplay.html#a982fadf081e7b14b666965885bf848e1",
+"namespaceScifiCluster.html#a0cd661660ed1a742f94389278b93a0c8",
+"namespaceSndlhcMuonReco.html",
+"namespaceana__ShipMuon.html#a40dc7edff0119a07ed6deeadc97acc6f",
+"namespacecharm-geometry__config.html#a9083c0d74a999f4969af8e80bfb9f370",
+"namespaceconditionsDatabase_1_1demo_1_1drifttubeMonitoring.html#a2ff7a13a5c5a64fb2a94b350b9eaba9d",
+"namespaceconditionsDatabase_1_1demo_1_1drifttubeMonitoring.html#aff8d1b2ea3d273a86b3542869bf9957e",
+"namespaceconvertRawData__muTestbeam.html#af1122c9037f3f883ba4a9b8622f0ce30",
+"namespaceextractMuonsAndUpdateWeight.html#a24871fbfcc990665b0f9edee056a795d",
+"namespacegenfit.html#a3601afe73ceb94925bd3fafa1d2a37d8",
+"namespacegeometry__config.html#a6d1b6ea70ac075117556ba50470e691e",
+"namespacegeometry__config.html#afe729854c327582e8ecf8cc0d4bbc505",
+"namespacemakeCascade.html#a6727d7bb8472fc986a59166a91b33c15",
+"namespacemembers_i.html",
+"namespacempmod.html#a5fbf5f0b5af5d89554c1074f9d8ae5bd",
+"namespacemuonDis.html#a3c24e39a6032c4f68939ba304c0f8c52",
+"namespacerunMufluxDigi.html#aec1ab594b6b942841956039d3abb22a7",
+"namespacerun__TrackSelections.html",
+"namespacerun__simPgun.html#ac21605aae33e86410136818f80fb1475",
+"namespacescifiSimAna.html#a6ae850cbb05f7cc880ecc1546c0f69de",
+"namespaceship_1_1details.html#acc1c8b1bb1cd5218d0f9c42217adaf73",
+"namespacesndLHC__H6geom__config.html#a7a840c6c080d2a844e34c10eb808f5bf",
+"namespacesndLHC__TI18geom__config.html#ab8b00c6e4a7e3d2be9fc9004ce998972",
+"namespacesndLHC__geom__config.html#ae24bfe5d3495f751f30b5c53e5fb5a6e",
+"option_page.html#cmd-cache",
+"readMilleBinary_8py.html#a332b61af90ded4fd933e806d1c9eb683",
+"run__Monitoring_8py.html#a146073a2a7bd8ec7e369566574f0f8c3",
+"run__fixedTarget_8py.html#abdbb8d1672225f7915bd51324256b861",
+"run__simScript_8py.html#a7438ba4e0f241567d8e58065969d5ab5",
+"shipLHC_2scripts_2eventDisplay_8py.html#abb547de85a64254fe7d94f264bf02a0b",
+"shipunit_8py.html#a852bff5f88f281cab1a9d17abbd90213",
+"sndLHC__H6geom__config_8py.html#abf455287b01a7f510f3c54f89d257456",
+"sndLHC__TI18geom__config_8py.html#af0d5f04543728ac1165b0e8e35d6158a",
+"sndSciFiBaseCut_8h_source.html",
+"study__muEloss_8py.html#a1cf3022eb1eeff3dd1ca4f1395ca09c3",
+"unitTests_2main_8cc.html#a4ea3ca0f3b9006dd73ab11556d4a5a55"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
