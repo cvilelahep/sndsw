@@ -2,6 +2,7 @@ var FillingScheme_8py =
 [
     [ "fillingScheme", "classFillingScheme_1_1fillingScheme.html", "classFillingScheme_1_1fillingScheme" ],
     [ "pyExit", "FillingScheme_8py.html#a369f277c7aab8064261d462bbc1ad562", null ],
+    [ "convpath", "FillingScheme_8py.html#a9263270e81e6c532e380717b9515c036", null ],
     [ "default", "FillingScheme_8py.html#a25abdeea4c656f2b5c20a03e770ca6ef", null ],
     [ "dest", "FillingScheme_8py.html#a0f7b2c524573ea02e10d5d5a7c673117", null ],
     [ "emulsionReplacements", "FillingScheme_8py.html#a36e6591f927dc4dbd421a27d202445e4", null ],
@@ -21,14 +22,16 @@ var FillingScheme_8py =
     [ "N_ScifiTracks", "FillingScheme_8py.html#a090004e490083f69dcd35b5b06d3cd92", null ],
     [ "nev", "FillingScheme_8py.html#ae3b99f40e1bf90410780917d72e80d85", null ],
     [ "Nevts", "FillingScheme_8py.html#a3f3834040da5b8524b3df754fef5a0e3", null ],
-    [ "offline", "FillingScheme_8py.html#ab2ca33f55854f32884d8b2f6739d2d5d", null ],
+    [ "offline", "FillingScheme_8py.html#a30a925d8ac754f8d7ddbe44822f44370", null ],
     [ "options", "FillingScheme_8py.html#a6f98dfca098ddc383a7ac59410d1c84b", null ],
     [ "parser", "FillingScheme_8py.html#ad04f13477ddf1993386b93a7e06f806b", null ],
     [ "partitions", "FillingScheme_8py.html#ada02deedc7862aba86cff6a72d8175dc", null ],
+    [ "path", "FillingScheme_8py.html#a16567663ee1d9e0e4a8a97a46adcb72e", null ],
     [ "postScale", "FillingScheme_8py.html#a5044f46474d5277ad5de231a7227e7eb", null ],
     [ "problems", "FillingScheme_8py.html#a3e4cdf55bb018cc450f7275266439a65", null ],
     [ "r", "FillingScheme_8py.html#a5696558457490aa17833c97d22b60976", null ],
     [ "required", "FillingScheme_8py.html#a78a8f12feb2ccfab7e7827efd4909c09", null ],
+    [ "rmin", "FillingScheme_8py.html#ad078c328a072e89c28512492503b1115", null ],
     [ "runnr", "FillingScheme_8py.html#a754e7baa1c9a9bf429342c39171105fd", null ],
     [ "runNumbers", "FillingScheme_8py.html#a71fd4a1cea01d9f9a1937c250440f0fb", null ],
     [ "runs", "FillingScheme_8py.html#a9582aa3706ab90c0285696bfce872547", null ],
@@ -38,6 +41,6 @@ var FillingScheme_8py =
     [ "tmp", "FillingScheme_8py.html#aa7d7d6a84c1043c818da4d454a1bb1b2", null ],
     [ "type", "FillingScheme_8py.html#a2b8ed7babcc34c783af4a8bd8180acbf", null ],
     [ "withIP2", "FillingScheme_8py.html#aad4c18651bdda9f6d42a179c453a3f0c", null ],
-    [ "www", "FillingScheme_8py.html#af05a55baac05d96b65ecbbbc0026586b", null ],
+    [ "www", "FillingScheme_8py.html#ac7bb7cd1cb06f7a71af8dacd19586f55", null ],
     [ "x", "FillingScheme_8py.html#af00a3860a6e3c852a9bf60058d2fc88c", null ]
 ];
