@@ -8,7 +8,7 @@ namespace sndAnalysis {
   
   class vetoCut : public MuFilterBaseCut {
   public :
-    vetoCut(TChain * ch);
+    vetoCut(TChain * tree);
     ~vetoCut(){;}
     bool passCut();
   };

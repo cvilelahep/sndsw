@@ -9,23 +9,23 @@
 namespace sndAnalysis {
 
   TClonesArray * sciFiBaseCut::scifiDigiHitCollection = 0;
-  TChain * sciFiBaseCut::tree = 0;
+  TChain * sciFiBaseCut::ch = 0;
   unsigned long int sciFiBaseCut::read_entry = -1;
 
   std::vector<int> sciFiBaseCut::hits_per_plane_vertical = std::vector<int>(5, 0);
   std::vector<int> sciFiBaseCut::hits_per_plane_horizontal = std::vector<int>(5, 0);
 
   sciFiBaseCut::sciFiBaseCut(TChain * ch){
-    if (tree == 0){
-      tree = ch;
+    if (ch == 0){
+      ch = ch;
       scifiDigiHitCollection = new TClonesArray("sndScifiHit", 3000);
-      tree->SetBranchAddress("Digi_ScifiHits", &scifiDigiHitCollection);
+      ch->SetBranchAddress("Digi_ScifiHits", &scifiDigiHitCollection);
     }
   }
 
   void sciFiBaseCut::initializeEvent(){
-    if (read_entry != tree->GetReadEntry()){
-      read_entry = tree->GetReadEntry();
+    if (read_entry != ch->GetReadEntry()){
+      read_entry = ch->GetReadEntry();
 
       // Clear hits per plane vectors
       std::fill(hits_per_plane_vertical.begin(), hits_per_plane_vertical.end(), 0);

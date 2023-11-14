@@ -13,7 +13,7 @@ namespace sndAnalysis {
 
   protected :
     static SNDLHCEventHeader * header;
-    static TChain * tree;
+    static TChain * ch;
 
     EventHeaderBaseCut(TChain * ch);
     ~EventHeaderBaseCut(){;}

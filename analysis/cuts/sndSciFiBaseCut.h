@@ -13,7 +13,7 @@ namespace sndAnalysis {
   class sciFiBaseCut : public baseCut {
 
   private : 
-    static TChain * tree;
+    static TChain * ch;
     static unsigned long int read_entry;
 
   protected :

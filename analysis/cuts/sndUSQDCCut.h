@@ -10,7 +10,7 @@ namespace sndAnalysis {
   private :
     float qdc_threshold;
   public :
-    USQDCCut(float threshold, TChain * ch);
+    USQDCCut(float threshold, TChain * tree);
     ~USQDCCut(){;}
     bool passCut();
   };

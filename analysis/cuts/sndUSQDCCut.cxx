@@ -11,7 +11,7 @@
 
 namespace sndAnalysis {
 
-  USQDCCut::USQDCCut(float threshold, TChain * ch) : MuFilterBaseCut(ch) {
+  USQDCCut::USQDCCut(float threshold, TChain * tree) : MuFilterBaseCut(tree) {
     qdc_threshold = threshold;
     cutName = "Total US QDC > "+std::to_string(qdc_threshold);
 

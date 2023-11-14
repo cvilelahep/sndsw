@@ -8,7 +8,7 @@ namespace sndAnalysis {
   
   class DSActivityCut : public MuFilterBaseCut {
   public :
-    DSActivityCut(TChain * ch);
+    DSActivityCut(TChain * tree);
     ~DSActivityCut(){;}
     bool passCut();
   };

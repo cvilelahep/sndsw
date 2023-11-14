@@ -11,7 +11,7 @@ namespace sndAnalysis {
     int delta_t;
     int delta_e;
   public :
-    eventDeltatCut(int delta_event, int delta_timestamp, TChain * ch);
+    eventDeltatCut(int delta_event, int delta_timestamp, TChain * tree);
     ~eventDeltatCut(){;}
     bool passCut();
   };

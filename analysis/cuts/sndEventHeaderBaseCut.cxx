@@ -8,19 +8,19 @@
 namespace sndAnalysis {
 
   SNDLHCEventHeader * EventHeaderBaseCut::header = 0;
-  TChain * EventHeaderBaseCut::tree = 0;
+  TChain * EventHeaderBaseCut::ch = 0;
 
-  EventHeaderBaseCut::EventHeaderBaseCut(TChain * ch){
+  EventHeaderBaseCut::EventHeaderBaseCut(TChain * tree){
     if (header == 0){
       header = new SNDLHCEventHeader();
-      ch->SetBranchAddress("EventHeader", &header);
-      ch->GetEntry(0);
+      tree->SetBranchAddress("EventHeader", &header);
+      tree->GetEntry(0);
       if (header->GetEventTime() == -1) {
-	ch->SetBranchAddress("EventHeader.", &header);
-	ch->GetEntry(0);
+	tree->SetBranchAddress("EventHeader.", &header);
+	tree->GetEntry(0);
 	if (header->GetEventTime() == -1) throw std::runtime_error("Invalid event header");
       }
-      tree = ch;
+      ch = tree;
     }
   }
 }

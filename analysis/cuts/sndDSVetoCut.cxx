@@ -9,7 +9,7 @@
 
 namespace sndAnalysis {
 
-  DSVetoCut::DSVetoCut(TChain * ch) : MuFilterBaseCut(ch) {
+  DSVetoCut::DSVetoCut(TChain * tree) : MuFilterBaseCut(tree) {
     cutName = "Remove events with hits in the last (hor) and two last (ver) DS planes";
     
     shortName = "DSVetoCut";

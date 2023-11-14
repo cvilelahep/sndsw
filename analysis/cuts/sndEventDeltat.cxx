@@ -4,7 +4,7 @@
 
 namespace sndAnalysis {
 
-  eventDeltatCut::eventDeltatCut(int delta_event, int delta_timestamp, TChain * ch) : EventHeaderBaseCut(ch) {
+  eventDeltatCut::eventDeltatCut(int delta_event, int delta_timestamp, TChain * tree) : EventHeaderBaseCut(tree) {
     delta_e = delta_event;
     delta_t = delta_timestamp;
 
@@ -22,11 +22,11 @@ namespace sndAnalysis {
   }
 
   bool eventDeltatCut::passCut(){
-    unsigned long int current_entry = tree->GetReadEntry();
+    unsigned long int current_entry = ch->GetReadEntry();
     long int current_time = header->GetEventTime();
 
     bool passes = true;
-    tree->GetEntry(current_entry + delta_e);
+    ch->GetEntry(current_entry + delta_e);
 
     int sign = (delta_e > 0) - (delta_e < 0);
 
@@ -35,7 +35,7 @@ namespace sndAnalysis {
     plot_var[0] = abs(current_time - header->GetEventTime());
     
     // Get current entry back
-    tree->GetEntry(current_entry);
+    ch->GetEntry(current_entry);
     return passes;
   }
 }
