@@ -20,3 +20,6 @@ link_directories( ${LINK_DIRECTORIES})
 
 add_executable(neutrinoFilterGoldenSample neutrinoFilterGoldenSample.cxx)
 target_link_libraries(neutrinoFilterGoldenSample ${ROOT_LIBRARIES} sndCuts)
+
+add_executable(US_correlation US_correlation.cxx)
+target_link_libraries(US_correlation ${ROOT_LIBRARIES} ShipData shipLHC veto)

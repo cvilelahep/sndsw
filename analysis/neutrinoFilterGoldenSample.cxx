@@ -23,6 +23,7 @@
 #include "sndAvgDSFiducialCut.h"
 #include "sndDSVetoCut.h"
 
+// Alternatice sets of cuts.
 enum Cutset { stage1cuts, novetocuts, FVsideband, allowWalls2and5, stage1cutsVetoFirst, nueFilter} ;
 
 int main(int argc, char ** argv) {
@@ -135,8 +136,6 @@ int main(int argc, char ** argv) {
     cutFlow.push_back( new sndAnalysis::minSciFiHits(35, ch)); // At least 35 SciFi hits
     if (isMC) cutFlow.push_back( new sndAnalysis::USQDCCut(700, ch)); // Min QDC
     else      cutFlow.push_back( new sndAnalysis::USQDCCut(600, ch)); // 
-		       
-
   } else {
     std::cout << "Unrecognized cutset. Exitting" << std::endl;
     exit(-1);
