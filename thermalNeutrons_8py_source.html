@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>SND Software: shipLHC/thermalNeutrons.py Source File</title>
+<title>SND@LHC Software: shipLHC/thermalNeutrons.py Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">SND Software
+   <div id="projectname">SND@LHC Software
    </div>
   </td>
  </tr>
@@ -136,7 +136,7 @@ $(document).ready(function(){initNavTree('thermalNeutrons_8py_source.html',''); 
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment"># -----Create simulation run----------------------------------------</span></div>
 <div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="namespacethermalNeutrons.html#a677f5a84d872cd5623ddd97665a486a5">   50</a></span>&#160;run = ROOT.FairRunSim()</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;run.SetName(<span class="stringliteral">&#39;TGeant4&#39;</span>)  <span class="comment"># Transport engine</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;run.SetOutputFile(outFile)  <span class="comment"># Output file</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;run.SetSink(ROOT.FairRootFileSink(outFile))  <span class="comment"># Output file</span></div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;run.SetUserConfig(<span class="stringliteral">&quot;g4ConfigNeutron.C&quot;</span>) <span class="comment"># user configuration file default g4Config.C</span></div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment"># -----Create PrimaryGenerator--------------------------------------</span></div>

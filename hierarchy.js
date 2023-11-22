@@ -35,6 +35,7 @@ var hierarchy =
       ] ],
       [ "sndAnalysis::MuFilterBaseCut", "classsndAnalysis_1_1MuFilterBaseCut.html", [
         [ "sndAnalysis::DSActivityCut", "classsndAnalysis_1_1DSActivityCut.html", null ],
+        [ "sndAnalysis::DSVetoCut", "classsndAnalysis_1_1DSVetoCut.html", null ],
         [ "sndAnalysis::USQDCCut", "classsndAnalysis_1_1USQDCCut.html", null ],
         [ "sndAnalysis::avgDSFiducialCut", "classsndAnalysis_1_1avgDSFiducialCut.html", null ],
         [ "sndAnalysis::vetoCut", "classsndAnalysis_1_1vetoCut.html", null ]
@@ -356,6 +357,7 @@ var hierarchy =
     ] ],
     [ "TObject", null, [
       [ "Hit2MCPoints", "classHit2MCPoints.html", null ],
+      [ "PrimaryTrack", "structPrimaryTrack.html", null ],
       [ "ShipHit", "classShipHit.html", [
         [ "TimeDetHit", "classTimeDetHit.html", null ],
         [ "UpstreamTaggerHit", "classUpstreamTaggerHit.html", null ],
