@@ -1,8 +1,5 @@
 var NAVTREEINDEX80 =
 {
-"neutrinoFilterGoldenSample__stage2_8py.html#a09e55492463354e46e230ee9ab0c848e":[13,0,0,3,69],
-"neutrinoFilterGoldenSample__stage2_8py.html#a110fd6c49090beb836be120cc372088d":[13,0,0,3,67],
-"neutrinoFilterGoldenSample__stage2_8py.html#a114ea208e0ab634c122b6cba1cf53b37":[13,0,0,3,2],
 "neutrinoFilterGoldenSample__stage2_8py.html#a1448f489854d9560362c7c568837d172":[13,0,0,3,12],
 "neutrinoFilterGoldenSample__stage2_8py.html#a1908f00794a646d0d606ede132770303":[13,0,0,3,56],
 "neutrinoFilterGoldenSample__stage2_8py.html#a19540e911ffd225f6586720e7d10cac3":[13,0,0,3,61],
@@ -249,5 +246,8 @@ var NAVTREEINDEX80 =
 "pyFairModule_8h.html#a4890f669326884bda5880d3fd27e9a76":[13,0,11,15,2],
 "pyFairModule_8h.html#ae19630c1f4ca6d5236b30719d9140013":[13,0,11,15,1],
 "pyFairModule_8h_source.html":[13,0,11,15],
-"pythia8__conf_8py.html":[13,0,17,27]
+"pythia8__conf_8py.html":[13,0,17,27],
+"pythia8__conf_8py.html#a2b3c56a66f8fd6da2994e4f2a75a36ff":[13,0,17,27,3],
+"pythia8__conf_8py.html#a970a3da10fa8b541ea748fd7097e9cbb":[13,0,17,27,2],
+"pythia8__conf_8py.html#aa390a2413d3b5fc056162feeac9cd5e7":[13,0,17,27,1]
 };
