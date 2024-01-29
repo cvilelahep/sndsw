@@ -22,6 +22,9 @@
 #include "sndAvgSciFiFiducialCut.h"
 #include "sndAvgDSFiducialCut.h"
 #include "sndDSVetoCut.h"
+#include "sndSciFiContinuity.h"
+#include "sndUSPlanesHit.h"
+#include "sndUSBarsVeto.h"
 
 // Alternatice sets of cuts.
 enum Cutset { stage1cuts, novetocuts, FVsideband, allowWalls2and5, stage1cutsVetoFirst, nueFilter} ;
@@ -136,6 +139,9 @@ int main(int argc, char ** argv) {
     cutFlow.push_back( new sndAnalysis::minSciFiHits(35, ch)); // At least 35 SciFi hits
     if (isMC) cutFlow.push_back( new sndAnalysis::USQDCCut(700, ch)); // Min QDC
     else      cutFlow.push_back( new sndAnalysis::USQDCCut(600, ch)); // 
+    cutFlow.push_back( new sndAnalysis::sciFiContinuity(ch)); // All SciFi planes downstream of first active (both views) plane must be hit (both views).
+    cutFlow.push_back( new sndAnalysis::USPlanesHit(std::vector<int>{0, 1}, ch)); // All SciFi planes downstream of first active (both views) plane must be hit (both views).
+    //    cutFlow.push_back( new sndAnalysis::USBarsVeto(std::vector<std::pair<int, int> >{{0, 0}, {1, 0}, {0, 9}, {1, 9}}, ch)); // Reject events with hits in lowest and highest bar in first two US planes
   } else {
     std::cout << "Unrecognized cutset. Exitting" << std::endl;
     exit(-1);

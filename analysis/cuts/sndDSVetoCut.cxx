@@ -32,8 +32,10 @@ namespace sndAnalysis {
     bool ret = true;
     
     while ( (hit = (MuFilterHit*) hitIterator.Next()) ){
+      if (! hit->isValid()) continue;
+
       if (hit->GetSystem() == 3) { // DS
-	if (hit->GetPlane() >= 3) {
+	if (hit->GetPlane() >= 2) {
 	  ret = false; 
 	  n_hits+=1;
 	}

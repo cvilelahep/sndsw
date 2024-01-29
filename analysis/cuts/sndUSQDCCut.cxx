@@ -32,6 +32,7 @@ namespace sndAnalysis {
     std::vector<bool> us = std::vector<bool>(5, false); 
     
     while ( (hit = (MuFilterHit*) hitIterator.Next()) ){
+      if (!hit->isValid()) continue;
       if (hit->GetSystem() == 2) {
 	for (const auto& [key, value] : hit->GetAllSignals()) {
 	  totQDC += value;

@@ -12,6 +12,10 @@ sndEventDeltat.cxx
 sndAvgSciFiFiducialCut.cxx
 sndAvgDSFiducialCut.cxx
 sndDSVetoCut.cxx
+sndSciFiContinuity.cxx
+sndUSPlanesHit.cxx
+sndUSBarsVeto.cxx
+sndSciFiAngle.cxx
 )
 
 set(LINK_DIRECTORIES
@@ -21,4 +25,4 @@ ${FAIRROOT_LIBRARY_DIR}
 link_directories( ${LINK_DIRECTORIES})
 
 add_library(sndCuts SHARED ${SND_CUTS_SRCS})
-target_link_libraries(sndCuts ${ROOT_LIBRARIES} sndTools shipLHC veto)
+target_link_libraries(sndCuts ${ROOT_LIBRARIES} -lROOTTPython sndTools shipLHC veto)
