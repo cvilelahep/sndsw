@@ -7,7 +7,7 @@
 #include <vector>
 #include <numeric>
 
-namespace sndAnalysis {
+namespace snd::analysis_cuts {
 
   DSVetoCut::DSVetoCut(TChain * tree) : MuFilterBaseCut(tree) {
     cutName = "Remove events with hits in the last (hor) and two last (ver) DS planes";

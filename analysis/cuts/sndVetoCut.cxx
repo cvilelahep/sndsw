@@ -4,7 +4,7 @@
 #include "TChain.h"
 #include "MuFilterHit.h"
 
-namespace sndAnalysis {
+namespace snd::analysis_cuts {
 
   vetoCut::vetoCut(TChain * tree) : MuFilterBaseCut(tree) {
     cutName = "No hits in veto";
