@@ -29,10 +29,17 @@ class DigiTaskSND : public FairTask
 
     /** Virtual method Exec **/
     virtual void Exec(Option_t* opt);
+    
+    /** Set flag for Scifi cluster making  **/
+    void withScifiClusters(bool flag){ fMakeClusterScifi = flag; }
+
+    /** Flags **/
+    bool fMakeClusterScifi;
 
   private:
     void digitizeMuFilter();
     void digitizeScifi();
+    void clusterScifi();
 
     Scifi* scifi;
     map<Int_t, map<Int_t, array<float, 2>>> fibresSiPM;
@@ -42,6 +49,7 @@ class DigiTaskSND : public FairTask
     FairMCEventHeader* fMCEventHeader;
     TClonesArray* fMuFilterPointArray; // MC points
     TClonesArray* fScifiPointArray;
+    TClonesArray* fScifiClusterArray;
     // Output
     SNDLHCEventHeader* fEventHeader;
     TClonesArray* fMuFilterDigiHitArray; // hit class (digitized!)
@@ -50,12 +58,12 @@ class DigiTaskSND : public FairTask
     TClonesArray* fScifiHit2MCPointsArray;
     TClonesArray* fvetoPointArray;
     TClonesArray* fEmulsionPointArray;
-
     TClonesArray* fMCTrackArray;
+
     DigiTaskSND(const DigiTaskSND&);
     DigiTaskSND& operator=(const DigiTaskSND&);
 
-    ClassDef(DigiTaskSND, 3);
+    ClassDef(DigiTaskSND, 4);
 };
 
 #endif /* DIGITASKSND_H_ */

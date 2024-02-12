@@ -18,6 +18,7 @@
  #include "MuFilterPoint.h"	     // for Muon Filter Point
  #include "sndScifiHit.h"	     // for SciFi Hit
  #include "MuFilterHit.h"	     // for Muon Filter Hit
+ #include "sndCluster.h"	     // for Clusters
  #include "Hit2MCPoints.h"           // for linking hits to true MC points
 
 using namespace std;
@@ -28,9 +29,11 @@ DigiTaskSND::DigiTaskSND()
     , fMuFilterPointArray(nullptr)
     , fEventHeader(nullptr)
     , fScifiDigiHitArray(nullptr)
+    , fScifiClusterArray(nullptr)
     , fMuFilterDigiHitArray(nullptr)
     , fScifiHit2MCPointsArray(nullptr)
     , fMuFilterHit2MCPointsArray(nullptr)
+    , fMakeClusterScifi(true)
 {}
 
 DigiTaskSND::~DigiTaskSND() {}
@@ -85,7 +88,11 @@ InitStatus DigiTaskSND::Init()
     // Branche containing links to MC truth info
     fScifiHit2MCPointsArray = new TClonesArray("Hit2MCPoints");
     ioman->Register("Digi_ScifiHits2MCPoints", "DigiScifiHits2MCPoints_det", fScifiHit2MCPointsArray, kTRUE);
-    fScifiHit2MCPointsArray->BypassStreamer(kTRUE);   
+    fScifiHit2MCPointsArray->BypassStreamer(kTRUE);
+    if ( fMakeClusterScifi )  {
+       fScifiClusterArray = new TClonesArray("sndCluster");
+       ioman->Register("Cluster_Scifi", "ScifiCluster_det", fScifiClusterArray, kTRUE);
+    }
     fMuFilterDigiHitArray = new TClonesArray("MuFilterHit");
     ioman->Register("Digi_MuFilterHits", "DigiMuFilterHit_det", fMuFilterDigiHitArray, kTRUE);
     // Branche containing links to MC truth info
@@ -99,10 +106,11 @@ InitStatus DigiTaskSND::Init()
 void DigiTaskSND::Exec(Option_t* /*opt*/)
 {
 
-    fScifiDigiHitArray->Delete();
-    fScifiHit2MCPointsArray->Delete();
-    fMuFilterDigiHitArray->Delete();
-    fMuFilterHit2MCPointsArray->Delete();
+    fScifiDigiHitArray->Clear("C");
+    if (fMakeClusterScifi) fScifiClusterArray->Clear("C");
+    fScifiHit2MCPointsArray->Clear("C");
+    fMuFilterDigiHitArray->Clear("C");
+    fMuFilterHit2MCPointsArray->Clear("C");
 
     // Set event header
     fEventHeader->SetRunId(fMCEventHeader->GetRunID());
@@ -114,6 +122,7 @@ void DigiTaskSND::Exec(Option_t* /*opt*/)
     if (fScifiPointArray)
     {
         digitizeScifi();
+        if (fMakeClusterScifi) clusterScifi();
     }
 }
 
@@ -160,6 +169,55 @@ void DigiTaskSND::digitizeScifi()
         }
     }
     new((*fScifiHit2MCPointsArray)[0]) Hit2MCPoints(mcLinks);
+}
+
+void DigiTaskSND::clusterScifi()
+{    
+    map<int, int > hitDict{};
+    vector<int> hitList{};
+    vector<int> tmp{};
+    int index{}, ncl{}, cprev{}, c{}, last{}, first{}, N{};
+    
+    for (int k = 0, kEnd = fScifiDigiHitArray->GetEntries(); k < kEnd; k++) {
+        sndScifiHit* d = static_cast<sndScifiHit*>(fScifiDigiHitArray->At(k));
+        if (!d->isValid()) continue;
+        hitDict[d->GetDetectorID()] = k ;
+        hitList.push_back(d->GetDetectorID());
+    }
+    if (hitList.size() > 0)
+    {
+       sort(hitList.begin(), hitList.end()); 
+       tmp.push_back(hitList[0]);
+       cprev = hitList[0];
+       ncl = 0;
+       last = hitList.size()-1;
+       vector<sndScifiHit*> hitlist{};
+       for (int i =0; i<hitList.size(); i++)
+       {
+            if (i==0 && hitList.size()>1) continue;
+            c = hitList[i];
+            if (c-cprev ==1) tmp.push_back(c);
+            if (c-cprev !=1 || c==hitList[last]){
+                first = tmp[0];
+                N = tmp.size();
+                hitlist.clear();
+                for (int j=0; j<tmp.size(); j++)
+                {
+                    sndScifiHit* aHit = static_cast<sndScifiHit*>(fScifiDigiHitArray->At(hitDict[tmp[j]]));
+                    hitlist.push_back(aHit);
+                }
+                new ((*fScifiClusterArray)[index]) sndCluster(first, N, hitlist, scifi);
+                index++;
+                if (c!=hitList[last])
+                {
+                   ncl++;
+                   tmp.clear();
+                   tmp.push_back(c);
+                }
+            }
+            cprev = c;
+        }
+     } 
 }
 
 void DigiTaskSND::digitizeMuFilter()
