@@ -4,69 +4,86 @@
 
 #include "TChain.h"
 
-#include "Scifi.h"
-#include "TPython.h"
-#include "TROOT.h"
-
 #include "TVector3.h"
 
-namespace sndAnalysis{
-  scifiAngle::scifiAngle(std::pair<int, int> rangeXZ, std::pair<int, int> rangeYZ, TChain * tree) : sciFiBaseCut(tree){
-    
-    rXZ = rangeXZ;
-    rYZ = rangeYZ;
-    
-    cutName = "SciFi angle";
+#include "TFitResult.h"
 
-    shortName = "SciFiAngle";
-    nbins = std::vector<int>{100, 100};
-    range_start = std::vector<double>{-50, -50};
-    range_end = std::vector<double>{50, 50};
-    plot_var = std::vector<double>{-1, -1};
+namespace snd{
+  namespace analysis_cuts {
+    scifiAngle::scifiAngle(double intercept, double slope, double max_chi2, TChain * ch) : sciFiBaseCut(ch){
 
-    TPython::Exec("import SndlhcGeo");
-    TPython::Exec("SndlhcGeo.GeoInterface('/eos/experiment/sndlhc/convertedData/physics/2023/geofile_sndlhc_TI18_V3_2023.root')");
-    
-    scifiDet = (Scifi*) gROOT->GetListOfGlobals()->FindObject("Scifi");
-    
-  }
+      intercept_ = intercept;
+      slope_ = slope;
+      max_chi2_ = max_chi2;
+      
+      cutName = "SciFi angle";
 
-  bool scifiAngle::passCut(){
-    initializeEvent();
-    //scifiDet->InitializeEvent(); NEED TO FIND A WAY TO DO THIS. FAIRROOT?!
-    
-    std::vector<double> pos_ver = std::vector<double>(5, 0.);
-    
-    std::vector<double> pos_hor = std::vector<double>(5, 0.);
+      shortName = "SciFiAngle";
+      nbins = std::vector<int>{100, 150, 100, 150};
+      range_start = std::vector<double>{-2.5, 0, -2.5, 0};
+      range_end = std::vector<double>{2.5, 150, 2.5, 150};
+      plot_var = std::vector<double>{-1, -1, -1, -1};
 
-    std::vector<double> pos_z = std::vector<double>(5, 0.);
-
-    sndScifiHit * hit;
-    TIter hitIterator(scifiDigiHitCollection);
-
-    while ( (hit = (sndScifiHit*) hitIterator.Next()) ){
-      if (hit->isValid()){
-
-	scifiDet->GetSiPMPosition(hit->GetDetectorID(), a, b);
-
-	int sta = hit->GetStation();
-	if (hit->isVertical()){
-	  pos_ver[sta-1] += (a.X() + b.X())/2.;
-	} else {
-	  pos_hor[sta-1] += (a.Y() + b.Y())/2.;
-	}
-	pos_z[sta-1] += (a.Z() + b.Z())/2.;
-      }
+      gv_ = new TGraph();
+      gh_ = new TGraph();
     }
+    
+    bool scifiAngle::passCut(){
+      initializeEvent();
 
-    // For a plane to count, need both planes to have hits
-    //    for (int i_plane = 0; i_plane < hits_per_plane_horizontal.size(); i_plane++){
-    //      if ((hits_per_plane_horizontal[i_plane]*hits_per_plane_vertical[i_plane] == 0) and gotFirstPlane){
-    //	  return false;
-    //      } else if (hits_per_plane_horizontal[i_plane]*hits_per_plane_vertical[i_plane] > 0){
-    //	gotFirstPlane = true;
-    //      }
-    //    }
-    return true;
-  }
-}	     
+      int n_planes_v = 5 - std::count(hits_per_plane_vertical.begin(), hits_per_plane_vertical.end(), 0);
+      int n_planes_h = 5 - std::count(hits_per_plane_horizontal.begin(), hits_per_plane_horizontal.end(), 0);
+
+      if (n_planes_v < 2 or n_planes_h < 2) {
+	plot_var[0] = 1000;
+	plot_var[1] = -1;
+	plot_var[2] = 1000;
+	plot_var[3] = -2;
+	return false;
+      }
+      
+      gv_->Set(0);
+      gh_->Set(0);
+      
+      sndScifiHit * hit;
+      TIter hitIterator(scifiDigiHitCollection);
+
+      while ( (hit = (sndScifiHit*) hitIterator.Next()) ){
+	if (hit->isValid()){
+
+	  scifiDet->GetSiPMPosition(hit->GetDetectorID(), a_, b_);
+
+	  if (hit->isVertical()){
+	    gv_->SetPoint(gv_->GetN(), (a_.Z() + b_.Z())/2., (a_.X() + b_.X())/2.);
+	  } else {
+	    gh_->SetPoint(gh_->GetN(), (a_.Z() + b_.Z())/2., (a_.Y() + b_.Y())/2.);
+	  }
+	}
+      }
+
+      //      if (gv_->GetN() == 0 or gh_->GetN() == 0){
+      //      }
+
+      auto fitv = gv_->Fit("pol1", "SQN");
+      double tanv = fitv->GetParams()[1];
+      double reducedchi2v = fitv->Chi2()/fitv->Ndf();
+      
+      auto fith = gh_->Fit("pol1", "SQN");
+      double tanh = fith->GetParams()[1];
+      double reducedchi2h = fith->Chi2()/fith->Ndf();
+
+      plot_var[0] = tanv;
+      plot_var[1] = reducedchi2v;
+
+      plot_var[2] = tanh;
+      plot_var[3] = reducedchi2h;
+
+      if (reducedchi2v <= intercept_ - (2.5-std::abs(tanv))*slope_) return false;
+      if (reducedchi2h <= intercept_ - (2.5-std::abs(tanh))*slope_) return false;
+      if (reducedchi2v > max_chi2_) return false;
+      if (reducedchi2h > max_chi2_) return false;
+      
+      return true;
+    }
+  }	     
+}

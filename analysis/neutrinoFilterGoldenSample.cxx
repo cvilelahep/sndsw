@@ -7,6 +7,7 @@
 #include "TChain.h"
 #include "TClonesArray.h"
 #include "TH1D.h"
+#include "TPython.h"
 
 #include "ShipMCTrack.h"
 
@@ -25,6 +26,7 @@
 #include "sndSciFiContinuity.h"
 #include "sndUSPlanesHit.h"
 #include "sndUSBarsVeto.h"
+#include "sndSciFiAngle.h"
 
 // Alternatice sets of cuts.
 enum Cutset { stage1cuts, novetocuts, FVsideband, allowWalls2and5, stage1cutsVetoFirst, nueFilter} ;
@@ -38,6 +40,15 @@ int main(int argc, char ** argv) {
     exit(-1);
   }
 
+  // SNDSW geometry:
+  TPython::Exec("import SndlhcGeo");
+  // REMOVE REMOVE REMOVE hard-coded path!!!
+  TPython::Exec("sndgeo = SndlhcGeo.GeoInterface('/eos/experiment/sndlhc/convertedData/physics/2023/geofile_sndlhc_TI18_V4_2023.root')");
+  // Hacky hacky
+  TPython::Exec("import atexit");
+  TPython::Exec("def pyExit():\n print(\"Make suicide until solution found for freezing\")\n os.system('kill '+str(os.getpid()))\natexit.register(pyExit)");
+  
+  
   // Input files
   bool isMC = false;
   TChain * ch = new TChain("rawConv");
@@ -135,14 +146,14 @@ int main(int argc, char ** argv) {
     cutFlow.push_back( new snd::analysis_cuts::vetoCut(ch)); // B. No veto hits
     cutFlow.push_back( new snd::analysis_cuts::avgSciFiFiducialCut(200, 1200, 300, 128*12-200, ch)); // E. Average SciFi hit channel number must be within [200, 1200] (ver) and [300, max-200] (hor)
     cutFlow.push_back( new snd::analysis_cuts::DSVetoCut(ch)); // D. Veto events with hits in last DS planes
-    cutFlow.push_back( new snd::analysis_cuts::DSVetoCut(ch)); // D. Veto events with hits in last DS planes
     cutFlow.push_back( new snd::analysis_cuts::minSciFiConsecutivePlanes(ch)); // G. At least two consecutive SciFi planes hit
     cutFlow.push_back( new snd::analysis_cuts::minSciFiHits(35, ch)); // At least 35 SciFi hits
     if (isMC) cutFlow.push_back( new snd::analysis_cuts::USQDCCut(700, ch)); // Min QDC
     else      cutFlow.push_back( new snd::analysis_cuts::USQDCCut(600, ch)); // 
     cutFlow.push_back( new snd::analysis_cuts::sciFiContinuity(ch)); // All SciFi planes downstream of first active (both views) plane must be hit (both views).
     cutFlow.push_back( new snd::analysis_cuts::USPlanesHit(std::vector<int>{0, 1}, ch)); // All SciFi planes downstream of first active (both views) plane must be hit (both views).
-    //    cutFlow.push_back( new snd::analysis_cuts::USBarsVeto(std::vector<std::pair<int, int> >{{0, 0}, {1, 0}, {0, 9}, {1, 9}}, ch)); // Reject events with hits in lowest and highest bar in first two US planes
+    cutFlow.push_back( new snd::analysis_cuts::USBarsVeto(std::vector<std::pair<int, double> >{{0, 2.}, {1, 2.}}, ch)); // Reject events with hits in lowest and highest bar in first two US planes
+    //    cutFlow.push_back( new snd::analysis_cuts::scifiAngle(40, 16, 60, ch)); // Reject events with high-angle track-like patterns in the SciFi.
   } else {
     std::cout << "Unrecognized cutset. Exitting" << std::endl;
     exit(-1);
@@ -323,5 +334,7 @@ int main(int argc, char ** argv) {
   
   outFile->Write();
 
+  TPython::Exec("del sndgeo");
+  
   return 0;
 }

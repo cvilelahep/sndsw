@@ -38,6 +38,6 @@ link_directories( ${LINK_DIRECTORIES})
 Set(HEADERS )
 Set(LINKDEF AnalysisCutsLinkDef.h)
 Set(LIBRARY_NAME snd_analysis_cuts)
-Set(DEPENDENCIES shipLHC veto)
+Set(DEPENDENCIES shipLHC veto -lROOTTPython)
 
 GENERATE_LIBRARY()

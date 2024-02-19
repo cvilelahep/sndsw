@@ -5,13 +5,16 @@
 #include "TChain.h"
 #include "sndScifiHit.h"
 
-namespace sndAnalysis {
-  class sciFiContinuity : public sciFiBaseCut {
-  public :
-    sciFiContinuity(TChain * tree);
-    ~sciFiContinuity(){;}
+namespace snd{
+  namespace analysis_cuts{
+    
+    class sciFiContinuity : public sciFiBaseCut {
+    public :
+      sciFiContinuity(TChain * ch);
+      ~sciFiContinuity(){;}
 
-    bool passCut();
+      bool passCut();
 
+    };
   };
-};
+}

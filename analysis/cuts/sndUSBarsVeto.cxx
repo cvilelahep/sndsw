@@ -9,36 +9,53 @@
 #include <map>
 #include <numeric>
 
-namespace sndAnalysis {
+namespace snd{
+  namespace analysis_cuts {
 
-  USBarsVeto::USBarsVeto(std::vector<std::pair<int, int> > bars_to_exclude, TChain * tree) : MuFilterBaseCut(tree) {
-    bars = bars_to_exclude;
-    cutName = "Bars to exclude ";
-    for (std::pair<int, int> bar : bars) cutName += " ("+std::to_string(std::get<0>(bar))+" "+std::to_string(std::get<1>(bar))+")";
+    USBarsVeto::USBarsVeto(std::vector<std::pair<int, double> > avg_per_plane, TChain * tree) : MuFilterBaseCut(tree) {
+      bars = avg_per_plane;
+      cutName = "Bars to exclude ";
+      for (std::pair<int, double> bar : bars) cutName += " ("+std::to_string(std::get<0>(bar))+" "+std::to_string(std::get<1>(bar))+")";
 
-    shortName = "USBarsVeto";
-    nbins = std::vector<int>{1};
-    range_start = std::vector<double>{0};
-    range_end = std::vector<double>{1};
-    plot_var = std::vector<double>{-1};
-  }
-
-  bool USBarsVeto::passCut(){
-    MuFilterHit * hit;
-    TIter hitIterator(muFilterDigiHitCollection);
-    
-    while ( (hit = (MuFilterHit*) hitIterator.Next()) ){
-      if (! hit->isValid()) continue;
+      shortName = "USBarsVeto";
       
-      if (hit->GetSystem() == 2) {
-	int this_plane = hit->GetPlane();
-	int this_bar = int(hit->GetDetectorID()%100);
+      nbins = std::vector<int>(bars.size(), 20);
+      range_start = std::vector<double>(bars.size(), 0);
+      range_end = std::vector<double>(bars.size(), 10);
+      plot_var = std::vector<double>(bars.size(), 0.);
+    }
 
-	for (std::pair<int, int> bar : bars) {
-	  if (this_plane == std::get<0>(bar) and this_bar == std::get<1>(bar)) return false;
+    bool USBarsVeto::passCut(){
+      MuFilterHit * hit;
+      TIter hitIterator(muFilterDigiHitCollection);
+
+      std::fill(plot_var.begin(), plot_var.end(), 0.);
+      std::vector<int> bars_hit(bars.size(), 0);
+      
+      while ( (hit = (MuFilterHit*) hitIterator.Next()) ){
+	if (! hit->isValid()) continue;
+      
+	if (hit->GetSystem() == 2) {
+	  int this_plane = hit->GetPlane();
+	  int this_bar = int(hit->GetDetectorID()%100);
+
+	  for (int i_plane = 0; i_plane < bars.size(); i_plane++){
+	    if (this_plane == std::get<0>(bars.at(i_plane))) {
+	      bars_hit.at(i_plane)++;
+	      plot_var.at(i_plane) += this_bar;
+	    }
+	  }
 	}
       }
+
+      bool ret = true;
+      for (int i_plane = 0; i_plane < bars.size(); i_plane++){
+	plot_var.at(i_plane) /= bars_hit.at(i_plane);
+	if (plot_var.at(i_plane) < std::get<1>(bars.at(i_plane))) {
+	  ret = false;
+	}
+      }
+      return ret;
     }
-    return true;
   }
 }

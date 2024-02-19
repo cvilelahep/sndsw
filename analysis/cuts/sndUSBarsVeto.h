@@ -4,14 +4,16 @@
 
 #include "TChain.h"
 
-namespace sndAnalysis {
+namespace snd {
+  namespace analysis_cuts{
   
-  class USBarsVeto : public MuFilterBaseCut {
-  private :
-    std::vector<std::pair<int, int> > bars;
-  public :
-    USBarsVeto(std::vector<std::pair<int, int> > bars_to_exclude, TChain * tree);
-    ~USBarsVeto(){;}
-    bool passCut();
-  };
+    class USBarsVeto : public MuFilterBaseCut {
+    private :
+      std::vector<std::pair<int, double> > bars;
+    public :
+      USBarsVeto(std::vector<std::pair<int, double> > avg_per_plane, TChain * tree);
+      ~USBarsVeto(){;}
+      bool passCut();
+    };
+  }
 }
