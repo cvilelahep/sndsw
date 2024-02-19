@@ -133,6 +133,9 @@ void Scifi::ConstructGeometry()
   TGeoMedium *Epoxy = gGeoManager->GetMedium("Epoxy");
 
   TGeoVolume *volTarget = gGeoManager->GetVolume("volTarget");
+  
+  InitMedium("iron");
+  TGeoMedium *Fe =gGeoManager->GetMedium("iron");
 
 // external parameters
 	Double_t fXDimension = conf_floats["Scifi/xdim"];
@@ -265,6 +268,7 @@ void Scifi::ConstructGeometry()
   // All fibres will be assigned station number 1 and mat number 1, to keep compatibility with the STMRFFF format.
   int dummy_station = 1;
   int dummy_mat = 1;
+  
   //Adding horizontal fibers
   for (int irow = 0; irow < fNFibers_z; irow++){
     zPosM =  -fZScifiMat/2 + fClad2_rmax/2 + irow*fVertPitch;
@@ -293,6 +297,19 @@ void Scifi::ConstructGeometry()
 	VertMatVolume->AddNode(FiberVolume, 1e6*dummy_station + 1e5*1 + 1e4*dummy_mat + 1e3*(irow + 1) + ifiber + 1, new TGeoCombiTrans("rottransvert1", offsetL + ifiber*fHorPitch, 0, zPosM, rotvertfiber));
       }
     }
+  }
+
+  // for testbeam 2023
+  // for now the distinct feature of the testbeam could be the 4 SciFi planes
+  std::map<int, TGeoVolume*> volFeTarget;
+  std::map<int, float> fFeTargetX;
+  std::map<int, float> fFeTargetY;
+  std::map<int, float> fFeTargetZ;
+  for ( int i = 0; i < fNScifi; i++){
+      std::string station = std::to_string(i+1);
+      fFeTargetX[i] = conf_floats[TString("Scifi/FeTargetX"+station)];
+      fFeTargetY[i] = conf_floats[TString("Scifi/FeTargetZ"+station)];
+      fFeTargetZ[i] = conf_floats[TString("Scifi/FeTargetY"+station)];
   }
 
   // DetID is of the form: 
@@ -328,13 +345,26 @@ void Scifi::ConstructGeometry()
     volTarget->AddNode(ScifiVolume, node, 
                new TGeoTranslation(DeltasV[istation][0], DeltasH[istation][1], DeltasH[istation][2]));
 
+    //std::cout<<"deltas "<<DeltasV[istation][0]<<" "<< DeltasH[istation][1]<<" "<< DeltasH[istation][2]<<" "<<totalThickness<<std::endl;
+    // for 2023 testbeam put iron blocks of variable length in between SciFi planes - the planes are dowstream of the blocks!
+    if (fNScifi==4 && istation != 0) {
+       volFeTarget[istation] = gGeoManager->MakeBox(TString("volFeTarget"+station),Fe,fFeTargetX[istation]/2., fFeTargetY[istation]/2., fFeTargetZ[istation]/2.);
+       volFeTarget[istation]->SetLineColor(kGreen-4);
+       volTarget->AddNode(volFeTarget[istation],1,
+                                         new TGeoTranslation(DeltasV[istation][0] ,
+                                                             DeltasH[istation][1] ,
+                                                             DeltasH[istation][2] - fFeTargetZ[istation]/2.));
+    }
+
     //Creating Scifi planes by appending fiber mats
     for (int imat = 0; imat < fNMats; imat++){
+      int N = fNMats==1 ? imat : imat-1;
+      
       //Placing mats along Y 
-      ScifiHorPlaneVol->AddNode(HorMatVolume, 1e6*(istation+1) + 1e4*(imat + 1), new TGeoTranslation(0, (imat-1)*(fWidthScifiMat+fGapScifiMat), 0));
+      ScifiHorPlaneVol->AddNode(HorMatVolume, 1e6*(istation+1) + 1e4*(imat + 1), new TGeoTranslation(0, N*(fWidthScifiMat+fGapScifiMat), 0));
         
       //Placing mats along X
-      ScifiVertPlaneVol->AddNode(VertMatVolume, 1e6*(istation+1) + 1e5 + 1e4*(imat + 1), new TGeoTranslation((imat-1)*(fWidthScifiMat+fGapScifiMat), 0, 0));
+      ScifiVertPlaneVol->AddNode(VertMatVolume, 1e6*(istation+1) + 1e5 + 1e4*(imat + 1), new TGeoTranslation(N*(fWidthScifiMat+fGapScifiMat), 0, 0)); 
     }
   }
 
@@ -368,7 +398,8 @@ void Scifi::SiPMOverlap()
 
     Double_t SiPMArray_fullwidth = fEdge+fCharr+fCharrGap+fCharr+fEdge;
     TGeoVolumeAssembly *SiPMArrayVol;
-    Double_t pos = -fEdge+firstChannelX;
+    int N = fNMats == 1 ? 1 : 0;
+    Double_t pos = -fEdge+firstChannelX + N*fLengthScifiMat;
     for (int imat = 0; imat < fNMats; imat++){
       for (int isipms = 0; isipms < fNSiPMs; isipms++){
         pos+= fEdge;
@@ -477,8 +508,10 @@ Double_t Scifi::GetCorrectedTime(Int_t fDetectorID, Double_t rawTime, Double_t L
 		else{		
 		     // allow reading older geo files with letter tags i.e. A, B, C
 		    tag = "tA";
-		    if (fRunNumber>5116 && !(fRunNumber<5193 && fRunNumber>5174) ) {tag = "tB";}		
-		}		
+		    if (fRunNumber>5116 && !(fRunNumber<5193 && fRunNumber>5174) ) {tag = "tB";}
+		}
+		// 2023 testbeam data doesn't have a custom tag
+		if (fRunNumber>=1e5) {tag = "t";}		
 	}
 	sID.Form("%i",fDetectorID);
 	Double_t cor = conf_floats["Scifi/station"+TString(sID(0,1))+tag];
@@ -567,6 +600,7 @@ void Scifi::GetSiPMPosition(Int_t SiPMChan, TVector3& A, TVector3& B)
 	Int_t globNumber         = int(SiPMChan/100000)*100000;
 	Float_t locPosition        = SiPMPos[locNumber]; // local position in plane of reference plane.
 	Double_t fFiberLength  = conf_floats["Scifi/fiber_length"];
+	Int_t fNMats   = conf_ints["Scifi/nmats"]; 
 	
 	TString tag = "";
 	vector<int> coveredRuns{};
@@ -601,14 +635,16 @@ void Scifi::GetSiPMPosition(Int_t SiPMChan, TVector3& A, TVector3& B)
 		    else if (fRunNumber<5172) {tag = "C";}
 		    else if (fRunNumber<5431) {tag = "D";}
 		}
+		// 2023 testbeam data doesn't have a custom tag
+		if (fRunNumber>=1e5) {tag = "";}
 	}
 	TString sID;
 	sID.Form("%i",SiPMChan);
-	
+	Int_t digits = fNMats==1 ? 2 : 1; 
 	locPosition += conf_floats["Scifi/LocM"+TString(sID(0,3))+tag];
-	Float_t rotPhi = conf_floats["Scifi/RotPhiS"+TString(sID(0,1))+tag];
-	Float_t rotPsi = conf_floats["Scifi/RotPsiS"+TString(sID(0,1))+tag];
-	Float_t rotTheta = conf_floats["Scifi/RotThetaS"+TString(sID(0,1))+tag];
+	Float_t rotPhi = conf_floats["Scifi/RotPhiS"+TString(sID(0,digits))+tag];
+	Float_t rotPsi = conf_floats["Scifi/RotPsiS"+TString(sID(0,digits))+tag];
+	Float_t rotTheta = conf_floats["Scifi/RotThetaS"+TString(sID(0,digits))+tag];
 
 	Double_t loc[3] = {0,0,0};
 	TString path = "/cave_1/Detector_0/volTarget_1/ScifiVolume"+TString(sID(0,1))+"_"+TString(sID(0,1))+"000000/";
