@@ -27,6 +27,9 @@ sndSciFiContinuity.cxx
 sndUSPlanesHit.cxx
 sndUSBarsVeto.cxx
 sndSciFiAngle.cxx
+sndStableBeams.cxx
+sndIP1.cxx
+sndPrescale.cxx
 )
 
 set(LINK_DIRECTORIES

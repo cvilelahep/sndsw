@@ -28,25 +28,34 @@ isMC = False
 treeName = "rawConv"
 
 ch = ROOT.TChain(treeName)
-ch.Add(args.inputFile)
+ret_ch = ch.Add(args.inputFile, -1)
 
-if ch.GetEntries() == 0 :
+if ret_ch == 0:
     treeName = "cbmsim"
     isMC = True
     TDC2ns = 1. # In the simulation hit times are always in ns
     del ch
     ch = ROOT.TChain(treeName)
-    ch.Add(args.inputFile)
-
-#if ch.GetEntries() == 0 :
-#    print("Chain is empty. Exitting")
-#    exit(-1)
+    ret_ch = ch.Add(args.inputFile, -1)
+    if ret_ch == 0:
+        print("Didn't find rawConv or cbmsim TTree. Exitting")
+        exit(-1)
 
 ch_tracks = ROOT.TChain(treeName)
-ch_tracks.Add(args.trackFile)
+ret_ch = ch_tracks.Add(args.trackFile, -1)
+if ret_ch == 0:
+    print("Didn't find track reco TTree.")
+    if ch.GetEntries() > 0:
+        print("Stage 1 TTree is not empty. Exitting.")
+        exit(-1)
+else:
+    ch.AddFriend(ch_tracks)    
+
+if not ch_tracks.GetEntries() == ch.GetEntries():
+    print("Inconsistent number of entries in stage1 ({}) and track reco ({}) files. Skipping.".format(ch.GetEntries(), ch_tracks.GetEntries()))
+    exit(-1)
 
 n_events = min(ch.GetEntries(), ch_tracks.GetEntries())
-ch.AddFriend(ch_tracks)
 
 # Set up cuts
 cuts = []
@@ -347,7 +356,6 @@ cuts.append(["Number of DS hits per projection is < {0}".format(max_DS_hits_cut)
 # END CUT DEFINITONS
 ################################################################################
 
-
 ch.GetEntry(0)
 f = ch.GetFile()
 
@@ -565,3 +573,9 @@ with open("nu_candidates_summary.txt", "w") as output_nu_cand_summary :
 cut_flow_extended.Write()
 output_file.Write()
 output_file.Close()
+
+del output_tree
+del output_file
+del ch_tracks
+del ch
+del snd_geo

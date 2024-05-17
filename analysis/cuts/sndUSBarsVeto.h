@@ -10,8 +10,9 @@ namespace snd {
     class USBarsVeto : public MuFilterBaseCut {
     private :
       std::vector<std::pair<int, double> > bars;
+      bool bottom_;
     public :
-      USBarsVeto(std::vector<std::pair<int, double> > avg_per_plane, TChain * tree);
+      USBarsVeto(std::vector<std::pair<int, double> > avg_per_plane, bool bottom, TChain * tree);
       ~USBarsVeto(){;}
       bool passCut();
     };

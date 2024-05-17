@@ -23,9 +23,10 @@ namespace snd {
       bool select_events_;
       double min_clock_cycle_;
       double max_clock_cycle_;
+      double TDC2ns_;
       
     protected :
-      static TH1D * hHitTime;
+      static std::vector<TH1D *> hHitTime;
 
       static TClonesArray * scifiDigiHitCollection;
       static TClonesArray * scifiDigiHitCollection_raw;
@@ -37,8 +38,7 @@ namespace snd {
       
       void initializeEvent();
 
-      sciFiBaseCut(TChain * ch, bool select_events = true,  double min_clock_cycle = -0.5, double max_clock_cycle = 0.5);
-      //      sciFiBaseCut(TChain * ch, bool select_events = false, double min_clock_cycle = -0.5, double max_clock_cycle = 0.5);
+      sciFiBaseCut(TChain * ch, bool select_events = true,  double min_clock_cycle = -0.5, double max_clock_cycle = 1.2);
       ~sciFiBaseCut();
     };
 

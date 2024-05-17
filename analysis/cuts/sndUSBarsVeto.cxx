@@ -12,12 +12,14 @@
 namespace snd{
   namespace analysis_cuts {
 
-    USBarsVeto::USBarsVeto(std::vector<std::pair<int, double> > avg_per_plane, TChain * tree) : MuFilterBaseCut(tree) {
+    USBarsVeto::USBarsVeto(std::vector<std::pair<int, double> > avg_per_plane, bool bottom, TChain * tree) : MuFilterBaseCut(tree) {
       bars = avg_per_plane;
+      bottom_ = bottom;
       cutName = "Bars to exclude ";
       for (std::pair<int, double> bar : bars) cutName += " ("+std::to_string(std::get<0>(bar))+" "+std::to_string(std::get<1>(bar))+")";
 
       shortName = "USBarsVeto";
+      for (std::pair<int, double> bar : bars) shortName += "_"+std::to_string(std::get<0>(bar))+"_"+std::to_string(std::get<1>(bar));
       
       nbins = std::vector<int>(bars.size(), 20);
       range_start = std::vector<double>(bars.size(), 0);
@@ -51,8 +53,14 @@ namespace snd{
       bool ret = true;
       for (int i_plane = 0; i_plane < bars.size(); i_plane++){
 	plot_var.at(i_plane) /= bars_hit.at(i_plane);
-	if (plot_var.at(i_plane) < std::get<1>(bars.at(i_plane))) {
-	  ret = false;
+	if (bottom_){	
+	  if (plot_var.at(i_plane) < std::get<1>(bars.at(i_plane))) {
+	    ret = false;
+	  }
+	} else {
+	  if (plot_var.at(i_plane) >= std::get<1>(bars.at(i_plane))) {
+	    ret = false;
+	  }
 	}
       }
       return ret;

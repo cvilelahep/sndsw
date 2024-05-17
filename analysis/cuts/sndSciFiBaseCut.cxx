@@ -18,7 +18,8 @@ namespace snd::analysis_cuts {
   
   TClonesArray * sciFiBaseCut::scifiDigiHitCollection = 0;
   TClonesArray * sciFiBaseCut::scifiDigiHitCollection_raw = 0;
-  TH1D * sciFiBaseCut::hHitTime = 0;
+
+  std::vector<TH1D *> sciFiBaseCut::hHitTime;
   
   std::vector<int> sciFiBaseCut::hits_per_plane_vertical = std::vector<int>(5, 0);
   std::vector<int> sciFiBaseCut::hits_per_plane_horizontal = std::vector<int>(5, 0);
@@ -30,6 +31,14 @@ namespace snd::analysis_cuts {
     if (tree == 0){
       tree = ch;
 
+      if ( strcmp(tree->GetName(), "rawConv") == 0 ){
+	// Real data times in clock cycle units
+	TDC2ns_ = 1E9/160.316E6;
+      } else {
+	// MC in ns
+	TDC2ns_ = 1.;
+      }
+      
       select_events_ = select_events;
       min_clock_cycle_ = min_clock_cycle;
       max_clock_cycle_ = max_clock_cycle;
@@ -43,11 +52,16 @@ namespace snd::analysis_cuts {
 	tree->SetBranchAddress("Digi_ScifiHits", &scifiDigiHitCollection_raw);
 	
 	scifiDigiHitCollection = new TClonesArray("sndScifiHit", 3000);
-	hHitTime = new TH1D("hHitTime", ";SciFi hit time [clock cycles]", 52., 0., 26.);
+	
+	for (int i_orientation = 0; i_orientation < 2; i_orientation++){
+	  for (int i_station = 0; i_station < 5; i_station++){
+	    hHitTime.push_back(new TH1D(("hHitTime_"+std::to_string(i_orientation)+"_"+std::to_string(i_station)).c_str(), ";SciFi hit time [clock cycles]", 200., 0., 100.));
+	  }
+	}
       }
       
       scifiDet = (Scifi*) gROOT->GetListOfGlobals()->FindObject("Scifi");
-
+	
       if (header == 0){
 	// Check if branch exists in the TTree
 	if (tree->FindBranch("EventHeader") != NULL){
@@ -81,8 +95,8 @@ namespace snd::analysis_cuts {
 	  }
 	}
       }
+      }
     }
-  }
 
 
   void sciFiBaseCut::initializeEvent(){
@@ -98,29 +112,47 @@ namespace snd::analysis_cuts {
       TIter hitIterator_raw(scifiDigiHitCollection_raw);
 
       if (select_events_){
-	hHitTime->Reset();
+	for (int i_orientation = 0; i_orientation < 2; i_orientation++){
+	  for (int i_station = 0; i_station < 5; i_station++){
+	    hHitTime.at(i_orientation*5+i_station)->Reset();
+	  }
+	}
 	scifiDigiHitCollection->Clear();
 	
 	while (hit = (sndScifiHit*) hitIterator_raw.Next()){
 	  if (hit->isValid()){
-
+	    int this_orientation = 0;
+	    if (hit->isVertical()) this_orientation = 1;
+	    int this_station = hit->GetStation() - 1;
 	    // Get corrected time!!!
-	    double time = hit->GetTime()*1E9/160.316E6;
+	    double time = hit->GetTime()*TDC2ns_;
 	    time = scifiDet->GetCorrectedTime(hit->GetDetectorID(), time, 0);
-	    hHitTime->Fill(time);
+	    hHitTime.at(this_orientation*5+this_station)->Fill(time);
 	  }
 	}
 
-	double peakTiming = (hHitTime->GetMaximumBin()-0.5)*(hHitTime->GetXaxis()->GetXmax()-hHitTime->GetXaxis()->GetXmin())/hHitTime->GetNbinsX() + hHitTime->GetXaxis()->GetXmin();
+	std::vector<double> peakTiming(2*5, 0);
 
+	for (int i_orientation = 0; i_orientation < 2; i_orientation++){
+	  for (int i_station = 0; i_station < 5; i_station++){
+	    int i = i_orientation*5+i_station;
+	    peakTiming.at(i) = (hHitTime.at(i)->GetMaximumBin()-0.5)*(hHitTime.at(i)->GetXaxis()->GetXmax()-hHitTime.at(i)->GetXaxis()->GetXmin())/hHitTime.at(i)->GetNbinsX() + hHitTime.at(i)->GetXaxis()->GetXmin();
+	  }
+	}
+	
 	hitIterator_raw.Reset();
 	int i_hit = 0;
 	while (hit = (sndScifiHit*) hitIterator_raw.Next()){
 	  if (not hit->isValid()) continue;
-	  double time = hit->GetTime()*1E9/160.316E6;
+	  double time = hit->GetTime()*TDC2ns_;
 	  time = scifiDet->GetCorrectedTime(hit->GetDetectorID(), time, 0);
-	  if (time < peakTiming + min_clock_cycle_*1E9/160.316E6) continue;
-	  if (time > peakTiming + max_clock_cycle_*1E9/160.316E6) continue;
+	  int this_orientation = 0;
+	  if (hit->isVertical()) this_orientation = 1;
+	  int this_station = hit->GetStation() - 1;
+	  int i = this_orientation*5+this_station;
+	  // Cuts defined in clock cycle unit
+	  if (time < peakTiming.at(i) + min_clock_cycle_*1E9/160.316E6) continue;
+	  if (time > peakTiming.at(i) + max_clock_cycle_*1E9/160.316E6) continue;
 	  (*scifiDigiHitCollection)[i_hit++] = hit;
 	}
       }
