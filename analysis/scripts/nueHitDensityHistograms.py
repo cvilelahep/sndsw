@@ -2,10 +2,13 @@ import ROOT
 import os
 from array import array
 import random
+from pathlib import Path
 
 from tqdm import tqdm
 
-LUMI = 70.5
+LUMI = 68.551
+
+BASE_FILTERED_DIR = Path("/eos/user/c/cvilela/SND_nue_analysis_May24/")
 
 ch = ROOT.TChain("rawConv")
 
@@ -16,29 +19,15 @@ muFilterDet = ROOT.gROOT.GetListOfGlobals().FindObject('MuFilter')
 
 from sciFiTools import *
 
-#for i in range(4362, 5334):
-#    fname = "/eos/user/c/cvilela/SND_nue_analysis_Jan_2024_hitSel2/Filter_nue_data_2022/{0}/filtered_MC_00{0}.root".format(i)
-#    if os.path.isfile(fname):
-#        ch.Add(fname)
-#for i in range(5564, 6667):
-#    fname = "/eos/user/c/cvilela/SND_nue_analysis_Jan_2024_hitSel2/Filter_nue_data_2023/{0}/filtered_MC_00{0}.root".format(i) 
-#    if os.path.isfile(fname):
-#        ch.Add(fname)
-
-
-ch.Add("/eos/user/c/cvilela/SND_nue_analysis_Jan_2024_hitSel2/Filter_nue_data_2022/filtered_MC_stage1.root")
-ch.Add("/eos/user/c/cvilela/SND_nue_analysis_Jan_2024_hitSel2/Filter_nue_data_2023/filtered_MC_stage1.root")
+ch.Add((BASE_FILTERED_DIR / "data_2022_2023" / "filtered_stage1.root").as_posix())
 
 N_MC_FILES=400
 
 chMC = ROOT.TChain("cbmsim")
-for i in range(0, N_MC_FILES):
-    fname = "/eos/user/c/cvilela/SND_nue_analysis_Jan_2024_hitSel/Filter_nue_nuMC/{0}/filtered_MC_00{0}.root".format(i)
-    if os.path.isfile(fname):
-        chMC.Add(fname)
+chMC.Add((BASE_FILTERED_DIR / "nuMC" / "filtered_stage1.root").as_posix())
 
 chNeutral = ROOT.TChain("cbmsim")
-chNeutral.Add("/eos/user/c/cvilela/SND_nue_analysis_Jan_2024_hitSel/neutron_kaon_nue_stage1_noprescale.root")
+chNeutral.Add("/afs/cern.ch/work/c/cvilela/public/SND_Nov_2023/sndsw/analysis/scripts/neutron_kaon_nue_stage1_noprescale.root")
 
 out_file = ROOT.TFile("checkDataCuts.root", "RECREATE")
 
