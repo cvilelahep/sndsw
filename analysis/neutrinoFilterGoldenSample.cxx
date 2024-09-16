@@ -32,7 +32,7 @@
 #include "sndPrescale.h"
 
 // Alternatice sets of cuts.
-enum Cutset { stage1cuts, novetocuts, FVsideband, allowWalls2and5, stage1cutsVetoFirst, nueFilter, allowWalls2and5VetoSideband} ;
+enum Cutset { stage1cuts, novetocuts, FVsideband, allowWalls2and5, stage1cutsVetoFirst, nueFilter, allowWalls2and5VetoSideband, nueFilterMoriondOrder} ;
 
 int main(int argc, char ** argv) {
 
@@ -185,11 +185,27 @@ int main(int argc, char ** argv) {
     if (isMC) cutFlow.push_back( new snd::analysis_cuts::USQDCCut(700, ch)); // Min QDC
     else      cutFlow.push_back( new snd::analysis_cuts::USQDCCut(600, ch)); // 
     cutFlow.push_back( new snd::analysis_cuts::DSVetoCut(ch)); // D. Veto events with hits in last DS planes
+  } else if (selected_cutset == nueFilterMoriondOrder) {
+    if (not isMC) {
+      cutFlow.push_back( new snd::analysis_cuts::stableBeamsCut(ch));
+      cutFlow.push_back( new snd::analysis_cuts::ip1Cut(ch));
+      cutFlow.push_back( new snd::analysis_cuts::eventDeltatCut(-1, 100, ch)); // J. Previous event more than 100 clock cycles away. To avoid deadtime issues.
+    }
+    cutFlow.push_back( new snd::analysis_cuts::vetoCut(ch)); // B. No veto hits
+    cutFlow.push_back( new snd::analysis_cuts::avgSciFiFiducialCut(200, 1200, 300, 128*12-200, ch)); // E. Average SciFi hit channel number must be within [200, 1200] (ver) and [300, max-200] (hor)
+    cutFlow.push_back( new snd::analysis_cuts::DSVetoCut(ch)); // D. Veto events with hits in last DS planes
+    cutFlow.push_back( new snd::analysis_cuts::minSciFiConsecutivePlanes(ch)); // G. At least two consecutive SciFi planes hit
+    cutFlow.push_back( new snd::analysis_cuts::minSciFiHits(35, ch)); // At least 35 SciFi hits
+    if (isMC) cutFlow.push_back( new snd::analysis_cuts::USQDCCut(700, ch)); // Min QDC
+    else      cutFlow.push_back( new snd::analysis_cuts::USQDCCut(600, ch)); // 
+    cutFlow.push_back( new snd::analysis_cuts::sciFiContinuity(ch)); // All SciFi planes downstream of first active (both views) plane must be hit (both views).
+    cutFlow.push_back( new snd::analysis_cuts::USPlanesHit(std::vector<int>{0, 1}, ch)); // All SciFi planes downstream of first active (both views) plane must be hit (both views).    
+    cutFlow.push_back( new snd::analysis_cuts::USBarsVeto(std::vector<std::pair<int, double> >{{0, 2.}, {1, 2.}}, true, ch)); // Reject events with hits in lowest bars in first two US planes
+    cutFlow.push_back( new snd::analysis_cuts::USBarsVeto(std::vector<std::pair<int, double> >{{0, 8.}, {1, 8.}}, false, ch)); // Reject events with hits in highest bars in first two US planes
   } else {
     std::cout << "Unrecognized cutset. Exitting" << std::endl;
     exit(-1);
   }
-
   std::cout << "Done initializing cuts" << std::endl;
 
   int n_cuts = (int) cutFlow.size();

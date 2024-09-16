@@ -26,7 +26,7 @@ namespace snd::analysis_cuts {
 
   Scifi * sciFiBaseCut::scifiDet = 0;
   
-  sciFiBaseCut::sciFiBaseCut(TChain * ch, bool select_events, double min_clock_cycle, double max_clock_cycle){
+  sciFiBaseCut::sciFiBaseCut(TChain * ch, bool select_hits, double min_clock_cycle, double max_clock_cycle){
 
     if (tree == 0){
       tree = ch;
@@ -34,16 +34,18 @@ namespace snd::analysis_cuts {
       if ( strcmp(tree->GetName(), "rawConv") == 0 ){
 	// Real data times in clock cycle units
 	TDC2ns_ = 1E9/160.316E6;
+	isMC_ = false;
       } else {
 	// MC in ns
 	TDC2ns_ = 1.;
+	isMC_ = true;
       }
       
-      select_events_ = select_events;
+      select_hits_ = select_hits;
       min_clock_cycle_ = min_clock_cycle;
       max_clock_cycle_ = max_clock_cycle;
       
-      if (not select_events_) {
+      if (not select_hits_) {
 	scifiDigiHitCollection = new TClonesArray("sndScifiHit", 3000);
 	tree->SetBranchAddress("Digi_ScifiHits", &scifiDigiHitCollection);
       }
@@ -111,7 +113,7 @@ namespace snd::analysis_cuts {
       TIter hitIterator(scifiDigiHitCollection);
       TIter hitIterator_raw(scifiDigiHitCollection_raw);
 
-      if (select_events_){
+      if (select_hits_){
 	for (int i_orientation = 0; i_orientation < 2; i_orientation++){
 	  for (int i_station = 0; i_station < 5; i_station++){
 	    hHitTime.at(i_orientation*5+i_station)->Reset();
@@ -126,7 +128,7 @@ namespace snd::analysis_cuts {
 	    int this_station = hit->GetStation() - 1;
 	    // Get corrected time!!!
 	    double time = hit->GetTime()*TDC2ns_;
-	    time = scifiDet->GetCorrectedTime(hit->GetDetectorID(), time, 0);
+	    if (!isMC_) time = scifiDet->GetCorrectedTime(hit->GetDetectorID(), time, 0);
 	    hHitTime.at(this_orientation*5+this_station)->Fill(time);
 	  }
 	}
@@ -145,7 +147,7 @@ namespace snd::analysis_cuts {
 	while (hit = (sndScifiHit*) hitIterator_raw.Next()){
 	  if (not hit->isValid()) continue;
 	  double time = hit->GetTime()*TDC2ns_;
-	  time = scifiDet->GetCorrectedTime(hit->GetDetectorID(), time, 0);
+	  if (!isMC_) time = scifiDet->GetCorrectedTime(hit->GetDetectorID(), time, 0);
 	  int this_orientation = 0;
 	  if (hit->isVertical()) this_orientation = 1;
 	  int this_station = hit->GetStation() - 1;

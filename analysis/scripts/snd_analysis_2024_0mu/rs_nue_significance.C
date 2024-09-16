@@ -58,7 +58,7 @@ void rs_nue_significance()
   std::cout << h_data->Integral(had_CR_bins.at(0), had_CR_bins.at(1)) << std::endl;
 
   std::cout << "Neutral hadron background scale factor" << std::endl;
-  double had_scale = h_data->Integral(had_CR_bins.at(0), had_CR_bins.at(1))/hists["hadMC"]->Integral(had_CR_bins.at(0), had_CR_bins.at(1));
+  double had_scale = h_data->Integral(had_CR_bins.at(0), had_CR_bins.at(1))/hists["hadMC"]->Integral(had_CR_bins.at(0), had_CR_bins.at(1)); // Subtract signal?
   double had_stat_uncert = sqrt(h_data->Integral(had_CR_bins.at(0), had_CR_bins.at(1)))/hists["hadMC"]->Integral(had_CR_bins.at(0), had_CR_bins.at(1));
   std::cout << had_scale << " +- " << had_stat_uncert << std::endl;
 
@@ -148,7 +148,7 @@ void rs_nue_significance()
   g_SR_opt->Draw("AL");
   g_SR_opt->GetXaxis()->SetTitle("Signal region SciFi hit density lower bound");
   g_SR_opt->GetYaxis()->SetTitle("Expected observation significance / #sigma");
-  g_SR_opt->GetYaxis()->SetRangeUser(0, 5.);
+  g_SR_opt->GetYaxis()->SetRangeUser(0, 6.);
   
   g_SR_nueCC_opt->SetLineColor(kRed);
   g_SR_nueCC_opt->Draw("L");

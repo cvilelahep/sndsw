@@ -19,7 +19,8 @@ muFilterDet = ROOT.gROOT.GetListOfGlobals().FindObject('MuFilter')
 
 from sciFiTools import *
 
-ch.Add((BASE_FILTERED_DIR / "data_2022_2023" / "filtered_stage1.root").as_posix())
+for this_run in (BASE_FILTERED_DIR / "data_2022_2023").glob("*/filtered_*.root"):
+    ch.Add(this_run.as_posix())
 
 N_MC_FILES=400
 
@@ -168,7 +169,7 @@ def makePlots(ch, name = "", isNuMC = False, isNeutralHad = False, preselection 
                 n_hits += 1
         h_n_hits[i_flav].Fill(n_hits, weight)
     
-        dens = getSumDensity(event.Digi_ScifiHits)
+        dens = getSumDensity(event.Digi_ScifiHits)[0]
         h_hit_density[i_flav].Fill(dens, weight)
         
 
@@ -193,7 +194,7 @@ def makePlots(ch, name = "", isNuMC = False, isNeutralHad = False, preselection 
 plots_data  = makePlots(ch)
 plots_MC = makePlots(chMC, isNuMC = True, name = "_MC")
 #plots_hadMC = makePlots(chNeutral, isNeutralHad = True, name = "_hadMC", preselection = 1.0)
-plots_hadMC = makePlots(chNeutral, isNeutralHad = True, name = "_hadMC", preselection = 0.3)
+plots_hadMC = makePlots(chNeutral, isNeutralHad = True, name = "_hadMC", preselection = 1.0)
 
 c = []
 def drawDataMC(data, MC):

@@ -5,11 +5,12 @@ from array import array
 from tqdm import tqdm
 from pathlib import Path
 
+#from hadronPositionReweighting import xy_maps
 
 # Switches
 plot_cut_vars = False
 do_stats = False
-make_background_tree = False
+make_background_tree = True
 # /Switches
 
 BASE_FILTERED_DIR = Path("/eos/user/c/cvilela/SND_nue_analysis_May24/")
@@ -53,7 +54,7 @@ for i_sample in samples :
 target_lumi = 68.551
 
 nominal_target_mass = 830.0
-actual_target_mass = 782.5 # To fix. Should be 792
+actual_target_mass = 792
 
 use_daniele_flux = True
 include_KS = True
@@ -130,6 +131,23 @@ else :
         interaction_rates["neutrons"][-1] += (f.Energy_neutrals_noVeto_maxentrack_antineutron.Integral(low_bin, up_bin)*target_lumi/calculated_lumi)
 #        interaction_rates["neutrons_FTFP_BERT"][-1] += (f.Energy_neutrals_noVeto_maxentrack_antineutron.Integral(low_bin, up_bin)*target_lumi/calculated_lumi)
 
+
+def getPassedCuts(f, useXYmap=False):
+    if not useXYmap:
+        return f.cutFlow.GetBinContent(f.cutFlow.GetNbinsX())
+    else:
+        f.cbmsim.GetEntry(0)
+        pid = f.cbmsim.MCTrack[0].GetPdgCode()
+        
+        n_pass = 0.
+        for event in tqdm(f.cbmsim):
+            x = event.MCTrack[0].GetStartX()
+            y = event.MCTrack[0].GetStartY()
+
+            n_pass += xy_maps[pid].GetBinContent(xy_maps[pid].FindBin(x, y))
+            
+        return n_pass
+
 for i_sample in samples :
     generated[i_sample] = []
     passed_cuts[i_sample] = []
@@ -144,10 +162,11 @@ for i_sample in samples :
             n_sel_stage_1 = f.cbmsim.GetEntries()
             n_minus_veto_stage_1 = f.n_minus_1_NoVetoHits_0.GetEntries()
             generated[i_sample].append(f.cutFlow.GetBinContent(1)/n_minus_veto_stage_1*n_sel_stage_1)
-            passed_cuts[i_sample].append(f.cutFlow.GetBinContent(f.cutFlow.GetNbinsX()))
+            passed_cuts[i_sample].append(getPassedCuts(f))
         else:
-            generated[i_sample].append(f.cutFlow.GetBinContent(denominator_bin))
-            passed_cuts[i_sample].append(f.cutFlow.GetBinContent(f.cutFlow_extended.GetNbinsX()))
+            pass
+#            generated[i_sample].append(f.cutFlow.GetBinContent(denominator_bin))
+#            passed_cuts[i_sample].append(f.cutFlow.GetBinContent(f.cutFlow_extended.GetNbinsX()))
         f.Close()
 
         p_high_stat = BASE_FILTERED_DIR / i_sample / "{0}_{1}_{2}_tgtarea_highstat/filtered_stage1.root".format(samplekey[i_sample], bin_low, bin_high)
@@ -157,10 +176,11 @@ for i_sample in samples :
                 n_sel_stage_1 = f.cbmsim.GetEntries()
                 n_minus_veto_stage_1 = f.n_minus_1_NoVetoHits_0.GetEntries()
                 generated[i_sample][-1] += f.cutFlow.GetBinContent(1)/n_minus_veto_stage_1*n_sel_stage_1
-                passed_cuts[i_sample][-1] += f.cutFlow.GetBinContent(f.cutFlow.GetNbinsX())
+                passed_cuts[i_sample][-1] += getPassedCuts(f)
             else:
-                generated[i_sample][-1] += f.cutFlow.GetBinContent(denominator_bin)
-                passed_cuts[i_sample][-1] += f.cutFlow.GetBinContent(f.cutFlow_extended.GetNbinsX())
+                pass
+#                generated[i_sample][-1] += f.cutFlow.GetBinContent(denominator_bin)
+#                passed_cuts[i_sample][-1] += f.cutFlow.GetBinContent(f.cutFlow_extended.GetNbinsX())
             f.Close()
 
 header = ["Energy", "", "Interaction rate", "Generated (no veto hits)", "Passed cuts", "Efficiency", "Yield"]
@@ -193,17 +213,32 @@ f_sig_stage1 = ROOT.TFile((BASE_FILTERED_DIR / "nuMC" / "filtered_stage1.root").
 #Two or more consecutive SciFi planes
 #More than 35 SciFi hits
 #Total US QDC > 700.000000
-stage_1_cuts = [["NoVetoHits", 1],
-                ["AvgSFChan", 2],
-                ["NoLastDSPlanesHits", 1],
+stage_1_cuts = [["AvgSFChan", 2],
+                ["USVarsVetoBottom", 2],
+                ["USVarsVetoTop", 2],
+                ["NoVetoHits", 1],
                 ["TwoConsecutiveSciFiPlanes", 1],
-                ["NSciFiHits", 1],
-                ["US_QDC", 1],
                 ["SciFiContinuity", 1],
                 ["USPlanesHit", 1],
-                ["USVarsVetoBottom", 2],
-                ["USVarsVetoTop", 2]]
-                
+                ["NSciFiHits", 1],
+                ["US_QDC", 1],
+                ["NoLastDSPlanesHits", 1]]
+
+"""
+  KEY: TH1D	-1_AvgSFChan_0;1	AvgSFChan
+  KEY: TH1D	-1_AvgSFChan_1;1	AvgSFChan
+  KEY: TH1D	-1_USBarsVeto_0_2.000000_1_2.000000_0;1	USBarsVeto_0_2.000000_1_2.000000
+  KEY: TH1D	-1_USBarsVeto_0_2.000000_1_2.000000_1;1	USBarsVeto_0_2.000000_1_2.000000
+  KEY: TH1D	-1_USBarsVeto_0_8.000000_1_8.000000_0;1	USBarsVeto_0_8.000000_1_8.000000
+  KEY: TH1D	-1_USBarsVeto_0_8.000000_1_8.000000_1;1	USBarsVeto_0_8.000000_1_8.000000
+  KEY: TH1D	-1_NoVetoHits_0;1	NoVetoHits
+  KEY: TH1D	-1_At least two consecutive SciFi planes_0;1	At least two consecutive SciFi planes
+  KEY: TH1D	-1_SciFiContinuity_0;1	SciFiContinuity
+  KEY: TH1D	-1_USPlanesHit_0;1	USPlanesHit
+  KEY: TH1D	-1_SciFiMinHits_0;1	SciFiMinHits
+  KEY: TH1D	-1_USQDC_0;1	USQDC
+  KEY: TH1D	-1_DSVetoCut_0;1	DSVetoCut
+"""
 #                ["US_QDC", 1],
 #                ["DSActivityCut", 1]]
 
@@ -1053,7 +1088,7 @@ if make_background_tree :
     #numpify bins
     bins = np.array(bins)
     
-    prescale = 1.
+    prescale = 1.0
 
     in_background_tree = ROOT.TChain("cbmsim")
 

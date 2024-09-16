@@ -20,10 +20,11 @@ namespace snd {
       static TChain * tree;
       static SNDLHCEventHeader * header;
       static unsigned long int read_entry;
-      bool select_events_;
+      bool select_hits_;
       double min_clock_cycle_;
       double max_clock_cycle_;
       double TDC2ns_;
+      bool isMC_;
       
     protected :
       static std::vector<TH1D *> hHitTime;
@@ -38,7 +39,7 @@ namespace snd {
       
       void initializeEvent();
 
-      sciFiBaseCut(TChain * ch, bool select_events = true,  double min_clock_cycle = -0.5, double max_clock_cycle = 1.2);
+      sciFiBaseCut(TChain * ch, bool select_hits = false,  double min_clock_cycle = -0.5, double max_clock_cycle = 1.2);
       ~sciFiBaseCut();
     };
 
