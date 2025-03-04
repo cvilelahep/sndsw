@@ -10,7 +10,7 @@ from pathlib import Path
 # Switches
 plot_cut_vars = False
 do_stats = False
-make_background_tree = True
+make_background_tree = False
 # /Switches
 
 BASE_FILTERED_DIR = Path("/eos/user/c/cvilela/SND_nue_analysis_May24/")

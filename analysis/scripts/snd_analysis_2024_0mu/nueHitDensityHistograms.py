@@ -8,6 +8,9 @@ from tqdm import tqdm
 
 LUMI = 68.551
 
+# SCALE TOTAL HADRON CONTRIBUTION TO THIS NUMBER. THIS IS the 90% upper limit OBTAINED FROM muonDISlumiCalc.py)
+N_HAD = 8.21
+
 BASE_FILTERED_DIR = Path("/eos/user/c/cvilela/SND_nue_analysis_May24/")
 
 ch = ROOT.TChain("rawConv")
@@ -85,14 +88,16 @@ def makePlots(ch, name = "", isNuMC = False, isNeutralHad = False, preselection 
             
         h_theta.append(ROOT.TH1D("theta"+flav+name, ";#theta", 100, 0, 1))
         h_theta_density.append(ROOT.TH2D("theta_density"+flav+name, ";#theta;Sum of hit densities", 100, 0, 1, 200, 0, 40000))
+
+    if isNeutralHad:
+        totWeight = 0
     
     for i_event, event in tqdm(enumerate(ch)):
 
         if preselection < 1.:
             if random.random() > preselection:
                 continue
-
-        
+            
         if not (isNuMC or isNeutralHad):
             scifiDet.InitEvent(event.EventHeader)
             muFilterDet.InitEvent(event.EventHeader)
@@ -102,10 +107,14 @@ def makePlots(ch, name = "", isNuMC = False, isNeutralHad = False, preselection 
         if isNeutralHad:
             weight = event.per_invfb_weight*LUMI
 
+
         elif isNuMC:
             weight = LUMI/(N_MC_FILES*100.)
 
         weight /= preselection
+
+        if isNeutralHad:
+            totWeight += weight
         
         n[0] += 1
         passCuts = True
@@ -188,13 +197,18 @@ def makePlots(ch, name = "", isNuMC = False, isNeutralHad = False, preselection 
         
     for i_sel, sel in enumerate(selected_list):
         print(sel, tdiff_list[i_sel], max_slope_list[i_sel])
+
+    if isNeutralHad:
+        for i_hist in (h_n_hits, h_n_hits_sel, h_hit_density, h_hit_density_sel, h_SciFiAngle, h_SciFiAngle_v_chi2, h_SciFiAngle_h_chi2, h_theta, h_theta_density, h_min_chi2, h_log_hit_density_sel, h_log_min_chi2, h_hit_density_sel_precut, h_hit_density2_sel, h_hit_density2_sel_precut, h_hit_density_sel_after_dens2, h_hit_density_sel_after_dens):
+            for j_hist in i_hist:
+                j_hist.Scale(N_HAD/totWeight)
         
     return (h_n_hits, h_n_hits_sel, h_hit_density, h_hit_density_sel, h_SciFiAngle, h_SciFiAngle_v_chi2, h_SciFiAngle_h_chi2, h_theta, h_theta_density, h_min_chi2, h_log_hit_density_sel, h_log_min_chi2, h_hit_density_sel_precut, h_hit_density2_sel, h_hit_density2_sel_precut, h_hit_density_sel_after_dens2, h_hit_density_sel_after_dens)
 
 plots_data  = makePlots(ch)
 plots_MC = makePlots(chMC, isNuMC = True, name = "_MC")
-#plots_hadMC = makePlots(chNeutral, isNeutralHad = True, name = "_hadMC", preselection = 1.0)
 plots_hadMC = makePlots(chNeutral, isNeutralHad = True, name = "_hadMC", preselection = 1.0)
+
 
 c = []
 def drawDataMC(data, MC):

@@ -8,6 +8,11 @@ using std::cout, std::endl;
 void rs_nue_significance()
 {
 
+  // WARNING WARNING WARNING SET TO 1 FOR REAL DATA ANALYSIS
+  // Change only for sensitivity studies
+  //float LUMI_SCALE = 2.5;
+  float LUMI_SCALE = 1.;
+  
   std::vector<std::string> mc_samples{"hadMC", "numuCC_MC", "nueCC_MC", "nuTauCC0mu_MC", "nuTauCC1mu_MC", "NC_MC"};
 
   std::map<std::string, std::string> sample_colors;
@@ -23,13 +28,17 @@ void rs_nue_significance()
 
   // External constraints
   // --------------------------------------------------------------------------------
-  //  sample_scale["numuCC_MC"] = (32-0.25)/19.1; // Based on extended numu analysis
-  sample_scale["numuCC_MC"] = 1.; // Based on extended numu analysis
+  sample_scale["numuCC_MC"] = (32-0.25)/19.1; // Based on extended numu analysis
+  //sample_scale["numuCC_MC"] = 1.; // Based on extended numu analysis
   sample_fractional_uncertainty["numuCC_MC"] = sqrt(32./pow(32,2) + pow(0.043,2)); // Statistical uncertainty on numu measurement added in quadrature with DS tracking systematic uncertainty (from flux measurement).
 
-    //  sample_scale["NC_MC"] = (32-0.25)/19.1; // Assume same scaling and uncertainty for NC. This is only used for the nueCC search.
-  sample_scale["NC_MC"] = 1; // Assume same scaling and uncertainty for NC. This is only used for the nueCC search.
+  sample_scale["nueCC_MC"] = 1.; // PLACEHOLDER
+  sample_fractional_uncertainty["nueCC_MC"] = 1.; // PLACEHOLDER
+
+  sample_scale["NC_MC"] = (32-0.25)/19.1; // Assume same scaling and uncertainty for NC. This is only used for the nueCC search.
+  //sample_scale["NC_MC"] = 1; // Assume same scaling and uncertainty for NC. This is only used for the nueCC search.
   sample_fractional_uncertainty["NC_MC"] = sqrt(32./pow(32,2) + pow(0.043,2)); //
+  bool NC_numu_correlation = true; // If true, treat numuCC and NC_MC as correlated uncertainties
 
   sample_scale["nuTauCC0mu_MC"] = 1.; // No external constraint
   sample_fractional_uncertainty["nuTauCC0mu_MC"] = 1.; // 100% uncertainty
@@ -42,12 +51,14 @@ void rs_nue_significance()
 
   std::map<std::string, TH1D*> hists;
   for (std::string sample_name : mc_samples) hists[sample_name] = static_cast<TH1D*>(f_histo->Get(("hit_density_sel_"+sample_name).c_str()));
+  for (std::string sample_name : mc_samples) hists[sample_name]->Scale(LUMI_SCALE);
 
   auto h_data = static_cast<TH1D*>(f_histo->Get("hit_density_sel"));
+  h_data->Scale(LUMI_SCALE);
   
   // First, use background-dominated region to find the neutral hadron background scale and uncertainty:
-  std::vector<double> had_CR{2000, 5000};
-  std::vector<int> had_CR_bins{hists["hadMC"]->GetXaxis()->FindBin(had_CR.at(0)),hists["hadMC"]->GetXaxis()->FindBin(had_CR.at(1))};
+  std::vector<double> had_CR_range{2000, 5000};
+  std::vector<int> had_CR_bins{hists["hadMC"]->GetXaxis()->FindBin(had_CR_range.at(0)),hists["hadMC"]->GetXaxis()->FindBin(had_CR_range.at(1)-1)};
 
   std::cout << "CONTROL REGION EXPECTED BREAKDOWN" << std::endl;
   for (std::string sample_name : mc_samples){
@@ -58,12 +69,26 @@ void rs_nue_significance()
   std::cout << h_data->Integral(had_CR_bins.at(0), had_CR_bins.at(1)) << std::endl;
 
   std::cout << "Neutral hadron background scale factor" << std::endl;
-  double had_scale = h_data->Integral(had_CR_bins.at(0), had_CR_bins.at(1))/hists["hadMC"]->Integral(had_CR_bins.at(0), had_CR_bins.at(1)); // Subtract signal?
-  double had_stat_uncert = sqrt(h_data->Integral(had_CR_bins.at(0), had_CR_bins.at(1)))/hists["hadMC"]->Integral(had_CR_bins.at(0), had_CR_bins.at(1));
-  std::cout << had_scale << " +- " << had_stat_uncert << std::endl;
+  double non_had_CR = 0.;
+  for (std::string sample_name : mc_samples){
+    if (sample_name == "hadMC") continue;
 
+    non_had_CR += hists[sample_name]->Integral(had_CR_bins.at(0), had_CR_bins.at(1));
+  }
+
+  double had_CR = hists["hadMC"]->Integral(had_CR_bins.at(0), had_CR_bins.at(1));
+
+  double data_CR = h_data->Integral(had_CR_bins.at(0), had_CR_bins.at(1));
+  
+  std::cout << "Total observed events in CR: " << data_CR << std::endl;
+  std::cout << "Non-hadron events predicted in CR: " << non_had_CR << std::endl;
+  std::cout << "Hadron events predicted in CR (factorised approach, large overestimation): " << had_CR << std::endl;
+
+  double had_scale = (data_CR - non_had_CR)/had_CR;
+  
   sample_scale["hadMC"] = had_scale;
-  sample_fractional_uncertainty["hadMC"] = had_stat_uncert/had_scale;
+  std::cout << "Hadron MC scale factor: " << sample_scale["hadMC"] << std::endl;
+  sample_fractional_uncertainty["hadMC"] = 1.; // Set 100% uncertainty on the extrapolation
 
   // Now, find optimal region to exclude no-shower hypothesis using the MC expectation for the signal and the scaled background.
   auto g_SR_opt = new TGraph();
@@ -80,6 +105,8 @@ void rs_nue_significance()
 
     int bin = hists["hadMC"]->GetXaxis()->FindBin(test_SR);
 
+    std::cout << bin << " " << test_SR << std::endl;
+    
     for (std::string sample_name : mc_samples){
 
       double integral = hists[sample_name]->Integral(bin, hists[sample_name]->GetNbinsX()+1);
@@ -87,7 +114,7 @@ void rs_nue_significance()
       g_SR_rates[sample_name]->AddPoint(test_SR, integral);
 
       if (sample_fractional_uncertainty.find(sample_name) != sample_fractional_uncertainty.end()) {
-	g_SR_rates[sample_name]->SetPointError(g_SR_rates[sample_name]->GetN()-1, 0., sample_fractional_uncertainty[sample_name]*sample_scale[sample_name]*integral);
+	g_SR_rates[sample_name]->SetPointError(g_SR_rates[sample_name]->GetN()-1, 0., sample_fractional_uncertainty[sample_name]);
       } else {
 	g_SR_rates[sample_name]->SetPointError(g_SR_rates[sample_name]->GetN()-1, 0., 0.);
       }
@@ -110,35 +137,47 @@ void rs_nue_significance()
     double n_sig_nueCC = 0.;
     double n_background_nueCC = 0.;
     double uncert_background_nueCC = 0.;
+
+    double NC_numu_correlation_correction = 2.;
     
     for (std::string sample_name : mc_samples){
       double rate = g_SR_rates[sample_name]->GetPointY(i_point);
       double error = g_SR_rates[sample_name]->GetErrorY(i_point);
+
+      double this_n = rate*sample_scale[sample_name];
       
       if (sample_name.compare("nueCC_MC") == 0) { // Signal in both cases
-	n_sig_nueCC += rate;
-	n_sig += rate;
+	n_sig_nueCC += this_n;
+	n_sig += this_n;
       }
       else if ((sample_name.compare("NC_MC") == 0) or (sample_name.compare("nuTauCC0mu_MC") == 0)){ // Signal for 0mu, else background
-	n_sig += rate;
+	n_sig += this_n;
 	
-	n_background_nueCC += rate*sample_scale[sample_name];
-	uncert_background_nueCC += sqrt(pow(uncert_background_nueCC, 2) + pow(error*sample_scale[sample_name]*rate, 2));
+	n_background_nueCC += this_n;
+	uncert_background_nueCC = sqrt(pow(uncert_background_nueCC, 2) + pow(error*this_n, 2));
+
+	if (sample_name.compare("NC_MC") == 0) NC_numu_correlation_correction *= error*this_n;
+
       } else { // Background in all cases
 
-	n_background += rate*sample_scale[sample_name];
-	uncert_background += sqrt(pow(uncert_background, 2) + pow(error*sample_scale[sample_name]*rate, 2));
+	n_background += this_n;
+	uncert_background = sqrt(pow(uncert_background, 2) + pow(error*this_n, 2));
 	
-	n_background_nueCC += rate*sample_scale[sample_name];
-	uncert_background_nueCC += sqrt(pow(uncert_background_nueCC, 2) + pow(error*sample_scale[sample_name]*rate, 2));
+	n_background_nueCC += this_n;
+	uncert_background_nueCC = sqrt(pow(uncert_background_nueCC, 2) + pow(error*this_n, 2));
+
+	if (sample_name.compare("numuCC_MC") == 0) NC_numu_correlation_correction *= error*this_n;
       }
-      
+    }
+
+    if (NC_numu_correlation){
+      uncert_background_nueCC = sqrt(pow(uncert_background_nueCC, 2) + NC_numu_correlation_correction);
     }
     
     double significance = NumberCountingUtils::BinomialExpZ(n_sig, n_background, uncert_background/n_background);
     double significance_nueCC = NumberCountingUtils::BinomialExpZ(n_sig_nueCC, n_background_nueCC, uncert_background_nueCC/n_background_nueCC);
     
-    std::cout << "SR " << test_SR << " n_sig " << n_sig << " n_background " << n_background << " uncert_background " << uncert_background/n_background << " expected significance " << significance << std::endl; 
+    std::cout <<" SR " << test_SR << " n_sig " << n_sig << " n_background " << n_background << " uncert_background " << uncert_background/n_background << " expected significance " << significance << std::endl; 
     std::cout << "NUE SR " << test_SR << " n_sig " << n_sig_nueCC << " n_background " << n_background_nueCC << " uncert_background " << uncert_background_nueCC/n_background_nueCC << " expected significance " << significance_nueCC << std::endl; 
     g_SR_opt->AddPoint(test_SR, significance);
     g_SR_nueCC_opt->AddPoint(test_SR, significance_nueCC);
@@ -210,17 +249,36 @@ void rs_nue_significance()
   c_rates_nueCC->RedrawAxis();
 
   // OBSERVED SIGNIFICANCE (all nutau background)
-  double n_data = 6;
-  //  std::cout << "OBSERVED SIGNIFICANCE " << NumberCountingUtils::BinomialExpZ(n_data, 0.20263, 0.493444) << std::endl;
-  //  SR 11000 n_sig 4.66005 n_background 0.20263 uncert_background 0.493444 expected significance 3.95984
-  //  std::cout << "Nue significance " << NumberCountingUtils::BinomialExpZ(4, 0.611587, 0.257177) << std::endl;
-  //NUE SR 14000 n_sig 2.94866 n_background 0.611587 uncert_background 0.257177 expected significance 2.24673
+  double n_data = 9;
+
+  // NOTE THAT THE NUMBERS BELOW ARE ALL HARD-CODED. COPY NUMBERS BY HAND TO OBTAIN OBSERVATION SIGNIFICANCE.
+  // OBSERVED SIGNIFICANCE (nutau0mu signal)
+
+  // NOMINAL  Numu
+  //  std::cout << "OBSERVED SIGNIFICANCE " << NumberCountingUtils::BinomialExpZ(n_data, 0.19518, 0.183765) << std::endl;
+  // SR 11000 n_sig 6.35639 n_background 0.19518 uncert_background 0.183765 expected significance 5.49917 
+  // Shifted Numu CV
+  std::cout << "OBSERVED SIGNIFICANCE " << NumberCountingUtils::BinomialExpZ(n_data, 0.313225, 0.178912) << std::endl;
+  // SR 11000 n_sig 7.23491 n_background 0.313225 uncert_background 0.178912 expected significance 5.50498
 
 
-    // OBSERVED SIGNIFICANCE (nutau0mu signal)
-  std::cout << "OBSERVED SIGNIFICANCE " << NumberCountingUtils::BinomialExpZ(n_data, 0.133907, 0.0417972) << std::endl;
-  //SR 11000 n_sig 4.72526 n_background 0.133907 uncert_background 0.0417972 expected significance 4.87142
-  std::cout << "Nue significance " << NumberCountingUtils::BinomialExpZ(4, 1.19846, 0.16534) << std::endl;
-  //NUE SR 11000 n_sig 3.66071 n_background 1.19846 uncert_background 0.16534 expected significance 2.25399
-  
+  // Nominal Numu, uncorrelated
+  //  std::cout << "Nue significance " << NumberCountingUtils::BinomialExpZ(n_data, 1.59533, 0.159755) << std::endl;
+  // NUE SR 11000 n_sig 4.95624 n_background 1.59533 uncert_background 0.159755 expected significance 2.67008
+  // Nominal Numu, NC and numuCC fully correlated
+  //  std::cout << "Nue significance " << NumberCountingUtils::BinomialExpZ(n_data, 1.59533, 0.177963) << std::endl;
+  // NUE SR 11000 n_sig 4.95624 n_background 1.59533 uncert_background 0.177963 expected significance 2.64314
+  // Shifted Numu CV, NC and numuCC fully correlated
+  std::cout << "Nue significance " << NumberCountingUtils::BinomialExpZ(n_data, 2.5919, 0.177955) << std::endl;
+  // NUE SR 11000 n_sig 4.95624 n_background 2.5919 uncert_background 0.177955 expected significance 2.19473
+  std::cout << "SIGNAL REGION EXPECTED BREAKDOWN" << std::endl;
+  for (std::string sample_name : mc_samples){
+    std::cout << sample_name << " " << hists[sample_name]->Integral(56 ,-1)*sample_scale[sample_name] << " +- " << sample_fractional_uncertainty[sample_name]*hists[sample_name]->Integral(56 ,-1)*sample_scale[sample_name] << std::endl;
+  }
+  std::cout << "DATA  " << h_data->Integral(56 ,-1) << std::endl;
+  std::cout << "ALL REGIONS EXPECTED BREAKDOWN" << std::endl;
+  for (std::string sample_name : mc_samples){
+    std::cout << sample_name << " " << hists[sample_name]->Integral(0 ,-1)*sample_scale[sample_name] << " +- " << sample_fractional_uncertainty[sample_name]*hists[sample_name]->Integral(56 ,-1)*sample_scale[sample_name] << std::endl;
+  }
+  std::cout << "DATA  " << h_data->Integral(0 ,-1) << std::endl;
 }
