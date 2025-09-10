@@ -6,6 +6,10 @@ from pathlib import Path
 
 from tqdm import tqdm
 
+import uproot
+
+import numpy as np
+
 LUMI = 68.551
 
 # SCALE TOTAL HADRON CONTRIBUTION TO THIS NUMBER. THIS IS the 90% upper limit OBTAINED FROM muonDISlumiCalc.py)
@@ -33,9 +37,9 @@ chMC.Add((BASE_FILTERED_DIR / "nuMC" / "filtered_stage1.root").as_posix())
 chNeutral = ROOT.TChain("cbmsim")
 chNeutral.Add("/afs/cern.ch/work/c/cvilela/public/SND_Nov_2023/sndsw/analysis/scripts/neutron_kaon_nue_stage1_noprescale.root")
 
-out_file = ROOT.TFile("checkDataCuts.root", "RECREATE")
+out_file = ROOT.TFile("checkDataCuts_TEMP.root", "RECREATE")
 
-def makePlots(ch, name = "", isNuMC = False, isNeutralHad = False, preselection = 1.):
+def makePlots(ch, name = "", isNuMC = False, isNeutralHad = False, output_tree = None, preselection = 1.):
     n = [0]*5
 
     selected_list = []
@@ -62,6 +66,16 @@ def makePlots(ch, name = "", isNuMC = False, isNeutralHad = False, preselection 
     h_theta = []
     h_theta_density = []
 
+    # Variables for summary TTree
+    if output_tree is not None:
+        f_dens_sel = []
+        f_dens_sel2 = []
+        f_weight = []
+        f_pdg = []
+        f_oneMu = []
+        f_cc = []
+        f_Etrue = []
+    
     if isNuMC:
         flav_list = ["_NC", "_nueCC", "_numuCC", "_nuTauCC0mu", "_nuTauCC1mu"]
     else:
@@ -141,13 +155,22 @@ def makePlots(ch, name = "", isNuMC = False, isNeutralHad = False, preselection 
                     i_flav = 4 #nutauCC1mu
                 else:
                     i_flav = 3 #nutauCC0mu
-                
+        
         h_min_chi2[i_flav].Fill(min(reducedchi2v, reducedchi2h), weight)
         h_log_min_chi2[i_flav].Fill(ROOT.TMath.Log(min(reducedchi2v, reducedchi2h)), weight)
         dens_sel, dens_sel2 = getSumDensity(selHits, return_2ndhighest = True)
         h_hit_density_sel_precut[i_flav].Fill(dens_sel, weight)
         h_hit_density2_sel_precut[i_flav].Fill(dens_sel, weight)
 
+        if output_tree is not None:
+            f_dens_sel2.append(dens_sel2)
+            f_dens_sel.append(dens_sel)
+            f_pdg.append(event.MCTrack[0].GetPdgCode() if (isNuMC or isNeutralHad) else 0)
+            f_weight.append(weight)
+            f_oneMu.append(is1Mu if (i_flav > 2) else False)
+            f_cc.append(i_flav > 0)
+            f_Etrue.append(event.MCTrack[0].GetEnergy() if (isNuMC or isNeutralHad) else 0)
+        
         if dens_sel2 < 20:
             continue
 
@@ -202,12 +225,25 @@ def makePlots(ch, name = "", isNuMC = False, isNeutralHad = False, preselection 
         for i_hist in (h_n_hits, h_n_hits_sel, h_hit_density, h_hit_density_sel, h_SciFiAngle, h_SciFiAngle_v_chi2, h_SciFiAngle_h_chi2, h_theta, h_theta_density, h_min_chi2, h_log_hit_density_sel, h_log_min_chi2, h_hit_density_sel_precut, h_hit_density2_sel, h_hit_density2_sel_precut, h_hit_density_sel_after_dens2, h_hit_density_sel_after_dens):
             for j_hist in i_hist:
                 j_hist.Scale(N_HAD/totWeight)
-        
+        if output_tree is not None:
+            f_weight = np.divide(f_weight, totWeight/N_HAD)
+
+    if output_tree is not None:
+        f = uproot.recreate("snd_0mu_summaryTree_{}.root".format(output_tree))
+        f["snd_0mu_summaryTree"] = {"dens_sel2": f_dens_sel2,
+                                    "dens_sel": f_dens_sel,
+                                    "pdg": f_pdg,
+                                    "weight": f_weight,
+                                    "oneMu": f_oneMu,
+                                    "cc": f_cc,
+                                    "Etrue": f_Etrue}
+        f.close()
+            
     return (h_n_hits, h_n_hits_sel, h_hit_density, h_hit_density_sel, h_SciFiAngle, h_SciFiAngle_v_chi2, h_SciFiAngle_h_chi2, h_theta, h_theta_density, h_min_chi2, h_log_hit_density_sel, h_log_min_chi2, h_hit_density_sel_precut, h_hit_density2_sel, h_hit_density2_sel_precut, h_hit_density_sel_after_dens2, h_hit_density_sel_after_dens)
 
-plots_data  = makePlots(ch)
-plots_MC = makePlots(chMC, isNuMC = True, name = "_MC")
-plots_hadMC = makePlots(chNeutral, isNeutralHad = True, name = "_hadMC", preselection = 1.0)
+plots_data  = makePlots(ch, output_tree = "data")
+plots_MC = makePlots(chMC, isNuMC = True, name = "_MC", output_tree = "nu")
+plots_hadMC = makePlots(chNeutral, isNeutralHad = True, name = "_hadMC", preselection = 1.0, output_tree = "hadron")
 
 
 c = []

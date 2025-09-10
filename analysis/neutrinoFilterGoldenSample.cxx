@@ -65,7 +65,8 @@ int main(int argc, char ** argv) {
       ch->SetBranchStatus("EventHeader.", 0); // To be able to run on old MC. Bizarre....?
     } else {
       std::cout << "Didn't find rawConv or cbmsim in input file" << std::endl;
-      exit(-1);
+      TPython::Exec("del sndgeo");
+      return -1;
     }
   }
   std::cout << "Got input tree" << std::endl;
@@ -204,7 +205,8 @@ int main(int argc, char ** argv) {
     cutFlow.push_back( new snd::analysis_cuts::USBarsVeto(std::vector<std::pair<int, double> >{{0, 8.}, {1, 8.}}, false, ch)); // Reject events with hits in highest bars in first two US planes
   } else {
     std::cout << "Unrecognized cutset. Exitting" << std::endl;
-    exit(-1);
+    TPython::Exec("del sndgeo");
+    return -1;
   }
   std::cout << "Done initializing cuts" << std::endl;
 
@@ -252,7 +254,8 @@ int main(int argc, char ** argv) {
 	break;
       default :
 	std::cerr << "MC truth histograms initialization error! Unknown species" << std::endl;
-	exit(-1);
+	TPython::Exec("del sndgeo");
+	return -1;
       }
 
       for (int i_cut = -1; i_cut < n_cuts; i_cut++){

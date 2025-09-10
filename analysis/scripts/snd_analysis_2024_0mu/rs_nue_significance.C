@@ -38,13 +38,15 @@ void rs_nue_significance()
   sample_scale["NC_MC"] = (32-0.25)/19.1; // Assume same scaling and uncertainty for NC. This is only used for the nueCC search.
   //sample_scale["NC_MC"] = 1; // Assume same scaling and uncertainty for NC. This is only used for the nueCC search.
   sample_fractional_uncertainty["NC_MC"] = sqrt(32./pow(32,2) + pow(0.043,2)); //
-  bool NC_numu_correlation = true; // If true, treat numuCC and NC_MC as correlated uncertainties
+  bool NC_numu_correlation = false; // If true, treat numuCC and NC_MC as correlated uncertainties
 
   sample_scale["nuTauCC0mu_MC"] = 1.; // No external constraint
   sample_fractional_uncertainty["nuTauCC0mu_MC"] = 1.; // 100% uncertainty
+  // sample_fractional_uncertainty["nuTauCC0mu_MC"] = 2.; // 100% uncertainty
 
   sample_scale["nuTauCC1mu_MC"] = 1.; // No external constraint
   sample_fractional_uncertainty["nuTauCC1mu_MC"] = 1.; // 100% uncertainty
+  //sample_fractional_uncertainty["nuTauCC1mu_MC"] = 2.; // 100% uncertainty
   // --------------------------------------------------------------------------------
   
   auto f_histo = new TFile("checkDataCuts.root");
@@ -89,6 +91,7 @@ void rs_nue_significance()
   sample_scale["hadMC"] = had_scale;
   std::cout << "Hadron MC scale factor: " << sample_scale["hadMC"] << std::endl;
   sample_fractional_uncertainty["hadMC"] = 1.; // Set 100% uncertainty on the extrapolation
+  // sample_fractional_uncertainty["hadMC"] = 2.; // Set 100% uncertainty on the extrapolation
 
   // Now, find optimal region to exclude no-shower hypothesis using the MC expectation for the signal and the scaled background.
   auto g_SR_opt = new TGraph();
@@ -259,6 +262,7 @@ void rs_nue_significance()
   // SR 11000 n_sig 6.35639 n_background 0.19518 uncert_background 0.183765 expected significance 5.49917 
   // Shifted Numu CV
   std::cout << "OBSERVED SIGNIFICANCE " << NumberCountingUtils::BinomialExpZ(n_data, 0.313225, 0.178912) << std::endl;
+  std::cout << "OBSERVED SIGNIFICANCE 200% " << NumberCountingUtils::BinomialExpZ(n_data, 0.313225, 0.198) << std::endl;
   // SR 11000 n_sig 7.23491 n_background 0.313225 uncert_background 0.178912 expected significance 5.50498
 
 
@@ -269,7 +273,11 @@ void rs_nue_significance()
   //  std::cout << "Nue significance " << NumberCountingUtils::BinomialExpZ(n_data, 1.59533, 0.177963) << std::endl;
   // NUE SR 11000 n_sig 4.95624 n_background 1.59533 uncert_background 0.177963 expected significance 2.64314
   // Shifted Numu CV, NC and numuCC fully correlated
-  std::cout << "Nue significance " << NumberCountingUtils::BinomialExpZ(n_data, 2.5919, 0.177955) << std::endl;
+  std::cout << "Nue significance fully correlated" << NumberCountingUtils::BinomialExpZ(n_data, 2.5919, 0.177955) << std::endl;
+  std::cout << "Nue significance fully correlated 200%" << NumberCountingUtils::BinomialExpZ(n_data, 2.5919, 0.179) << std::endl;
+  std::cout << "Nue significance fully uncorrelated" << NumberCountingUtils::BinomialExpZ(n_data, 2.5919, 0.158841) << std::endl;
+  
+  std::cout << "Nue significance fully uncorrelated" << NumberCountingUtils::BinomialExpZ(n_data, 2.5919, 0.158841) << std::endl;
   // NUE SR 11000 n_sig 4.95624 n_background 2.5919 uncert_background 0.177955 expected significance 2.19473
   std::cout << "SIGNAL REGION EXPECTED BREAKDOWN" << std::endl;
   for (std::string sample_name : mc_samples){
