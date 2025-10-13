@@ -24,7 +24,7 @@ var classMuFilter =
     [ "InitEvent", "classMuFilter.html#a3b62377daee7b9c7f652ec6ba082d9a9", null ],
     [ "Initialize", "classMuFilter.html#ab5ecbe0ffacd7dc2cbeb0513cc7c4a12", null ],
     [ "InitMedium", "classMuFilter.html#af593d8d2c6fb98053c662e594789fd6d", null ],
-    [ "operator=", "classMuFilter.html#a5e76ffe0b4a1852b340e8d5b5d39ea77", null ],
+    [ "operator=", "classMuFilter.html#ac9ee2bf6c2e99acef8f2be25ab7f621a", null ],
     [ "PostTrack", "classMuFilter.html#a60bdec79e226bc9dd1c2166cd00b84e9", null ],
     [ "PreTrack", "classMuFilter.html#afe2224c41d3376b7d5ed7bea963bf685", null ],
     [ "ProcessHits", "classMuFilter.html#acab8f74657245e3455ef48f899bf9275", null ],
@@ -34,9 +34,11 @@ var classMuFilter =
     [ "SetConfPar", "classMuFilter.html#a9e8d85364a99bbb88d1a1042b7f76f3a", null ],
     [ "SetConfPar", "classMuFilter.html#a0a3fd42f3bf4b9458b83718370cd028c", null ],
     [ "SetSpecialPhysicsCuts", "classMuFilter.html#a2f3ea980383f7f297b71bb8bcd5f9c6d", null ],
+    [ "alignment_init", "classMuFilter.html#a00e2907cff12b254efdd737f48a1922e", null ],
     [ "conf_floats", "classMuFilter.html#a2f9a12c0cd5d1a5f6e1956b9cf10597c", null ],
     [ "conf_ints", "classMuFilter.html#ab7a4485f3839f3e67f681e25802d89a7", null ],
     [ "conf_strings", "classMuFilter.html#ab910ee9e391e669998ce043a52e2c94a", null ],
+    [ "covered_runs_time_alignment", "classMuFilter.html#a6ad87519f5e02ca1fc2abfb4c9351591", null ],
     [ "eventHeader", "classMuFilter.html#a95cbd0451a0afea25fc8cb819b7b9fc7", null ],
     [ "fELoss", "classMuFilter.html#a9a04bd06aaa02d99269942302d0477f1", null ],
     [ "fLength", "classMuFilter.html#a2af0b15f8b476ddd8d49a9fa0cfe856d", null ],
@@ -44,5 +46,8 @@ var classMuFilter =
     [ "fMuFilterPointCollection", "classMuFilter.html#ae4f7ea4c7b3f5bd4c44e321277cbb691", null ],
     [ "fPos", "classMuFilter.html#a859f4a282b024a9b4d4111c92b1709eb", null ],
     [ "fTime", "classMuFilter.html#a9cc41304924c11985d72025b1575f3f5", null ],
-    [ "fVolumeID", "classMuFilter.html#a12f0931ad5cb0e388f3f362e0a5f36ac", null ]
+    [ "fVolumeID", "classMuFilter.html#a12f0931ad5cb0e388f3f362e0a5f36ac", null ],
+    [ "last_run_pos", "classMuFilter.html#ae8a00075f539fe1ce1221a3441fd6670", null ],
+    [ "last_run_time", "classMuFilter.html#aea21db3ee0881acbde2bf0b0153c66d8", null ],
+    [ "last_time_alignment_tag", "classMuFilter.html#a2cb4e2cba3e4ad3e09fdae1496e19f41", null ]
 ];
