@@ -4,6 +4,8 @@ from array import array
 import random
 from pathlib import Path
 
+import datetime
+
 from tqdm import tqdm
 
 import uproot
@@ -20,9 +22,13 @@ BASE_FILTERED_DIR = Path("/eos/user/c/cvilela/SND_nue_analysis_May24/")
 ch = ROOT.TChain("rawConv")
 
 import SndlhcGeo
-snd_geo = SndlhcGeo.GeoInterface("/eos/experiment/sndlhc/convertedData/physics/2023/geofile_sndlhc_TI18_V4_2023.root")
-scifiDet = ROOT.gROOT.GetListOfGlobals().FindObject('Scifi')
-muFilterDet = ROOT.gROOT.GetListOfGlobals().FindObject('MuFilter')
+
+#snd_geo = SndlhcGeo.GeoInterface("/eos/experiment/sndlhc/convertedData/physics/2023/geofile_sndlhc_TI18_V4_2023.root")
+#snd_geo = SndlhcGeo.GeoInterface("/eos/experiment/sndlhc/convertedData/physics/2023/geofile_sndlhc_TI18_V3_2023.root") # Get 8 events with this one
+#snd_geo = SndlhcGeo.GeoInterface("/eos/experiment/sndlhc/convertedData/physics/2022/geofile_sndlhc_TI18_V4_2022.root")
+
+#scifiDet = ROOT.gROOT.GetListOfGlobals().FindObject('Scifi')
+#muFilterDet = ROOT.gROOT.GetListOfGlobals().FindObject('MuFilter')
 
 from sciFiTools import *
 
@@ -32,10 +38,10 @@ for this_run in (BASE_FILTERED_DIR / "data_2022_2023").glob("*/filtered_*.root")
 N_MC_FILES=400
 
 chMC = ROOT.TChain("cbmsim")
-chMC.Add((BASE_FILTERED_DIR / "nuMC" / "filtered_stage1.root").as_posix())
+#chMC.Add((BASE_FILTERED_DIR / "nuMC" / "filtered_stage1.root").as_posix())
 
 chNeutral = ROOT.TChain("cbmsim")
-chNeutral.Add("/afs/cern.ch/work/c/cvilela/public/SND_Nov_2023/sndsw/analysis/scripts/neutron_kaon_nue_stage1_noprescale.root")
+#chNeutral.Add("/afs/cern.ch/work/c/cvilela/public/SND_Nov_2023/sndsw/analysis/scripts/neutron_kaon_nue_stage1_noprescale.root")
 
 out_file = ROOT.TFile("checkDataCuts_TEMP.root", "RECREATE")
 
@@ -105,14 +111,37 @@ def makePlots(ch, name = "", isNuMC = False, isNeutralHad = False, output_tree =
 
     if isNeutralHad:
         totWeight = 0
-    
-    for i_event, event in tqdm(enumerate(ch)):
 
+    prevYear = -1
+    for i_event, event in tqdm(enumerate(ch)):
         if preselection < 1.:
             if random.random() > preselection:
                 continue
             
         if not (isNuMC or isNeutralHad):
+            currentYear = datetime.datetime.fromtimestamp(event.EventHeader.GetUTCtimestamp()).year
+
+            print(f"CURRENT YEAR {currentYear}")
+            
+            if not prevYear == currentYear:
+                print(f"Initializing geometry for year {currentYear}")
+                prevYear = currentYear
+
+                if currentYear == 2022:
+                    geofile = "/eos/experiment/sndlhc/convertedData/physics/2022/geofile_sndlhc_TI18_V4_2022.root"
+                elif currentYear == 2023:
+                    geofile = "/eos/experiment/sndlhc/convertedData/physics/2023/geofile_sndlhc_TI18_V3_2023.root"
+                elif currentYear == 2024:
+                    geofile = "/eos/experiment/sndlhc/convertedData/physics/2024/geofile_sndlhc_TI18_V12_2024.root"
+                else:
+                    raise RunTimeError(f"Found a {currentYear} event, but only 2022 to 2024 geo files implemented.")
+
+                snd_geo = SndlhcGeo.GeoInterface(geofile)
+                scifiDet = ROOT.gROOT.GetListOfGlobals().FindObject('Scifi')
+                print(scifiDet, scifiDet.GetUniqueID())
+                muFilterDet = ROOT.gROOT.GetListOfGlobals().FindObject('MuFilter')  
+
+            print(scifiDet, scifiDet.GetUniqueID())            
             scifiDet.InitEvent(event.EventHeader)
             muFilterDet.InitEvent(event.EventHeader)
 
@@ -242,8 +271,8 @@ def makePlots(ch, name = "", isNuMC = False, isNeutralHad = False, output_tree =
     return (h_n_hits, h_n_hits_sel, h_hit_density, h_hit_density_sel, h_SciFiAngle, h_SciFiAngle_v_chi2, h_SciFiAngle_h_chi2, h_theta, h_theta_density, h_min_chi2, h_log_hit_density_sel, h_log_min_chi2, h_hit_density_sel_precut, h_hit_density2_sel, h_hit_density2_sel_precut, h_hit_density_sel_after_dens2, h_hit_density_sel_after_dens)
 
 plots_data  = makePlots(ch, output_tree = "data")
-plots_MC = makePlots(chMC, isNuMC = True, name = "_MC", output_tree = "nu")
-plots_hadMC = makePlots(chNeutral, isNeutralHad = True, name = "_hadMC", preselection = 1.0, output_tree = "hadron")
+#plots_MC = makePlots(chMC, isNuMC = True, name = "_MC", output_tree = "nu")
+#plots_hadMC = makePlots(chNeutral, isNeutralHad = True, name = "_hadMC", preselection = 1.0, output_tree = "hadron")
 
 
 c = []

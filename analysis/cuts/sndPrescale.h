@@ -17,7 +17,7 @@ namespace snd{
       
     public:
       preScale(double fraction);
-      bool passCut();
+      void process();
     };
   }
 }

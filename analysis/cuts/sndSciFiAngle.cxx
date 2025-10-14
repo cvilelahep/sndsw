@@ -1,22 +1,19 @@
 #include "sndSciFiAngle.h"
 
+#include "Scifi.h"
+#include "sndScifiHit.h"
 #include "sndSciFiTools.h"
 
+#include "TROOT.h"
 #include "TChain.h"
-
 #include "TVector3.h"
-
 #include "TFitResult.h"
 
 namespace snd{
   namespace analysis_cuts {
-    scifiAngle::scifiAngle(double intercept, double slope, double max_chi2, TChain * ch) : sciFiBaseCut(ch){
+    scifiAngle::scifiAngle(double intercept, double slope, double max_chi2) : sciFiBaseCut(), intercept_(intercept), slope_(slope), max_chi2_(max_chi2) {
 
-      intercept_ = intercept;
-      slope_ = slope;
-      max_chi2_ = max_chi2;
-      
-      cutName = "SciFi angle";
+      processName = "SciFi angle";
 
       shortName = "SciFiAngle";
       nbins = std::vector<int>{100, 150, 100, 150};
@@ -26,33 +23,34 @@ namespace snd{
 
       gv_ = new TGraph();
       gh_ = new TGraph();
+
+      scifiDet = dynamic_cast<Scifi*>(gROOT->GetListOfGlobals()->FindObject("Scifi"));
     }
     
-    bool scifiAngle::passCut(){
+    void scifiAngle::process(){
       initializeEvent();
 
-      int n_planes_v = 5 - std::count(hits_per_plane_vertical.begin(), hits_per_plane_vertical.end(), 0);
-      int n_planes_h = 5 - std::count(hits_per_plane_horizontal.begin(), hits_per_plane_horizontal.end(), 0);
+      int n_planes_v = 5 - std::count(hits_per_plane_vertical->begin(), hits_per_plane_vertical->end(), 0);
+      int n_planes_h = 5 - std::count(hits_per_plane_horizontal->begin(), hits_per_plane_horizontal->end(), 0);
 
       if (n_planes_v < 2 or n_planes_h < 2) {
 	plot_var[0] = 1000;
 	plot_var[1] = -1;
 	plot_var[2] = 1000;
 	plot_var[3] = -2;
-	return false;
+	passed_cut = false; return;
       }
       
       gv_->Set(0);
       gh_->Set(0);
       
-      sndScifiHit * hit;
-      TIter hitIterator(scifiDigiHitCollection);
-
-      while ( (hit = (sndScifiHit*) hitIterator.Next()) ){
+      for (TObject * obj : *scifiDigiHitCollection){
+	sndScifiHit * hit = dynamic_cast<sndScifiHit*>(obj);
+	
 	if (hit->isValid()){
-
+	  
 	  scifiDet->GetSiPMPosition(hit->GetDetectorID(), a_, b_);
-
+	  
 	  if (hit->isVertical()){
 	    gv_->SetPoint(gv_->GetN(), (a_.Z() + b_.Z())/2., (a_.X() + b_.X())/2.);
 	  } else {
@@ -60,10 +58,7 @@ namespace snd{
 	  }
 	}
       }
-
-      //      if (gv_->GetN() == 0 or gh_->GetN() == 0){
-      //      }
-
+      
       auto fitv = gv_->Fit("pol1", "SQN");
       double tanv = fitv->GetParams()[1];
       double reducedchi2v = fitv->Chi2()/fitv->Ndf();
@@ -78,12 +73,12 @@ namespace snd{
       plot_var[2] = tanh;
       plot_var[3] = reducedchi2h;
 
-      if (reducedchi2v <= intercept_ - (2.5-std::abs(tanv))*slope_) return false;
-      if (reducedchi2h <= intercept_ - (2.5-std::abs(tanh))*slope_) return false;
-      if (reducedchi2v > max_chi2_) return false;
-      if (reducedchi2h > max_chi2_) return false;
+      if (reducedchi2v <= intercept_ - (2.5-std::abs(tanv))*slope_) {passed_cut = false; return;}
+      if (reducedchi2h <= intercept_ - (2.5-std::abs(tanh))*slope_) {passed_cut = false; return;}
+      if (reducedchi2v > max_chi2_) {passed_cut = false; return;}
+      if (reducedchi2h > max_chi2_) {passed_cut = false; return;}
       
-      return true;
+      passed_cut = true; return;
     }
   }	     
 }

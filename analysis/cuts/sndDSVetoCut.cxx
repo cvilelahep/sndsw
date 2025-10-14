@@ -9,8 +9,8 @@
 
 namespace snd::analysis_cuts {
 
-  DSVetoCut::DSVetoCut(TChain * tree) : MuFilterBaseCut(tree) {
-    cutName = "Remove events with hits in the last (hor) and two last (ver) DS planes";
+  DSVetoCut::DSVetoCut() : MuFilterBaseCut() {
+    processName = "Remove events with hits in the last (hor) and two last (ver) DS planes";
     
     shortName = "DSVetoCut";
     nbins = std::vector<int>{180};
@@ -20,29 +20,25 @@ namespace snd::analysis_cuts {
 
   }
 
-  bool DSVetoCut::passCut(){
-    MuFilterHit * hit;
-    TIter hitIterator(muFilterDigiHitCollection);
-
-    //    bool ds = false;
-    //    std::vector<bool> us = std::vector<bool>(5, false); 
-
+  void DSVetoCut::process(){
+    
     double n_hits = 0;
     
-    bool ret = true;
-    
-    while ( (hit = (MuFilterHit*) hitIterator.Next()) ){
-      if (! hit->isValid()) continue;
+    passed_cut = true;
 
+    for (TObject * obj : *muFilterDigiHitCollection){
+      MuFilterHit * hit = dynamic_cast<MuFilterHit*>(obj);
+
+      if (! hit->isValid()) continue;
+      
       if (hit->GetSystem() == 3) { // DS
 	if (hit->GetPlane() >= 2) {
-	  ret = false; 
+	  passed_cut = false; 
 	  n_hits+=1;
 	}
       }
     }
     
     plot_var[0] = n_hits;
-    return ret;
   }
 }

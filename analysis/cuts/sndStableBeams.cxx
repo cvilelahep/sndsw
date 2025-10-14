@@ -6,8 +6,8 @@
 
 namespace snd::analysis_cuts {
 
-  stableBeamsCut::stableBeamsCut(TChain * ch) : EventHeaderBaseCut(ch) {
-    cutName = "Stable beams";
+  stableBeamsCut::stableBeamsCut() : EventHeaderBaseCut() {
+    processName = "Stable beams";
 
     shortName = "StableBeams";
     nbins = std::vector<int>{31};
@@ -17,11 +17,11 @@ namespace snd::analysis_cuts {
 
   }
 
-  bool stableBeamsCut::passCut(){
+  void stableBeamsCut::process(){
 
     plot_var[0] = header->GetBeamMode();
     
-    if (header->GetBeamMode() == (int) LhcBeamMode::StableBeams) return true;
-    else return false;
+    if (header->GetBeamMode() == static_cast<int>(LhcBeamMode::StableBeams)) {passed_cut = true; return;}
+    else {passed_cut = false; return;}
   }
 }

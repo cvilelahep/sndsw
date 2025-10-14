@@ -9,13 +9,13 @@ namespace snd {
   namespace analysis_cuts {
     class avgSciFiFiducialCut : public snd::analysis_cuts::sciFiBaseCut {
     private :
-      double vertical_min, vertical_max, horizontal_min, horizontal_max;
-      bool reversed;
+      double vertical_min_, vertical_max_, horizontal_min_, horizontal_max_;
+      bool reversed_;
     public :
-      avgSciFiFiducialCut(double vertical_min_cut, double vertical_max_cut, double horizontal_min_cut, double horizontal_max_cut, TChain * ch, bool reverseCuts = false);
+      avgSciFiFiducialCut(double vertical_min, double vertical_max, double horizontal_min, double horizontal_max, bool reversed = false);
       ~avgSciFiFiducialCut(){;}
 
-      bool passCut();
+      void process();
     };
 
   }

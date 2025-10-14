@@ -1,0 +1,3304 @@
+<?xml version='1.0' encoding='utf-8'?>
+<runlist>
+    <meta>
+        <name>numu_22_23_v2</name>
+        <datetime>2025-11-10T19:58:11.542757</datetime>
+        <selection>
+            <years>2022,2023</years>
+            <min_events>100000</min_events>
+            <min_lumi>0.001</min_lumi>
+            <min_stable_time>10.0</min_stable_time>
+            <particle_B1>p+</particle_B1>
+            <particle_B2>p+</particle_B2>
+            <min_energy>6400.0</min_energy>
+            <max_energy>0.0</max_energy>
+            <min_bunches_IP1>100</min_bunches_IP1>
+            <max_bunches_IP1>0</max_bunches_IP1>
+            <exclude_runs>[5025, 5026, 5027, 5028, 5030, 5031]</exclude_runs>
+            <include_runs>[6268, 6279]</include_runs>
+        </selection>
+        <statistics>
+            <n_runs>273</n_runs>
+            <tot_n_events>17051760463</tot_n_events>
+            <tot_duration>131211</tot_duration>
+            <tot_n_files>17200</tot_n_files>
+        </statistics>
+    </meta>
+    <runs>
+        <run>
+            <run_number>4449</run_number>
+            <start>2022-07-14 15:40:15</start>
+            <end>2022-07-15 04:10:29</end>
+            <n_events>12367098</n_events>
+            <duration>749</duration>
+            <n_files>13</n_files>
+            <fill_number>7978</fill_number>
+            <fill_int_lumi>49950.61328125</fill_int_lumi>
+            <fill_stable_time>11.213055555555556</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004449</path>
+        </run>
+        <run>
+            <run_number>4488</run_number>
+            <start>2022-07-18 00:42:16</start>
+            <end>2022-07-18 07:26:44</end>
+            <n_events>5026155</n_events>
+            <duration>404</duration>
+            <n_files>6</n_files>
+            <fill_number>8007</fill_number>
+            <fill_int_lumi>19001.380859375</fill_int_lumi>
+            <fill_stable_time>4.142777777777778</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004488</path>
+        </run>
+        <run>
+            <run_number>4503</run_number>
+            <start>2022-07-19 15:15:21</start>
+            <end>2022-07-19 21:02:28</end>
+            <n_events>7217333</n_events>
+            <duration>346</duration>
+            <n_files>8</n_files>
+            <fill_number>8016</fill_number>
+            <fill_int_lumi>20143.779296875</fill_int_lumi>
+            <fill_stable_time>2.421111111111111</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004503</path>
+        </run>
+        <run>
+            <run_number>4504</run_number>
+            <start>2022-07-19 22:34:21</start>
+            <end>2022-07-20 07:27:15</end>
+            <n_events>13486977</n_events>
+            <duration>532</duration>
+            <n_files>14</n_files>
+            <fill_number>8017</fill_number>
+            <fill_int_lumi>36459.56640625</fill_int_lumi>
+            <fill_stable_time>8.37138888888889</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004504</path>
+        </run>
+        <run>
+            <run_number>4513</run_number>
+            <start>2022-07-20 23:46:08</start>
+            <end>2022-07-21 04:43:29</end>
+            <n_events>6506988</n_events>
+            <duration>297</duration>
+            <n_files>7</n_files>
+            <fill_number>8022</fill_number>
+            <fill_int_lumi>22781.880859375</fill_int_lumi>
+            <fill_stable_time>2.6572222222222224</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004513</path>
+        </run>
+        <run>
+            <run_number>4515</run_number>
+            <start>2022-07-21 04:48:05</start>
+            <end>2022-07-21 08:26:56</end>
+            <n_events>2890489</n_events>
+            <duration>217</duration>
+            <n_files>3</n_files>
+            <fill_number>8023</fill_number>
+            <fill_int_lumi>9841.8759765625</fill_int_lumi>
+            <fill_stable_time>1.3077777777777777</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004515</path>
+        </run>
+        <run>
+            <run_number>4527</run_number>
+            <start>2022-07-21 20:58:58</start>
+            <end>2022-07-22 05:48:22</end>
+            <n_events>20071102</n_events>
+            <duration>530</duration>
+            <n_files>21</n_files>
+            <fill_number>8027</fill_number>
+            <fill_int_lumi>78746.6953125</fill_int_lumi>
+            <fill_stable_time>6.497777777777777</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004527</path>
+        </run>
+        <run>
+            <run_number>4532</run_number>
+            <start>2022-07-22 15:17:53</start>
+            <end>2022-07-22 23:01:51</end>
+            <n_events>8009525</n_events>
+            <duration>464</duration>
+            <n_files>9</n_files>
+            <fill_number>8030</fill_number>
+            <fill_int_lumi>24223.259765625</fill_int_lumi>
+            <fill_stable_time>1.4169444444444443</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004532</path>
+        </run>
+        <run>
+            <run_number>4568</run_number>
+            <start>2022-07-25 09:13:38</start>
+            <end>2022-07-25 11:39:08</end>
+            <n_events>1419944</n_events>
+            <duration>145</duration>
+            <n_files>2</n_files>
+            <fill_number>8043</fill_number>
+            <fill_int_lumi>3738.517333984375</fill_int_lumi>
+            <fill_stable_time>0.2897222222222222</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004568</path>
+        </run>
+        <run>
+            <run_number>4572</run_number>
+            <start>2022-07-25 16:02:42</start>
+            <end>2022-07-25 20:10:41</end>
+            <n_events>9094080</n_events>
+            <duration>248</duration>
+            <n_files>10</n_files>
+            <fill_number>8046</fill_number>
+            <fill_int_lumi>44165.1640625</fill_int_lumi>
+            <fill_stable_time>2.1955555555555555</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004572</path>
+        </run>
+        <run>
+            <run_number>4591</run_number>
+            <start>2022-07-27 15:38:31</start>
+            <end>2022-07-27 18:47:31</end>
+            <n_events>3289361</n_events>
+            <duration>189</duration>
+            <n_files>4</n_files>
+            <fill_number>8057</fill_number>
+            <fill_int_lumi>12241.0673828125</fill_int_lumi>
+            <fill_stable_time>0.8583333333333333</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004591</path>
+        </run>
+        <run>
+            <run_number>4593</run_number>
+            <start>2022-07-27 19:10:40</start>
+            <end>2022-07-27 23:08:57</end>
+            <n_events>2620876</n_events>
+            <duration>238</duration>
+            <n_files>3</n_files>
+            <fill_number>8058</fill_number>
+            <fill_int_lumi>11829.158203125</fill_int_lumi>
+            <fill_stable_time>1.2102777777777778</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004593</path>
+        </run>
+        <run>
+            <run_number>4595</run_number>
+            <start>2022-07-27 23:14:00</start>
+            <end>2022-07-28 09:23:46</end>
+            <n_events>17054636</n_events>
+            <duration>609</duration>
+            <n_files>18</n_files>
+            <fill_number>8059</fill_number>
+            <fill_int_lumi>86364.8203125</fill_int_lumi>
+            <fill_stable_time>4.970555555555555</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004595</path>
+        </run>
+        <run>
+            <run_number>4604</run_number>
+            <start>2022-07-28 13:38:23</start>
+            <end>2022-07-28 17:03:07</end>
+            <n_events>1435207</n_events>
+            <duration>204</duration>
+            <n_files>2</n_files>
+            <fill_number>8062</fill_number>
+            <fill_int_lumi>3822.280517578125</fill_int_lumi>
+            <fill_stable_time>0.2475</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004604</path>
+        </run>
+        <run>
+            <run_number>4612</run_number>
+            <start>2022-07-28 17:38:30</start>
+            <end>2022-07-29 07:36:54</end>
+            <n_events>38759492</n_events>
+            <duration>838</duration>
+            <n_files>39</n_files>
+            <fill_number>8063</fill_number>
+            <fill_int_lumi>214930.828125</fill_int_lumi>
+            <fill_stable_time>12.496666666666666</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004612</path>
+        </run>
+        <run>
+            <run_number>4617</run_number>
+            <start>2022-07-29 12:30:41</start>
+            <end>2022-07-29 19:52:30</end>
+            <n_events>27959228</n_events>
+            <duration>442</duration>
+            <n_files>28</n_files>
+            <fill_number>8067</fill_number>
+            <fill_int_lumi>142497.890625</fill_int_lumi>
+            <fill_stable_time>5.892222222222222</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004617</path>
+        </run>
+        <run>
+            <run_number>4619</run_number>
+            <start>2022-07-29 20:39:29</start>
+            <end>2022-07-30 02:21:59</end>
+            <n_events>18860895</n_events>
+            <duration>342</duration>
+            <n_files>19</n_files>
+            <fill_number>8068</fill_number>
+            <fill_int_lumi>94766.703125</fill_int_lumi>
+            <fill_stable_time>4.017222222222222</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004619</path>
+        </run>
+        <run>
+            <run_number>4626</run_number>
+            <start>2022-07-30 07:54:28</start>
+            <end>2022-07-30 22:56:03</end>
+            <n_events>50050182</n_events>
+            <duration>901</duration>
+            <n_files>51</n_files>
+            <fill_number>8072</fill_number>
+            <fill_int_lumi>264356.6875</fill_int_lumi>
+            <fill_stable_time>12.536666666666667</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004626</path>
+        </run>
+        <run>
+            <run_number>4628</run_number>
+            <start>2022-07-30 23:00:02</start>
+            <end>2022-07-31 05:39:17</end>
+            <n_events>22077943</n_events>
+            <duration>399</duration>
+            <n_files>23</n_files>
+            <fill_number>8073</fill_number>
+            <fill_int_lumi>112231.640625</fill_int_lumi>
+            <fill_stable_time>4.7283333333333335</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004628</path>
+        </run>
+        <run>
+            <run_number>4639</run_number>
+            <start>2022-07-31 17:07:17</start>
+            <end>2022-08-01 05:58:09</end>
+            <n_events>42146406</n_events>
+            <duration>770</duration>
+            <n_files>43</n_files>
+            <fill_number>8076</fill_number>
+            <fill_int_lumi>222689.671875</fill_int_lumi>
+            <fill_stable_time>7.681111111111111</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004639</path>
+        </run>
+        <run>
+            <run_number>4649</run_number>
+            <start>2022-08-01 12:58:50</start>
+            <end>2022-08-01 17:14:18</end>
+            <n_events>12774799</n_events>
+            <duration>256</duration>
+            <n_files>13</n_files>
+            <fill_number>8078</fill_number>
+            <fill_int_lumi>55424.21484375</fill_int_lumi>
+            <fill_stable_time>2.0147222222222223</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004649</path>
+        </run>
+        <run>
+            <run_number>4650</run_number>
+            <start>2022-08-01 17:15:56</start>
+            <end>2022-08-02 02:19:35</end>
+            <n_events>16147789</n_events>
+            <duration>544</duration>
+            <n_files>17</n_files>
+            <fill_number>8079</fill_number>
+            <fill_int_lumi>77158.9921875</fill_int_lumi>
+            <fill_stable_time>2.63</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004650</path>
+        </run>
+        <run>
+            <run_number>4654</run_number>
+            <start>2022-08-02 03:38:17</start>
+            <end>2022-08-02 14:05:29</end>
+            <n_events>47266082</n_events>
+            <duration>627</duration>
+            <n_files>48</n_files>
+            <fill_number>8081</fill_number>
+            <fill_int_lumi>248477.4375</fill_int_lumi>
+            <fill_stable_time>8.893333333333333</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004654</path>
+        </run>
+        <run>
+            <run_number>4661</run_number>
+            <start>2022-08-02 16:43:15</start>
+            <end>2022-08-03 05:05:39</end>
+            <n_events>53954360</n_events>
+            <duration>742</duration>
+            <n_files>54</n_files>
+            <fill_number>8083</fill_number>
+            <fill_int_lumi>290576.03125</fill_int_lumi>
+            <fill_stable_time>10.650277777777777</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004661</path>
+        </run>
+        <run>
+            <run_number>4703</run_number>
+            <start>2022-08-03 20:29:32</start>
+            <end>2022-08-03 23:12:59</end>
+            <n_events>7294459</n_events>
+            <duration>163</duration>
+            <n_files>8</n_files>
+            <fill_number>8087</fill_number>
+            <fill_int_lumi>25994.12890625</fill_int_lumi>
+            <fill_stable_time>0.8238888888888889</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004703</path>
+        </run>
+        <run>
+            <run_number>4705</run_number>
+            <start>2022-08-03 23:26:03</start>
+            <end>2022-08-04 12:06:24</end>
+            <n_events>71705003</n_events>
+            <duration>760</duration>
+            <n_files>72</n_files>
+            <fill_number>8088</fill_number>
+            <fill_int_lumi>377076.5</fill_int_lumi>
+            <fill_stable_time>10.538055555555555</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004705</path>
+        </run>
+        <run>
+            <run_number>4708</run_number>
+            <start>2022-08-04 18:13:21</start>
+            <end>2022-08-04 21:48:22</end>
+            <n_events>14445843</n_events>
+            <duration>215</duration>
+            <n_files>15</n_files>
+            <fill_number>8091</fill_number>
+            <fill_int_lumi>67220.1796875</fill_int_lumi>
+            <fill_stable_time>1.6555555555555554</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004708</path>
+        </run>
+        <run>
+            <run_number>4713</run_number>
+            <start>2022-08-05 00:50:01</start>
+            <end>2022-08-05 15:03:18</end>
+            <n_events>60043057</n_events>
+            <duration>853</duration>
+            <n_files>61</n_files>
+            <fill_number>8094</fill_number>
+            <fill_int_lumi>321203.875</fill_int_lumi>
+            <fill_stable_time>8.857222222222223</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004713</path>
+        </run>
+        <run>
+            <run_number>4718</run_number>
+            <start>2022-08-05 23:15:10</start>
+            <end>2022-08-06 01:47:27</end>
+            <n_events>5716464</n_events>
+            <duration>152</duration>
+            <n_files>6</n_files>
+            <fill_number>8098</fill_number>
+            <fill_int_lumi>17882.708984375</fill_int_lumi>
+            <fill_stable_time>0.49694444444444447</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004718</path>
+        </run>
+        <run>
+            <run_number>4719</run_number>
+            <start>2022-08-06 01:48:30</start>
+            <end>2022-08-06 04:35:37</end>
+            <n_events>6329376</n_events>
+            <duration>167</duration>
+            <n_files>7</n_files>
+            <fill_number>8099</fill_number>
+            <fill_int_lumi>22876.83984375</fill_int_lumi>
+            <fill_stable_time>0.6561111111111111</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004719</path>
+        </run>
+        <run>
+            <run_number>4721</run_number>
+            <start>2022-08-06 04:38:58</start>
+            <end>2022-08-06 14:52:32</end>
+            <n_events>7559760</n_events>
+            <duration>614</duration>
+            <n_files>8</n_files>
+            <fill_number>8100</fill_number>
+            <fill_int_lumi>30574.990234375</fill_int_lumi>
+            <fill_stable_time>0.8113888888888889</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004721</path>
+        </run>
+        <run>
+            <run_number>4724</run_number>
+            <start>2022-08-06 15:29:47</start>
+            <end>2022-08-07 08:09:11</end>
+            <n_events>97998125</n_events>
+            <duration>999</duration>
+            <n_files>98</n_files>
+            <fill_number>8102</fill_number>
+            <fill_int_lumi>531153.25</fill_int_lumi>
+            <fill_stable_time>14.693055555555556</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004724</path>
+        </run>
+        <run>
+            <run_number>4726</run_number>
+            <start>2022-08-07 08:15:53</start>
+            <end>2022-08-07 18:57:51</end>
+            <n_events>45254948</n_events>
+            <duration>642</duration>
+            <n_files>46</n_files>
+            <fill_number>8103</fill_number>
+            <fill_int_lumi>225018.40625</fill_int_lumi>
+            <fill_stable_time>5.191944444444444</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004726</path>
+        </run>
+        <run>
+            <run_number>4729</run_number>
+            <start>2022-08-08 03:42:46</start>
+            <end>2022-08-08 09:19:11</end>
+            <n_events>27185177</n_events>
+            <duration>336</duration>
+            <n_files>28</n_files>
+            <fill_number>8106</fill_number>
+            <fill_int_lumi>134324.0</fill_int_lumi>
+            <fill_stable_time>2.9294444444444445</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004729</path>
+        </run>
+        <run>
+            <run_number>4744</run_number>
+            <start>2022-08-09 01:06:25</start>
+            <end>2022-08-09 14:19:25</end>
+            <n_events>108426563</n_events>
+            <duration>793</duration>
+            <n_files>109</n_files>
+            <fill_number>8112</fill_number>
+            <fill_int_lumi>505035.53125</fill_int_lumi>
+            <fill_stable_time>11.26388888888889</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004744</path>
+        </run>
+        <run>
+            <run_number>4746</run_number>
+            <start>2022-08-09 14:39:52</start>
+            <end>2022-08-10 00:33:23</end>
+            <n_events>67767883</n_events>
+            <duration>594</duration>
+            <n_files>68</n_files>
+            <fill_number>8113</fill_number>
+            <fill_int_lumi>361678.15625</fill_int_lumi>
+            <fill_stable_time>7.584722222222222</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004746</path>
+        </run>
+        <run>
+            <run_number>4752</run_number>
+            <start>2022-08-10 15:12:25</start>
+            <end>2022-08-11 06:33:41</end>
+            <n_events>90951432</n_events>
+            <duration>921</duration>
+            <n_files>91</n_files>
+            <fill_number>8115</fill_number>
+            <fill_int_lumi>496453.75</fill_int_lumi>
+            <fill_stable_time>10.884166666666667</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004752</path>
+        </run>
+        <run>
+            <run_number>4757</run_number>
+            <start>2022-08-11 18:18:20</start>
+            <end>2022-08-11 20:58:30</end>
+            <n_events>14348994</n_events>
+            <duration>160</duration>
+            <n_files>15</n_files>
+            <fill_number>8118</fill_number>
+            <fill_int_lumi>483303.8125</fill_int_lumi>
+            <fill_stable_time>10.341666666666667</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004757</path>
+        </run>
+        <run>
+            <run_number>4758</run_number>
+            <start>2022-08-11 21:00:49</start>
+            <end>2022-08-12 06:48:22</end>
+            <n_events>73355946</n_events>
+            <duration>588</duration>
+            <n_files>74</n_files>
+            <fill_number>8118</fill_number>
+            <fill_int_lumi>483303.8125</fill_int_lumi>
+            <fill_stable_time>10.341666666666667</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004758</path>
+        </run>
+        <run>
+            <run_number>4764</run_number>
+            <start>2022-08-12 16:20:51</start>
+            <end>2022-08-12 20:18:43</end>
+            <n_events>12404988</n_events>
+            <duration>238</duration>
+            <n_files>13</n_files>
+            <fill_number>8120</fill_number>
+            <fill_int_lumi>181359.4375</fill_int_lumi>
+            <fill_stable_time>4.053333333333334</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004764</path>
+        </run>
+        <run>
+            <run_number>4765</run_number>
+            <start>2022-08-12 20:19:16</start>
+            <end>2022-08-12 23:02:08</end>
+            <n_events>20073554</n_events>
+            <duration>162</duration>
+            <n_files>21</n_files>
+            <fill_number>8120</fill_number>
+            <fill_int_lumi>181359.4375</fill_int_lumi>
+            <fill_stable_time>4.053333333333334</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004765</path>
+        </run>
+        <run>
+            <run_number>4766</run_number>
+            <start>2022-08-12 23:03:11</start>
+            <end>2022-08-13 11:33:42</end>
+            <n_events>8868207</n_events>
+            <duration>750</duration>
+            <n_files>9</n_files>
+            <fill_number>8121</fill_number>
+            <fill_int_lumi>37129.46875</fill_int_lumi>
+            <fill_stable_time>1.0055555555555555</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004766</path>
+        </run>
+        <run>
+            <run_number>4769</run_number>
+            <start>2022-08-13 12:41:47</start>
+            <end>2022-08-14 04:06:10</end>
+            <n_events>100788480</n_events>
+            <duration>924</duration>
+            <n_files>101</n_files>
+            <fill_number>8124</fill_number>
+            <fill_int_lumi>575193.125</fill_int_lumi>
+            <fill_stable_time>13.445833333333333</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004769</path>
+        </run>
+        <run>
+            <run_number>4776</run_number>
+            <start>2022-08-14 16:45:52</start>
+            <end>2022-08-14 19:07:14</end>
+            <n_events>2691029</n_events>
+            <duration>141</duration>
+            <n_files>3</n_files>
+            <fill_number>8128</fill_number>
+            <fill_int_lumi>434453.9375</fill_int_lumi>
+            <fill_stable_time>8.75611111111111</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004776</path>
+        </run>
+        <run>
+            <run_number>4778</run_number>
+            <start>2022-08-14 22:21:09</start>
+            <end>2022-08-15 12:55:59</end>
+            <n_events>76111219</n_events>
+            <duration>874</duration>
+            <n_files>77</n_files>
+            <fill_number>8128</fill_number>
+            <fill_int_lumi>434453.9375</fill_int_lumi>
+            <fill_stable_time>8.75611111111111</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004778</path>
+        </run>
+        <run>
+            <run_number>4784</run_number>
+            <start>2022-08-15 19:13:40</start>
+            <end>2022-08-16 03:27:30</end>
+            <n_events>24323188</n_events>
+            <duration>494</duration>
+            <n_files>25</n_files>
+            <fill_number>8132</fill_number>
+            <fill_int_lumi>126150.3828125</fill_int_lumi>
+            <fill_stable_time>2.258888888888889</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004784</path>
+        </run>
+        <run>
+            <run_number>4796</run_number>
+            <start>2022-08-17 04:10:41</start>
+            <end>2022-08-17 12:55:15</end>
+            <n_events>53550870</n_events>
+            <duration>525</duration>
+            <n_files>54</n_files>
+            <fill_number>8136</fill_number>
+            <fill_int_lumi>396176.09375</fill_int_lumi>
+            <fill_stable_time>10.466388888888888</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004796</path>
+        </run>
+        <run>
+            <run_number>4797</run_number>
+            <start>2022-08-17 12:55:45</start>
+            <end>2022-08-17 17:27:17</end>
+            <n_events>15571533</n_events>
+            <duration>272</duration>
+            <n_files>16</n_files>
+            <fill_number>8136</fill_number>
+            <fill_int_lumi>396176.09375</fill_int_lumi>
+            <fill_stable_time>10.466388888888888</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004797</path>
+        </run>
+        <run>
+            <run_number>4803</run_number>
+            <start>2022-08-18 19:41:59</start>
+            <end>2022-08-19 03:55:57</end>
+            <n_events>32057516</n_events>
+            <duration>494</duration>
+            <n_files>33</n_files>
+            <fill_number>8142</fill_number>
+            <fill_int_lumi>165622.828125</fill_int_lumi>
+            <fill_stable_time>2.9741666666666666</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004803</path>
+        </run>
+        <run>
+            <run_number>4805</run_number>
+            <start>2022-08-19 04:06:50</start>
+            <end>2022-08-19 21:29:04</end>
+            <n_events>107727679</n_events>
+            <duration>1042</duration>
+            <n_files>108</n_files>
+            <fill_number>8143</fill_number>
+            <fill_int_lumi>623159.8125</fill_int_lumi>
+            <fill_stable_time>14.447777777777778</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004805</path>
+        </run>
+        <run>
+            <run_number>4806</run_number>
+            <start>2022-08-19 21:30:07</start>
+            <end>2022-08-20 01:13:14</end>
+            <n_events>5637322</n_events>
+            <duration>223</duration>
+            <n_files>6</n_files>
+            <fill_number>8144</fill_number>
+            <fill_int_lumi>22500.48046875</fill_int_lumi>
+            <fill_stable_time>0.56</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004806</path>
+        </run>
+        <run>
+            <run_number>4809</run_number>
+            <start>2022-08-20 08:29:09</start>
+            <end>2022-08-20 20:31:02</end>
+            <n_events>89758374</n_events>
+            <duration>721</duration>
+            <n_files>90</n_files>
+            <fill_number>8146</fill_number>
+            <fill_int_lumi>511451.5</fill_int_lumi>
+            <fill_stable_time>10.346111111111112</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004809</path>
+        </run>
+        <run>
+            <run_number>4811</run_number>
+            <start>2022-08-20 20:35:42</start>
+            <end>2022-08-21 04:38:52</end>
+            <n_events>49514527</n_events>
+            <duration>483</duration>
+            <n_files>50</n_files>
+            <fill_number>8147</fill_number>
+            <fill_int_lumi>271562.03125</fill_int_lumi>
+            <fill_stable_time>4.912222222222222</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004811</path>
+        </run>
+        <run>
+            <run_number>4813</run_number>
+            <start>2022-08-21 05:09:14</start>
+            <end>2022-08-21 18:19:01</end>
+            <n_events>89590720</n_events>
+            <duration>789</duration>
+            <n_files>90</n_files>
+            <fill_number>8148</fill_number>
+            <fill_int_lumi>509414.84375</fill_int_lumi>
+            <fill_stable_time>10.423333333333334</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004813</path>
+        </run>
+        <run>
+            <run_number>4815</run_number>
+            <start>2022-08-21 18:23:42</start>
+            <end>2022-08-22 19:24:39</end>
+            <n_events>116454661</n_events>
+            <duration>1501</duration>
+            <n_files>117</n_files>
+            <fill_number>8149</fill_number>
+            <fill_int_lumi>665653.4375</fill_int_lumi>
+            <fill_stable_time>15.239444444444445</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004815</path>
+        </run>
+        <run>
+            <run_number>4819</run_number>
+            <start>2022-08-22 21:39:35</start>
+            <end>2022-08-23 15:02:54</end>
+            <n_events>107880234</n_events>
+            <duration>1043</duration>
+            <n_files>108</n_files>
+            <fill_number>8151</fill_number>
+            <fill_int_lumi>604367.3125</fill_int_lumi>
+            <fill_stable_time>12.415277777777778</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004819</path>
+        </run>
+        <run>
+            <run_number>4944</run_number>
+            <start>2022-09-29 11:55:38</start>
+            <end>2022-09-29 21:55:53</end>
+            <n_events>1279076</n_events>
+            <duration>600</duration>
+            <n_files>2</n_files>
+            <fill_number>8210</fill_number>
+            <fill_int_lumi>6807.07373046875</fill_int_lumi>
+            <fill_stable_time>6.860555555555556</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004944</path>
+        </run>
+        <run>
+            <run_number>4945</run_number>
+            <start>2022-09-29 21:56:58</start>
+            <end>2022-09-30 03:31:23</end>
+            <n_events>1556803</n_events>
+            <duration>335</duration>
+            <n_files>2</n_files>
+            <fill_number>8211</fill_number>
+            <fill_int_lumi>9101.7578125</fill_int_lumi>
+            <fill_stable_time>2.557777777777778</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004945</path>
+        </run>
+        <run>
+            <run_number>4949</run_number>
+            <start>2022-09-30 04:45:36</start>
+            <end>2022-09-30 08:51:03</end>
+            <n_events>7788974</n_events>
+            <duration>245</duration>
+            <n_files>8</n_files>
+            <fill_number>8212</fill_number>
+            <fill_int_lumi>45728.20703125</fill_int_lumi>
+            <fill_stable_time>3.473333333333333</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004949</path>
+        </run>
+        <run>
+            <run_number>4955</run_number>
+            <start>2022-09-30 10:05:56</start>
+            <end>2022-09-30 16:56:54</end>
+            <n_events>8211032</n_events>
+            <duration>411</duration>
+            <n_files>9</n_files>
+            <fill_number>8214</fill_number>
+            <fill_int_lumi>58749.078125</fill_int_lumi>
+            <fill_stable_time>2.653888888888889</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004955</path>
+        </run>
+        <run>
+            <run_number>4956</run_number>
+            <start>2022-09-30 16:58:18</start>
+            <end>2022-09-30 18:13:21</end>
+            <n_events>2076663</n_events>
+            <duration>75</duration>
+            <n_files>3</n_files>
+            <fill_number>8214</fill_number>
+            <fill_int_lumi>58749.078125</fill_int_lumi>
+            <fill_stable_time>2.653888888888889</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004956</path>
+        </run>
+        <run>
+            <run_number>4958</run_number>
+            <start>2022-09-30 18:14:31</start>
+            <end>2022-10-01 05:55:09</end>
+            <n_events>29185094</n_events>
+            <duration>700</duration>
+            <n_files>30</n_files>
+            <fill_number>8216</fill_number>
+            <fill_int_lumi>169671.671875</fill_int_lumi>
+            <fill_stable_time>8.468333333333334</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004958</path>
+        </run>
+        <run>
+            <run_number>4964</run_number>
+            <start>2022-10-01 09:26:35</start>
+            <end>2022-10-01 18:14:55</end>
+            <n_events>59191689</n_events>
+            <duration>528</duration>
+            <n_files>60</n_files>
+            <fill_number>8220</fill_number>
+            <fill_int_lumi>463295.84375</fill_int_lumi>
+            <fill_stable_time>12.536666666666667</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004964</path>
+        </run>
+        <run>
+            <run_number>4968</run_number>
+            <start>2022-10-03 08:23:37</start>
+            <end>2022-10-03 13:30:07</end>
+            <n_events>21868500</n_events>
+            <duration>306</duration>
+            <n_files>22</n_files>
+            <fill_number>8223</fill_number>
+            <fill_int_lumi>378116.65625</fill_int_lumi>
+            <fill_stable_time>7.842222222222222</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004968</path>
+        </run>
+        <run>
+            <run_number>4969</run_number>
+            <start>2022-10-03 13:32:17</start>
+            <end>2022-10-03 19:47:59</end>
+            <n_events>48959894</n_events>
+            <duration>375</duration>
+            <n_files>49</n_files>
+            <fill_number>8223</fill_number>
+            <fill_int_lumi>378116.65625</fill_int_lumi>
+            <fill_stable_time>7.842222222222222</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004969</path>
+        </run>
+        <run>
+            <run_number>4971</run_number>
+            <start>2022-10-03 21:28:41</start>
+            <end>2022-10-04 11:12:59</end>
+            <n_events>96275481</n_events>
+            <duration>824</duration>
+            <n_files>97</n_files>
+            <fill_number>8225</fill_number>
+            <fill_int_lumi>519789.1875</fill_int_lumi>
+            <fill_stable_time>11.955833333333333</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004971</path>
+        </run>
+        <run>
+            <run_number>4976</run_number>
+            <start>2022-10-04 18:12:22</start>
+            <end>2022-10-05 09:52:29</end>
+            <n_events>84042226</n_events>
+            <duration>940</duration>
+            <n_files>85</n_files>
+            <fill_number>8228</fill_number>
+            <fill_int_lumi>444945.46875</fill_int_lumi>
+            <fill_stable_time>8.604166666666666</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004976</path>
+        </run>
+        <run>
+            <run_number>4980</run_number>
+            <start>2022-10-05 11:38:04</start>
+            <end>2022-10-06 01:12:55</end>
+            <n_events>25841327</n_events>
+            <duration>814</duration>
+            <n_files>26</n_files>
+            <fill_number>8230</fill_number>
+            <fill_int_lumi>117268.140625</fill_int_lumi>
+            <fill_stable_time>2.1491666666666664</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004980</path>
+        </run>
+        <run>
+            <run_number>4986</run_number>
+            <start>2022-10-06 08:34:42</start>
+            <end>2022-10-06 17:55:20</end>
+            <n_events>2214641</n_events>
+            <duration>561</duration>
+            <n_files>3</n_files>
+            <fill_number>8233</fill_number>
+            <fill_int_lumi>10884.546875</fill_int_lumi>
+            <fill_stable_time>2.6019444444444444</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004986</path>
+        </run>
+        <run>
+            <run_number>4990</run_number>
+            <start>2022-10-07 13:18:02</start>
+            <end>2022-10-08 08:15:20</end>
+            <n_events>106816815</n_events>
+            <duration>1137</duration>
+            <n_files>107</n_files>
+            <fill_number>8236</fill_number>
+            <fill_int_lumi>550015.375</fill_int_lumi>
+            <fill_stable_time>12.35388888888889</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004990</path>
+        </run>
+        <run>
+            <run_number>4992</run_number>
+            <start>2022-10-08 09:46:32</start>
+            <end>2022-10-08 21:45:49</end>
+            <n_events>92138406</n_events>
+            <duration>719</duration>
+            <n_files>93</n_files>
+            <fill_number>8238</fill_number>
+            <fill_int_lumi>497995.21875</fill_int_lumi>
+            <fill_stable_time>10.335555555555555</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_004992</path>
+        </run>
+        <run>
+            <run_number>5000</run_number>
+            <start>2022-10-09 17:56:15</start>
+            <end>2022-10-10 09:40:38</end>
+            <n_events>118764020</n_events>
+            <duration>944</duration>
+            <n_files>119</n_files>
+            <fill_number>8245</fill_number>
+            <fill_int_lumi>633609.4375</fill_int_lumi>
+            <fill_stable_time>12.883333333333333</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005000</path>
+        </run>
+        <run>
+            <run_number>5003</run_number>
+            <start>2022-10-10 12:24:23</start>
+            <end>2022-10-11 03:41:34</end>
+            <n_events>124553053</n_events>
+            <duration>917</duration>
+            <n_files>125</n_files>
+            <fill_number>8247</fill_number>
+            <fill_int_lumi>621902.0625</fill_int_lumi>
+            <fill_stable_time>13.584444444444445</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005003</path>
+        </run>
+        <run>
+            <run_number>5005</run_number>
+            <start>2022-10-11 03:55:22</start>
+            <end>2022-10-11 10:30:31</end>
+            <n_events>57120876</n_events>
+            <duration>395</duration>
+            <n_files>58</n_files>
+            <fill_number>8248</fill_number>
+            <fill_int_lumi>300914.71875</fill_int_lumi>
+            <fill_stable_time>4.9175</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005005</path>
+        </run>
+        <run>
+            <run_number>5013</run_number>
+            <start>2022-10-11 22:47:26</start>
+            <end>2022-10-12 11:28:03</end>
+            <n_events>46919440</n_events>
+            <duration>760</duration>
+            <n_files>47</n_files>
+            <fill_number>8253</fill_number>
+            <fill_int_lumi>239499.828125</fill_int_lumi>
+            <fill_stable_time>3.953888888888889</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005013</path>
+        </run>
+        <run>
+            <run_number>5024</run_number>
+            <start>2022-10-13 06:54:07</start>
+            <end>2022-10-13 15:56:01</end>
+            <n_events>75556540</n_events>
+            <duration>541</duration>
+            <n_files>76</n_files>
+            <fill_number>8260</fill_number>
+            <fill_int_lumi>686826.5</fill_int_lumi>
+            <fill_stable_time>12.835833333333333</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005024</path>
+        </run>
+        <run>
+            <run_number>5036</run_number>
+            <start>2022-10-13 22:59:42</start>
+            <end>2022-10-14 02:46:52</end>
+            <n_events>27611613</n_events>
+            <duration>227</duration>
+            <n_files>28</n_files>
+            <fill_number>8263</fill_number>
+            <fill_int_lumi>138087.0</fill_int_lumi>
+            <fill_stable_time>2.3161111111111112</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005036</path>
+        </run>
+        <run>
+            <run_number>5044</run_number>
+            <start>2022-10-14 18:59:47</start>
+            <end>2022-10-14 22:44:36</end>
+            <n_events>24962235</n_events>
+            <duration>225</duration>
+            <n_files>25</n_files>
+            <fill_number>8267</fill_number>
+            <fill_int_lumi>120944.5625</fill_int_lumi>
+            <fill_stable_time>2.142777777777778</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005044</path>
+        </run>
+        <run>
+            <run_number>5046</run_number>
+            <start>2022-10-15 01:17:04</start>
+            <end>2022-10-15 04:10:12</end>
+            <n_events>6588206</n_events>
+            <duration>173</duration>
+            <n_files>7</n_files>
+            <fill_number>8269</fill_number>
+            <fill_int_lumi>25559.814453125</fill_int_lumi>
+            <fill_stable_time>0.5608333333333333</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005046</path>
+        </run>
+        <run>
+            <run_number>5052</run_number>
+            <start>2022-10-15 08:17:42</start>
+            <end>2022-10-15 10:32:32</end>
+            <n_events>9347227</n_events>
+            <duration>135</duration>
+            <n_files>10</n_files>
+            <fill_number>8272</fill_number>
+            <fill_int_lumi>40515.99609375</fill_int_lumi>
+            <fill_stable_time>0.7488888888888889</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005052</path>
+        </run>
+        <run>
+            <run_number>5054</run_number>
+            <start>2022-10-15 10:35:32</start>
+            <end>2022-10-15 18:03:54</end>
+            <n_events>55896216</n_events>
+            <duration>448</duration>
+            <n_files>56</n_files>
+            <fill_number>8273</fill_number>
+            <fill_int_lumi>214233.9375</fill_int_lumi>
+            <fill_stable_time>4.788055555555555</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005054</path>
+        </run>
+        <run>
+            <run_number>5056</run_number>
+            <start>2022-10-15 18:07:14</start>
+            <end>2022-10-16 13:41:56</end>
+            <n_events>140964644</n_events>
+            <duration>1174</duration>
+            <n_files>141</n_files>
+            <fill_number>8274</fill_number>
+            <fill_int_lumi>775781.1875</fill_int_lumi>
+            <fill_stable_time>17.1325</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005056</path>
+        </run>
+        <run>
+            <run_number>5059</run_number>
+            <start>2022-10-16 15:33:16</start>
+            <end>2022-10-17 05:05:09</end>
+            <n_events>113890940</n_events>
+            <duration>811</duration>
+            <n_files>114</n_files>
+            <fill_number>8276</fill_number>
+            <fill_int_lumi>621158.375</fill_int_lumi>
+            <fill_stable_time>11.943055555555556</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005059</path>
+        </run>
+        <run>
+            <run_number>5082</run_number>
+            <start>2022-10-19 13:27:13</start>
+            <end>2022-10-19 16:32:42</end>
+            <n_events>1655387</n_events>
+            <duration>185</duration>
+            <n_files>2</n_files>
+            <fill_number>8293</fill_number>
+            <fill_int_lumi>8907.1982421875</fill_int_lumi>
+            <fill_stable_time>1.0616666666666668</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005082</path>
+        </run>
+        <run>
+            <run_number>5084</run_number>
+            <start>2022-10-19 21:23:55</start>
+            <end>2022-10-20 10:59:54</end>
+            <n_events>111464427</n_events>
+            <duration>816</duration>
+            <n_files>112</n_files>
+            <fill_number>8295</fill_number>
+            <fill_int_lumi>603968.625</fill_int_lumi>
+            <fill_stable_time>10.907777777777778</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005084</path>
+        </run>
+        <run>
+            <run_number>5086</run_number>
+            <start>2022-10-20 12:20:23</start>
+            <end>2022-10-21 08:10:15</end>
+            <n_events>101863812</n_events>
+            <duration>1190</duration>
+            <n_files>102</n_files>
+            <fill_number>8297</fill_number>
+            <fill_int_lumi>555767.1875</fill_int_lumi>
+            <fill_stable_time>9.795833333333333</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005086</path>
+        </run>
+        <run>
+            <run_number>5089</run_number>
+            <start>2022-10-21 08:28:10</start>
+            <end>2022-10-21 12:03:53</end>
+            <n_events>695546</n_events>
+            <duration>215</duration>
+            <n_files>1</n_files>
+            <fill_number>8299</fill_number>
+            <fill_int_lumi>3073.339599609375</fill_int_lumi>
+            <fill_stable_time>0.40055555555555555</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005089</path>
+        </run>
+        <run>
+            <run_number>5092</run_number>
+            <start>2022-10-21 14:12:19</start>
+            <end>2022-10-21 20:20:56</end>
+            <n_events>5445051</n_events>
+            <duration>368</duration>
+            <n_files>6</n_files>
+            <fill_number>8301</fill_number>
+            <fill_int_lumi>30959.2421875</fill_int_lumi>
+            <fill_stable_time>3.3427777777777776</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005092</path>
+        </run>
+        <run>
+            <run_number>5094</run_number>
+            <start>2022-10-21 20:24:10</start>
+            <end>2022-10-22 12:24:20</end>
+            <n_events>128966921</n_events>
+            <duration>960</duration>
+            <n_files>129</n_files>
+            <fill_number>8302</fill_number>
+            <fill_int_lumi>712667.375</fill_int_lumi>
+            <fill_stable_time>13.5475</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005094</path>
+        </run>
+        <run>
+            <run_number>5097</run_number>
+            <start>2022-10-22 14:16:13</start>
+            <end>2022-10-22 22:48:59</end>
+            <n_events>79690519</n_events>
+            <duration>512</duration>
+            <n_files>80</n_files>
+            <fill_number>8304</fill_number>
+            <fill_int_lumi>428889.21875</fill_int_lumi>
+            <fill_stable_time>6.705555555555556</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005097</path>
+        </run>
+        <run>
+            <run_number>5099</run_number>
+            <start>2022-10-22 22:58:31</start>
+            <end>2022-10-23 13:33:57</end>
+            <n_events>125378352</n_events>
+            <duration>875</duration>
+            <n_files>126</n_files>
+            <fill_number>8305</fill_number>
+            <fill_int_lumi>687894.3125</fill_int_lumi>
+            <fill_stable_time>12.356666666666667</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005099</path>
+        </run>
+        <run>
+            <run_number>5100</run_number>
+            <start>2022-10-23 13:35:02</start>
+            <end>2022-10-24 07:36:45</end>
+            <n_events>131795923</n_events>
+            <duration>1081</duration>
+            <n_files>132</n_files>
+            <fill_number>8306</fill_number>
+            <fill_int_lumi>687318.125</fill_int_lumi>
+            <fill_stable_time>13.285</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005100</path>
+        </run>
+        <run>
+            <run_number>5102</run_number>
+            <start>2022-10-24 07:40:11</start>
+            <end>2022-10-24 13:52:23</end>
+            <n_events>7004242</n_events>
+            <duration>372</duration>
+            <n_files>8</n_files>
+            <fill_number>8307</fill_number>
+            <fill_int_lumi>33660.8046875</fill_int_lumi>
+            <fill_stable_time>2.2405555555555554</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005102</path>
+        </run>
+        <run>
+            <run_number>5106</run_number>
+            <start>2022-10-24 15:08:05</start>
+            <end>2022-10-24 20:11:07</end>
+            <n_events>8023472</n_events>
+            <duration>302</duration>
+            <n_files>9</n_files>
+            <fill_number>8309</fill_number>
+            <fill_int_lumi>42056.484375</fill_int_lumi>
+            <fill_stable_time>2.7197222222222224</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005106</path>
+        </run>
+        <run>
+            <run_number>5109</run_number>
+            <start>2022-10-24 22:37:12</start>
+            <end>2022-10-25 12:09:51</end>
+            <n_events>123172145</n_events>
+            <duration>812</duration>
+            <n_files>124</n_files>
+            <fill_number>8311</fill_number>
+            <fill_int_lumi>678032.9375</fill_int_lumi>
+            <fill_stable_time>12.088611111111112</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005109</path>
+        </run>
+        <run>
+            <run_number>5111</run_number>
+            <start>2022-10-25 12:14:43</start>
+            <end>2022-10-25 14:55:01</end>
+            <n_events>2232234</n_events>
+            <duration>160</duration>
+            <n_files>3</n_files>
+            <fill_number>8312</fill_number>
+            <fill_int_lumi>9738.1220703125</fill_int_lumi>
+            <fill_stable_time>0.4008333333333333</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005111</path>
+        </run>
+        <run>
+            <run_number>5113</run_number>
+            <start>2022-10-25 14:58:03</start>
+            <end>2022-10-25 21:34:48</end>
+            <n_events>15307318</n_events>
+            <duration>396</duration>
+            <n_files>16</n_files>
+            <fill_number>8313</fill_number>
+            <fill_int_lumi>81121.015625</fill_int_lumi>
+            <fill_stable_time>2.6238888888888887</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005113</path>
+        </run>
+        <run>
+            <run_number>5115</run_number>
+            <start>2022-10-25 21:38:03</start>
+            <end>2022-10-26 06:26:01</end>
+            <n_events>57835716</n_events>
+            <duration>527</duration>
+            <n_files>58</n_files>
+            <fill_number>8314</fill_number>
+            <fill_int_lumi>306925.9375</fill_int_lumi>
+            <fill_stable_time>5.459722222222222</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005115</path>
+        </run>
+        <run>
+            <run_number>5120</run_number>
+            <start>2022-10-26 21:31:50</start>
+            <end>2022-10-27 11:00:43</end>
+            <n_events>115869647</n_events>
+            <duration>809</duration>
+            <n_files>116</n_files>
+            <fill_number>8315</fill_number>
+            <fill_int_lumi>875684.5625</fill_int_lumi>
+            <fill_stable_time>16.177777777777777</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005120</path>
+        </run>
+        <run>
+            <run_number>5122</run_number>
+            <start>2022-10-27 11:03:44</start>
+            <end>2022-10-27 17:17:33</end>
+            <n_events>60206780</n_events>
+            <duration>374</duration>
+            <n_files>61</n_files>
+            <fill_number>8316</fill_number>
+            <fill_int_lumi>293840.46875</fill_int_lumi>
+            <fill_stable_time>4.551111111111111</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005122</path>
+        </run>
+        <run>
+            <run_number>5125</run_number>
+            <start>2022-10-27 18:54:02</start>
+            <end>2022-10-28 10:11:30</end>
+            <n_events>162955692</n_events>
+            <duration>917</duration>
+            <n_files>163</n_files>
+            <fill_number>8317</fill_number>
+            <fill_int_lumi>727105.6875</fill_int_lumi>
+            <fill_stable_time>13.549722222222222</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005125</path>
+        </run>
+        <run>
+            <run_number>5128</run_number>
+            <start>2022-10-28 11:30:51</start>
+            <end>2022-10-28 16:21:51</end>
+            <n_events>53599388</n_events>
+            <duration>291</duration>
+            <n_files>54</n_files>
+            <fill_number>8319</fill_number>
+            <fill_int_lumi>223537.453125</fill_int_lumi>
+            <fill_stable_time>3.4019444444444447</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005128</path>
+        </run>
+        <run>
+            <run_number>5130</run_number>
+            <start>2022-10-28 16:24:45</start>
+            <end>2022-10-29 02:23:32</end>
+            <n_events>89551803</n_events>
+            <duration>599</duration>
+            <n_files>90</n_files>
+            <fill_number>8320</fill_number>
+            <fill_int_lumi>390377.375</fill_int_lumi>
+            <fill_stable_time>6.169722222222222</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005130</path>
+        </run>
+        <run>
+            <run_number>5132</run_number>
+            <start>2022-10-29 02:27:12</start>
+            <end>2022-10-29 20:37:16</end>
+            <n_events>180223412</n_events>
+            <duration>1090</duration>
+            <n_files>181</n_files>
+            <fill_number>8321</fill_number>
+            <fill_int_lumi>804474.5625</fill_int_lumi>
+            <fill_stable_time>14.563888888888888</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005132</path>
+        </run>
+        <run>
+            <run_number>5133</run_number>
+            <start>2022-10-29 20:38:17</start>
+            <end>2022-10-30 06:23:42</end>
+            <n_events>100202929</n_events>
+            <duration>585</duration>
+            <n_files>101</n_files>
+            <fill_number>8322</fill_number>
+            <fill_int_lumi>439730.71875</fill_int_lumi>
+            <fill_stable_time>6.887777777777778</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005133</path>
+        </run>
+        <run>
+            <run_number>5136</run_number>
+            <start>2022-10-30 08:49:26</start>
+            <end>2022-10-30 15:15:33</end>
+            <n_events>31588627</n_events>
+            <duration>386</duration>
+            <n_files>32</n_files>
+            <fill_number>8324</fill_number>
+            <fill_int_lumi>130168.8125</fill_int_lumi>
+            <fill_stable_time>1.978611111111111</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005136</path>
+        </run>
+        <run>
+            <run_number>5144</run_number>
+            <start>2022-10-31 05:39:47</start>
+            <end>2022-10-31 12:21:39</end>
+            <n_events>47836322</n_events>
+            <duration>402</duration>
+            <n_files>48</n_files>
+            <fill_number>8327</fill_number>
+            <fill_int_lumi>414865.8125</fill_int_lumi>
+            <fill_stable_time>6.4494444444444445</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005144</path>
+        </run>
+        <run>
+            <run_number>5150</run_number>
+            <start>2022-10-31 15:58:37</start>
+            <end>2022-10-31 22:45:03</end>
+            <n_events>45895241</n_events>
+            <duration>406</duration>
+            <n_files>46</n_files>
+            <fill_number>8330</fill_number>
+            <fill_int_lumi>194901.984375</fill_int_lumi>
+            <fill_stable_time>2.9922222222222223</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005150</path>
+        </run>
+        <run>
+            <run_number>5152</run_number>
+            <start>2022-11-01 02:27:50</start>
+            <end>2022-11-01 15:21:30</end>
+            <n_events>141613507</n_events>
+            <duration>774</duration>
+            <n_files>142</n_files>
+            <fill_number>8331</fill_number>
+            <fill_int_lumi>627719.0</fill_int_lumi>
+            <fill_stable_time>10.643888888888888</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005152</path>
+        </run>
+        <run>
+            <run_number>5154</run_number>
+            <start>2022-11-01 16:55:58</start>
+            <end>2022-11-02 08:59:28</end>
+            <n_events>179306493</n_events>
+            <duration>964</duration>
+            <n_files>180</n_files>
+            <fill_number>8333</fill_number>
+            <fill_int_lumi>801565.625</fill_int_lumi>
+            <fill_stable_time>14.783611111111112</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005154</path>
+        </run>
+        <run>
+            <run_number>5157</run_number>
+            <start>2022-11-02 10:27:07</start>
+            <end>2022-11-03 00:20:46</end>
+            <n_events>166988596</n_events>
+            <duration>833</duration>
+            <n_files>167</n_files>
+            <fill_number>8334</fill_number>
+            <fill_int_lumi>732070.75</fill_int_lumi>
+            <fill_stable_time>12.293333333333333</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005157</path>
+        </run>
+        <run>
+            <run_number>5159</run_number>
+            <start>2022-11-03 00:24:53</start>
+            <end>2022-11-03 10:19:58</end>
+            <n_events>115477073</n_events>
+            <duration>595</duration>
+            <n_files>116</n_files>
+            <fill_number>8335</fill_number>
+            <fill_int_lumi>510578.65625</fill_int_lumi>
+            <fill_stable_time>8.034722222222221</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005159</path>
+        </run>
+        <run>
+            <run_number>5168</run_number>
+            <start>2022-11-03 19:16:39</start>
+            <end>2022-11-03 20:25:28</end>
+            <n_events>235404</n_events>
+            <duration>69</duration>
+            <n_files>1</n_files>
+            <fill_number>8342</fill_number>
+            <fill_int_lumi>597543.6875</fill_int_lumi>
+            <fill_stable_time>10.027777777777779</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005168</path>
+        </run>
+        <run>
+            <run_number>5170</run_number>
+            <start>2022-11-03 20:34:43</start>
+            <n_events>12808440</n_events>
+            <duration>None</duration>
+            <n_files>13</n_files>
+            <fill_number>8342</fill_number>
+            <fill_int_lumi>597543.6875</fill_int_lumi>
+            <fill_stable_time>10.027777777777779</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005170</path>
+        </run>
+        <run>
+            <run_number>5171</run_number>
+            <start>2022-11-03 22:06:08</start>
+            <end>2022-11-04 07:56:28</end>
+            <n_events>112099328</n_events>
+            <duration>590</duration>
+            <n_files>113</n_files>
+            <fill_number>8342</fill_number>
+            <fill_int_lumi>597543.6875</fill_int_lumi>
+            <fill_stable_time>10.027777777777779</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005171</path>
+        </run>
+        <run>
+            <run_number>5180</run_number>
+            <start>2022-11-05 06:29:54</start>
+            <end>2022-11-05 17:01:24</end>
+            <n_events>107083389</n_events>
+            <duration>632</duration>
+            <n_files>108</n_files>
+            <fill_number>8347</fill_number>
+            <fill_int_lumi>519496.3125</fill_int_lumi>
+            <fill_stable_time>8.481666666666667</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005180</path>
+        </run>
+        <run>
+            <run_number>5230</run_number>
+            <start>2022-11-10 18:01:47</start>
+            <end>2022-11-11 19:11:40</end>
+            <n_events>788906</n_events>
+            <duration>1510</duration>
+            <n_files>1</n_files>
+            <fill_number>8381</fill_number>
+            <fill_int_lumi>1201.2769775390625</fill_int_lumi>
+            <fill_stable_time>23.50861111111111</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005230</path>
+        </run>
+        <run>
+            <run_number>5236</run_number>
+            <start>2022-11-12 01:37:38</start>
+            <end>2022-11-12 15:21:31</end>
+            <n_events>98622979</n_events>
+            <duration>824</duration>
+            <n_files>99</n_files>
+            <fill_number>8385</fill_number>
+            <fill_int_lumi>475451.59375</fill_int_lumi>
+            <fill_stable_time>12.048333333333334</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005236</path>
+        </run>
+        <run>
+            <run_number>5239</run_number>
+            <start>2022-11-12 16:21:11</start>
+            <end>2022-11-13 11:03:54</end>
+            <n_events>180001034</n_events>
+            <duration>1122</duration>
+            <n_files>181</n_files>
+            <fill_number>8387</fill_number>
+            <fill_int_lumi>817341.0</fill_int_lumi>
+            <fill_stable_time>15.286388888888888</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005239</path>
+        </run>
+        <run>
+            <run_number>5241</run_number>
+            <start>2022-11-13 12:55:37</start>
+            <end>2022-11-13 18:46:00</end>
+            <n_events>45184281</n_events>
+            <duration>350</duration>
+            <n_files>46</n_files>
+            <fill_number>8389</fill_number>
+            <fill_int_lumi>207572.78125</fill_int_lumi>
+            <fill_stable_time>3.1475</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005241</path>
+        </run>
+        <run>
+            <run_number>5247</run_number>
+            <start>2022-11-14 07:11:38</start>
+            <end>2022-11-14 10:36:50</end>
+            <n_events>3540437</n_events>
+            <duration>205</duration>
+            <n_files>4</n_files>
+            <fill_number>8392</fill_number>
+            <fill_int_lumi>8666.3974609375</fill_int_lumi>
+            <fill_stable_time>0.24416666666666667</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005247</path>
+        </run>
+        <run>
+            <run_number>5253</run_number>
+            <start>2022-11-14 14:19:41</start>
+            <end>2022-11-15 05:43:55</end>
+            <n_events>159852076</n_events>
+            <duration>924</duration>
+            <n_files>160</n_files>
+            <fill_number>8395</fill_number>
+            <fill_int_lumi>756763.0</fill_int_lumi>
+            <fill_stable_time>13.656944444444445</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005253</path>
+        </run>
+        <run>
+            <run_number>5257</run_number>
+            <start>2022-11-15 08:53:08</start>
+            <end>2022-11-15 22:30:19</end>
+            <n_events>137615525</n_events>
+            <duration>817</duration>
+            <n_files>138</n_files>
+            <fill_number>8398</fill_number>
+            <fill_int_lumi>652118.3125</fill_int_lumi>
+            <fill_stable_time>11.313055555555556</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005257</path>
+        </run>
+        <run>
+            <run_number>5259</run_number>
+            <start>2022-11-15 22:33:19</start>
+            <end>2022-11-16 10:36:51</end>
+            <n_events>106627639</n_events>
+            <duration>723</duration>
+            <n_files>107</n_files>
+            <fill_number>8399</fill_number>
+            <fill_int_lumi>498347.15625</fill_int_lumi>
+            <fill_stable_time>7.809166666666667</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005259</path>
+        </run>
+        <run>
+            <run_number>5262</run_number>
+            <start>2022-11-16 11:08:01</start>
+            <end>2022-11-17 00:17:56</end>
+            <n_events>140800874</n_events>
+            <duration>789</duration>
+            <n_files>141</n_files>
+            <fill_number>8401</fill_number>
+            <fill_int_lumi>664218.0</fill_int_lumi>
+            <fill_stable_time>10.891388888888889</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005262</path>
+        </run>
+        <run>
+            <run_number>5263</run_number>
+            <start>2022-11-17 00:19:01</start>
+            <end>2022-11-17 10:28:43</end>
+            <n_events>111339762</n_events>
+            <duration>609</duration>
+            <n_files>112</n_files>
+            <fill_number>8402</fill_number>
+            <fill_int_lumi>520076.75</fill_int_lumi>
+            <fill_stable_time>8.012777777777778</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005263</path>
+        </run>
+        <run>
+            <run_number>5350</run_number>
+            <start>2022-11-21 09:47:40</start>
+            <end>2022-11-21 23:50:19</end>
+            <n_events>159483346</n_events>
+            <duration>843</duration>
+            <n_files>160</n_files>
+            <fill_number>8456</fill_number>
+            <fill_int_lumi>760398.375</fill_int_lumi>
+            <fill_stable_time>11.98611111111111</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005350</path>
+        </run>
+        <run>
+            <run_number>5373</run_number>
+            <start>2022-11-23 18:59:43</start>
+            <end>2022-11-23 22:25:29</end>
+            <n_events>17917559</n_events>
+            <duration>206</duration>
+            <n_files>18</n_files>
+            <fill_number>8471</fill_number>
+            <fill_int_lumi>74495.9140625</fill_int_lumi>
+            <fill_stable_time>1.211111111111111</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005373</path>
+        </run>
+        <run>
+            <run_number>5377</run_number>
+            <start>2022-11-24 04:19:10</start>
+            <end>2022-11-24 14:38:17</end>
+            <n_events>108345742</n_events>
+            <duration>619</duration>
+            <n_files>109</n_files>
+            <fill_number>8474</fill_number>
+            <fill_int_lumi>501821.46875</fill_int_lumi>
+            <fill_stable_time>8.044722222222223</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005377</path>
+        </run>
+        <run>
+            <run_number>5389</run_number>
+            <start>2022-11-25 05:57:38</start>
+            <end>2022-11-25 16:46:58</end>
+            <n_events>83344075</n_events>
+            <duration>649</duration>
+            <n_files>84</n_files>
+            <fill_number>8484</fill_number>
+            <fill_int_lumi>388351.40625</fill_int_lumi>
+            <fill_stable_time>6.053055555555556</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005389</path>
+        </run>
+        <run>
+            <run_number>5396</run_number>
+            <start>2022-11-25 21:44:19</start>
+            <end>2022-11-26 16:46:56</end>
+            <n_events>173718221</n_events>
+            <duration>1142</duration>
+            <n_files>174</n_files>
+            <fill_number>8489</fill_number>
+            <fill_int_lumi>833285.4375</fill_int_lumi>
+            <fill_stable_time>15.969722222222222</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005396</path>
+        </run>
+        <run>
+            <run_number>5399</run_number>
+            <start>2022-11-26 21:25:37</start>
+            <end>2022-11-27 08:46:16</end>
+            <n_events>120263089</n_events>
+            <duration>681</duration>
+            <n_files>121</n_files>
+            <fill_number>8491</fill_number>
+            <fill_int_lumi>559854.4375</fill_int_lumi>
+            <fill_stable_time>8.948055555555555</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005399</path>
+        </run>
+        <run>
+            <run_number>5408</run_number>
+            <start>2022-11-27 16:39:22</start>
+            <end>2022-11-28 08:19:24</end>
+            <n_events>90174916</n_events>
+            <duration>940</duration>
+            <n_files>91</n_files>
+            <fill_number>8496</fill_number>
+            <fill_int_lumi>425268.625</fill_int_lumi>
+            <fill_stable_time>6.791111111111111</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2022/run_005408</path>
+        </run>
+        <run>
+            <run_number>5847</run_number>
+            <start>2023-04-27 21:25:56</start>
+            <end>2023-04-28 03:23:25</end>
+            <n_events>15161073</n_events>
+            <duration>358</duration>
+            <n_files>16</n_files>
+            <fill_number>8675</fill_number>
+            <fill_int_lumi>46424.03125</fill_int_lumi>
+            <fill_stable_time>5.40972222222222</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_005847</path>
+        </run>
+        <run>
+            <run_number>5865</run_number>
+            <start>2023-04-29 07:23:16</start>
+            <end>2023-04-29 16:02:51</end>
+            <n_events>20921219</n_events>
+            <duration>519</duration>
+            <n_files>21</n_files>
+            <fill_number>8685</fill_number>
+            <fill_int_lumi>75267.4296875</fill_int_lumi>
+            <fill_stable_time>8.165</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_005865</path>
+        </run>
+        <run>
+            <run_number>5868</run_number>
+            <start>2023-04-29 17:57:48</start>
+            <end>2023-04-30 03:08:44</end>
+            <n_events>23200495</n_events>
+            <duration>551</duration>
+            <n_files>24</n_files>
+            <fill_number>8686</fill_number>
+            <fill_int_lumi>83710.484375</fill_int_lumi>
+            <fill_stable_time>8.75694444444445</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_005868</path>
+        </run>
+        <run>
+            <run_number>5874</run_number>
+            <start>2023-04-30 08:36:56</start>
+            <end>2023-04-30 16:27:08</end>
+            <n_events>21189410</n_events>
+            <duration>471</duration>
+            <n_files>22</n_files>
+            <fill_number>8690</fill_number>
+            <fill_int_lumi>76069.0859375</fill_int_lumi>
+            <fill_stable_time>7.40361111111111</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_005874</path>
+        </run>
+        <run>
+            <run_number>5877</run_number>
+            <start>2023-04-30 18:06:26</start>
+            <end>2023-04-30 22:45:34</end>
+            <n_events>11819023</n_events>
+            <duration>279</duration>
+            <n_files>12</n_files>
+            <fill_number>8691</fill_number>
+            <fill_int_lumi>42117.6328125</fill_int_lumi>
+            <fill_stable_time>3.85666666666667</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_005877</path>
+        </run>
+        <run>
+            <run_number>5880</run_number>
+            <start>2023-05-01 00:44:56</start>
+            <end>2023-05-01 06:31:50</end>
+            <n_events>2813530</n_events>
+            <duration>347</duration>
+            <n_files>3</n_files>
+            <fill_number>8692</fill_number>
+            <fill_int_lumi>9345.3642578125</fill_int_lumi>
+            <fill_stable_time>1.10916666666667</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_005880</path>
+        </run>
+        <run>
+            <run_number>5888</run_number>
+            <start>2023-05-01 10:57:30</start>
+            <end>2023-05-01 19:21:00</end>
+            <n_events>50001027</n_events>
+            <duration>503</duration>
+            <n_files>51</n_files>
+            <fill_number>8695</fill_number>
+            <fill_int_lumi>179109.984375</fill_int_lumi>
+            <fill_stable_time>8.00416666666667</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_005888</path>
+        </run>
+        <run>
+            <run_number>5891</run_number>
+            <start>2023-05-01 21:54:09</start>
+            <end>2023-05-02 09:46:44</end>
+            <n_events>70074466</n_events>
+            <duration>712</duration>
+            <n_files>71</n_files>
+            <fill_number>8696</fill_number>
+            <fill_int_lumi>254435.578125</fill_int_lumi>
+            <fill_stable_time>11.4819444444444</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_005891</path>
+        </run>
+        <run>
+            <run_number>5901</run_number>
+            <start>2023-05-03 00:32:56</start>
+            <end>2023-05-03 08:56:00</end>
+            <n_events>56251700</n_events>
+            <duration>503</duration>
+            <n_files>57</n_files>
+            <fill_number>8701</fill_number>
+            <fill_int_lumi>203923.4375</fill_int_lumi>
+            <fill_stable_time>7.82166666666667</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_005901</path>
+        </run>
+        <run>
+            <run_number>5938</run_number>
+            <start>2023-05-05 11:12:58</start>
+            <end>2023-05-05 17:31:54</end>
+            <n_events>16551932</n_events>
+            <duration>379</duration>
+            <n_files>17</n_files>
+            <fill_number>8723</fill_number>
+            <fill_int_lumi>58467.90234375</fill_int_lumi>
+            <fill_stable_time>5.26583333333333</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_005938</path>
+        </run>
+        <run>
+            <run_number>5940</run_number>
+            <start>2023-05-05 20:37:13</start>
+            <end>2023-05-06 00:17:47</end>
+            <n_events>24465494</n_events>
+            <duration>220</duration>
+            <n_files>25</n_files>
+            <fill_number>8724</fill_number>
+            <fill_int_lumi>86318.4375</fill_int_lumi>
+            <fill_stable_time>3.28694444444444</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_005940</path>
+        </run>
+        <run>
+            <run_number>5941</run_number>
+            <start>2023-05-06 06:47:31</start>
+            <end>2023-05-06 08:35:17</end>
+            <n_events>14301139</n_events>
+            <duration>108</duration>
+            <n_files>15</n_files>
+            <fill_number>8725</fill_number>
+            <fill_int_lumi>130849.234375</fill_int_lumi>
+            <fill_stable_time>4.68472222222222</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_005941</path>
+        </run>
+        <run>
+            <run_number>5947</run_number>
+            <start>2023-05-06 11:01:31</start>
+            <end>2023-05-06 15:33:51</end>
+            <n_events>33308609</n_events>
+            <duration>272</duration>
+            <n_files>34</n_files>
+            <fill_number>8728</fill_number>
+            <fill_int_lumi>117954.890625</fill_int_lumi>
+            <fill_stable_time>4.01333333333333</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_005947</path>
+        </run>
+        <run>
+            <run_number>5951</run_number>
+            <start>2023-05-06 17:50:39</start>
+            <end>2023-05-07 04:36:01</end>
+            <n_events>85532713</n_events>
+            <duration>645</duration>
+            <n_files>86</n_files>
+            <fill_number>8729</fill_number>
+            <fill_int_lumi>307364.46875</fill_int_lumi>
+            <fill_stable_time>10.4277777777778</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_005951</path>
+        </run>
+        <run>
+            <run_number>5957</run_number>
+            <start>2023-05-07 07:02:59</start>
+            <end>2023-05-07 18:43:54</end>
+            <n_events>87852982</n_events>
+            <duration>701</duration>
+            <n_files>88</n_files>
+            <fill_number>8730</fill_number>
+            <fill_int_lumi>315855.90625</fill_int_lumi>
+            <fill_stable_time>11.3111111111111</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_005957</path>
+        </run>
+        <run>
+            <run_number>5960</run_number>
+            <start>2023-05-07 20:25:43</start>
+            <end>2023-05-08 04:58:56</end>
+            <n_events>97095447</n_events>
+            <duration>513</duration>
+            <n_files>98</n_files>
+            <fill_number>8731</fill_number>
+            <fill_int_lumi>350784.0</fill_int_lumi>
+            <fill_stable_time>7.57138888888889</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_005960</path>
+        </run>
+        <run>
+            <run_number>5971</run_number>
+            <start>2023-05-08 21:23:03</start>
+            <end>2023-05-09 10:21:06</end>
+            <n_events>94927262</n_events>
+            <duration>778</duration>
+            <n_files>95</n_files>
+            <fill_number>8736</fill_number>
+            <fill_int_lumi>331279.6875</fill_int_lumi>
+            <fill_stable_time>12.1091666666667</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_005971</path>
+        </run>
+        <run>
+            <run_number>5977</run_number>
+            <start>2023-05-09 15:42:59</start>
+            <end>2023-05-10 01:11:11</end>
+            <n_events>97784474</n_events>
+            <duration>569</duration>
+            <n_files>98</n_files>
+            <fill_number>8738</fill_number>
+            <fill_int_lumi>353593.8125</fill_int_lumi>
+            <fill_stable_time>8.96583333333333</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_005977</path>
+        </run>
+        <run>
+            <run_number>5981</run_number>
+            <start>2023-05-10 03:18:24</start>
+            <end>2023-05-10 13:05:58</end>
+            <n_events>92561700</n_events>
+            <duration>587</duration>
+            <n_files>93</n_files>
+            <fill_number>8739</fill_number>
+            <fill_int_lumi>335792.4375</fill_int_lumi>
+            <fill_stable_time>9.45361111111111</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_005981</path>
+        </run>
+        <run>
+            <run_number>5985</run_number>
+            <start>2023-05-10 19:00:42</start>
+            <end>2023-05-11 03:17:06</end>
+            <n_events>90360073</n_events>
+            <duration>497</duration>
+            <n_files>91</n_files>
+            <fill_number>8741</fill_number>
+            <fill_int_lumi>325309.46875</fill_int_lumi>
+            <fill_stable_time>7.69833333333333</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_005985</path>
+        </run>
+        <run>
+            <run_number>5999</run_number>
+            <start>2023-05-11 09:19:43</start>
+            <end>2023-05-11 19:45:53</end>
+            <n_events>133787375</n_events>
+            <duration>626</duration>
+            <n_files>134</n_files>
+            <fill_number>8746</fill_number>
+            <fill_int_lumi>483173.71875</fill_int_lumi>
+            <fill_stable_time>10.095</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_005999</path>
+        </run>
+        <run>
+            <run_number>6018</run_number>
+            <start>2023-05-12 14:17:04</start>
+            <end>2023-05-13 04:19:20</end>
+            <n_events>184699431</n_events>
+            <duration>842</duration>
+            <n_files>185</n_files>
+            <fill_number>8754</fill_number>
+            <fill_int_lumi>698112.5625</fill_int_lumi>
+            <fill_stable_time>13.4688888888889</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006018</path>
+        </run>
+        <run>
+            <run_number>6042</run_number>
+            <start>2023-05-14 10:10:24</start>
+            <end>2023-05-14 22:53:07</end>
+            <n_events>174634180</n_events>
+            <duration>763</duration>
+            <n_files>175</n_files>
+            <fill_number>8771</fill_number>
+            <fill_int_lumi>660956.0</fill_int_lumi>
+            <fill_stable_time>12.3233333333333</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006042</path>
+        </run>
+        <run>
+            <run_number>6049</run_number>
+            <start>2023-05-15 01:20:31</start>
+            <end>2023-05-15 05:17:37</end>
+            <n_events>131296</n_events>
+            <duration>237</duration>
+            <n_files>1</n_files>
+            <fill_number>8773</fill_number>
+            <fill_int_lumi>699716.5625</fill_int_lumi>
+            <fill_stable_time>12.2430555555556</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006049</path>
+        </run>
+        <run>
+            <run_number>6050</run_number>
+            <start>2023-05-15 05:19:28</start>
+            <end>2023-05-15 19:31:04</end>
+            <n_events>191431591</n_events>
+            <duration>852</duration>
+            <n_files>192</n_files>
+            <fill_number>8773</fill_number>
+            <fill_int_lumi>699716.5625</fill_int_lumi>
+            <fill_stable_time>12.2430555555556</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006050</path>
+        </run>
+        <run>
+            <run_number>6055</run_number>
+            <start>2023-05-15 21:59:06</start>
+            <end>2023-05-16 05:17:32</end>
+            <n_events>113092564</n_events>
+            <duration>438</duration>
+            <n_files>114</n_files>
+            <fill_number>8775</fill_number>
+            <fill_int_lumi>410506.28125</fill_int_lumi>
+            <fill_stable_time>6.3625</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006055</path>
+        </run>
+        <run>
+            <run_number>6068</run_number>
+            <start>2023-05-16 22:47:44</start>
+            <end>2023-05-17 02:23:36</end>
+            <n_events>115018</n_events>
+            <duration>216</duration>
+            <n_files>1</n_files>
+            <fill_number>8782</fill_number>
+            <fill_int_lumi>559187.6875</fill_int_lumi>
+            <fill_stable_time>9.31694444444445</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006068</path>
+        </run>
+        <run>
+            <run_number>6069</run_number>
+            <start>2023-05-17 02:25:12</start>
+            <end>2023-05-17 14:28:55</end>
+            <n_events>154819281</n_events>
+            <duration>723</duration>
+            <n_files>155</n_files>
+            <fill_number>8782</fill_number>
+            <fill_int_lumi>559187.6875</fill_int_lumi>
+            <fill_stable_time>9.31694444444445</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006069</path>
+        </run>
+        <run>
+            <run_number>6073</run_number>
+            <start>2023-05-17 19:01:19</start>
+            <end>2023-05-17 22:02:24</end>
+            <n_events>121582</n_events>
+            <duration>181</duration>
+            <n_files>1</n_files>
+            <fill_number>8784</fill_number>
+            <fill_int_lumi>314555.375</fill_int_lumi>
+            <fill_stable_time>4.95138888888889</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006073</path>
+        </run>
+        <run>
+            <run_number>6074</run_number>
+            <start>2023-05-17 22:04:03</start>
+            <end>2023-05-18 04:05:44</end>
+            <n_events>87409661</n_events>
+            <duration>361</duration>
+            <n_files>88</n_files>
+            <fill_number>8784</fill_number>
+            <fill_int_lumi>314555.375</fill_int_lumi>
+            <fill_stable_time>4.95138888888889</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006074</path>
+        </run>
+        <run>
+            <run_number>6078</run_number>
+            <start>2023-05-18 07:50:47</start>
+            <end>2023-05-18 12:24:39</end>
+            <n_events>141726</n_events>
+            <duration>274</duration>
+            <n_files>1</n_files>
+            <fill_number>8786</fill_number>
+            <fill_int_lumi>826817.9375</fill_int_lumi>
+            <fill_stable_time>15.5305555555556</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006078</path>
+        </run>
+        <run>
+            <run_number>6079</run_number>
+            <start>2023-05-18 12:26:21</start>
+            <end>2023-05-19 04:30:44</end>
+            <n_events>227816187</n_events>
+            <duration>964</duration>
+            <n_files>228</n_files>
+            <fill_number>8786</fill_number>
+            <fill_int_lumi>826817.9375</fill_int_lumi>
+            <fill_stable_time>15.5305555555556</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006079</path>
+        </run>
+        <run>
+            <run_number>6093</run_number>
+            <start>2023-05-19 16:20:58</start>
+            <end>2023-05-19 17:17:03</end>
+            <n_events>109169</n_events>
+            <duration>56</duration>
+            <n_files>1</n_files>
+            <fill_number>8794</fill_number>
+            <fill_int_lumi>217308.875</fill_int_lumi>
+            <fill_stable_time>3.4425</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006093</path>
+        </run>
+        <run>
+            <run_number>6094</run_number>
+            <start>2023-05-19 17:18:53</start>
+            <end>2023-05-20 00:16:54</end>
+            <n_events>61093297</n_events>
+            <duration>418</duration>
+            <n_files>62</n_files>
+            <fill_number>8794</fill_number>
+            <fill_int_lumi>217308.875</fill_int_lumi>
+            <fill_stable_time>3.4425</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006094</path>
+        </run>
+        <run>
+            <run_number>6098</run_number>
+            <start>2023-05-20 02:57:28</start>
+            <end>2023-05-20 10:21:38</end>
+            <n_events>46363880</n_events>
+            <duration>444</duration>
+            <n_files>47</n_files>
+            <fill_number>8796</fill_number>
+            <fill_int_lumi>162730.640625</fill_int_lumi>
+            <fill_stable_time>2.64555555555556</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006098</path>
+        </run>
+        <run>
+            <run_number>6099</run_number>
+            <start>2023-05-20 10:22:36</start>
+            <end>2023-05-20 19:19:34</end>
+            <n_events>178826</n_events>
+            <duration>537</duration>
+            <n_files>1</n_files>
+            <fill_number>8796</fill_number>
+            <fill_int_lumi>162730.640625</fill_int_lumi>
+            <fill_stable_time>2.64555555555556</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006099</path>
+        </run>
+        <run>
+            <run_number>6110</run_number>
+            <start>2023-05-21 03:25:52</start>
+            <end>2023-05-21 08:29:17</end>
+            <n_events>82920541</n_events>
+            <duration>304</duration>
+            <n_files>83</n_files>
+            <fill_number>8804</fill_number>
+            <fill_int_lumi>297057.1875</fill_int_lumi>
+            <fill_stable_time>4.68166666666667</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006110</path>
+        </run>
+        <run>
+            <run_number>6114</run_number>
+            <start>2023-05-21 14:20:12</start>
+            <end>2023-05-21 16:22:07</end>
+            <n_events>27108119</n_events>
+            <duration>122</duration>
+            <n_files>28</n_files>
+            <fill_number>8807</fill_number>
+            <fill_int_lumi>94020.296875</fill_int_lumi>
+            <fill_stable_time>1.70222222222222</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006114</path>
+        </run>
+        <run>
+            <run_number>6121</run_number>
+            <start>2023-05-22 02:37:57</start>
+            <end>2023-05-22 04:16:04</end>
+            <n_events>15931714</n_events>
+            <duration>99</duration>
+            <n_files>16</n_files>
+            <fill_number>8811</fill_number>
+            <fill_int_lumi>53715.4609375</fill_int_lumi>
+            <fill_stable_time>1.19277777777778</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006121</path>
+        </run>
+        <run>
+            <run_number>6130</run_number>
+            <start>2023-05-22 15:01:00</start>
+            <end>2023-05-22 17:33:54</end>
+            <n_events>115454</n_events>
+            <duration>152</duration>
+            <n_files>1</n_files>
+            <fill_number>8816</fill_number>
+            <fill_int_lumi>123770.171875</fill_int_lumi>
+            <fill_stable_time>3.02722222222222</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006130</path>
+        </run>
+        <run>
+            <run_number>6131</run_number>
+            <start>2023-05-22 17:35:31</start>
+            <end>2023-05-22 21:20:01</end>
+            <n_events>51270526</n_events>
+            <duration>224</duration>
+            <n_files>52</n_files>
+            <fill_number>8816</fill_number>
+            <fill_int_lumi>123770.171875</fill_int_lumi>
+            <fill_stable_time>3.02722222222222</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006131</path>
+        </run>
+        <run>
+            <run_number>6133</run_number>
+            <start>2023-05-22 21:24:01</start>
+            <end>2023-05-22 23:44:20</end>
+            <n_events>109135</n_events>
+            <duration>140</duration>
+            <n_files>1</n_files>
+            <fill_number>8817</fill_number>
+            <fill_int_lumi>753626.625</fill_int_lumi>
+            <fill_stable_time>12.7758333333333</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006133</path>
+        </run>
+        <run>
+            <run_number>6134</run_number>
+            <start>2023-05-22 23:46:24</start>
+            <end>2023-05-23 08:53:33</end>
+            <n_events>155650242</n_events>
+            <duration>547</duration>
+            <n_files>156</n_files>
+            <fill_number>8817</fill_number>
+            <fill_int_lumi>753626.625</fill_int_lumi>
+            <fill_stable_time>12.7758333333333</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006134</path>
+        </run>
+        <run>
+            <run_number>6135</run_number>
+            <start>2023-05-23 08:54:19</start>
+            <end>2023-05-23 09:10:02</end>
+            <n_events>3964812</n_events>
+            <duration>15</duration>
+            <n_files>4</n_files>
+            <fill_number>8817</fill_number>
+            <fill_int_lumi>753626.625</fill_int_lumi>
+            <fill_stable_time>12.7758333333333</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006135</path>
+        </run>
+        <run>
+            <run_number>6136</run_number>
+            <start>2023-05-23 09:10:58</start>
+            <end>2023-05-23 14:18:03</end>
+            <n_events>43004501</n_events>
+            <duration>308</duration>
+            <n_files>44</n_files>
+            <fill_number>8817</fill_number>
+            <fill_int_lumi>753626.625</fill_int_lumi>
+            <fill_stable_time>12.7758333333333</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006136</path>
+        </run>
+        <run>
+            <run_number>6144</run_number>
+            <start>2023-05-23 23:19:43</start>
+            <end>2023-05-24 14:16:57</end>
+            <n_events>216560839</n_events>
+            <duration>897</duration>
+            <n_files>217</n_files>
+            <fill_number>8821</fill_number>
+            <fill_int_lumi>862802.0625</fill_int_lumi>
+            <fill_stable_time>14.5205555555556</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006144</path>
+        </run>
+        <run>
+            <run_number>6147</run_number>
+            <start>2023-05-24 17:15:08</start>
+            <end>2023-05-25 05:56:16</end>
+            <n_events>186822350</n_events>
+            <duration>761</duration>
+            <n_files>187</n_files>
+            <fill_number>8822</fill_number>
+            <fill_int_lumi>746388.0</fill_int_lumi>
+            <fill_stable_time>12.06</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006147</path>
+        </run>
+        <run>
+            <run_number>6208</run_number>
+            <start>2023-05-30 16:59:12</start>
+            <end>2023-05-30 20:55:19</end>
+            <n_events>15234171</n_events>
+            <duration>236</duration>
+            <n_files>16</n_files>
+            <fill_number>8850</fill_number>
+            <fill_int_lumi>59158.3828125</fill_int_lumi>
+            <fill_stable_time>3.32055555555556</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006208</path>
+        </run>
+        <run>
+            <run_number>6215</run_number>
+            <start>2023-05-30 23:53:08</start>
+            <end>2023-05-31 03:43:57</end>
+            <n_events>24894245</n_events>
+            <duration>230</duration>
+            <n_files>25</n_files>
+            <fill_number>8853</fill_number>
+            <fill_int_lumi>100501.546875</fill_int_lumi>
+            <fill_stable_time>3.43861111111111</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006215</path>
+        </run>
+        <run>
+            <run_number>6222</run_number>
+            <start>2023-06-01 11:40:12</start>
+            <end>2023-06-01 12:49:03</end>
+            <n_events>163478</n_events>
+            <duration>68</duration>
+            <n_files>1</n_files>
+            <fill_number>8858</fill_number>
+            <fill_int_lumi>240869.953125</fill_int_lumi>
+            <fill_stable_time>5.98611111111111</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006222</path>
+        </run>
+        <run>
+            <run_number>6223</run_number>
+            <start>2023-06-01 12:51:14</start>
+            <end>2023-06-01 19:11:07</end>
+            <n_events>58719118</n_events>
+            <duration>380</duration>
+            <n_files>59</n_files>
+            <fill_number>8858</fill_number>
+            <fill_int_lumi>240869.953125</fill_int_lumi>
+            <fill_stable_time>5.98611111111111</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006223</path>
+        </run>
+        <run>
+            <run_number>6225</run_number>
+            <start>2023-06-01 20:17:01</start>
+            <end>2023-06-01 21:41:38</end>
+            <n_events>175255</n_events>
+            <duration>84</duration>
+            <n_files>1</n_files>
+            <fill_number>8860</fill_number>
+            <fill_int_lumi>420395.9375</fill_int_lumi>
+            <fill_stable_time>10.275</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006225</path>
+        </run>
+        <run>
+            <run_number>6226</run_number>
+            <start>2023-06-01 21:43:14</start>
+            <end>2023-06-02 08:21:04</end>
+            <n_events>101763313</n_events>
+            <duration>637</duration>
+            <n_files>102</n_files>
+            <fill_number>8860</fill_number>
+            <fill_int_lumi>420395.9375</fill_int_lumi>
+            <fill_stable_time>10.275</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006226</path>
+        </run>
+        <run>
+            <run_number>6232</run_number>
+            <start>2023-06-02 14:35:25</start>
+            <end>2023-06-02 15:42:07</end>
+            <n_events>205205</n_events>
+            <duration>67</duration>
+            <n_files>1</n_files>
+            <fill_number>8863</fill_number>
+            <fill_int_lumi>249582.65625</fill_int_lumi>
+            <fill_stable_time>5.60166666666667</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006232</path>
+        </run>
+        <run>
+            <run_number>6233</run_number>
+            <start>2023-06-02 15:43:43</start>
+            <end>2023-06-02 21:52:06</end>
+            <n_events>61316955</n_events>
+            <duration>369</duration>
+            <n_files>62</n_files>
+            <fill_number>8863</fill_number>
+            <fill_int_lumi>249582.65625</fill_int_lumi>
+            <fill_stable_time>5.60166666666667</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006233</path>
+        </run>
+        <run>
+            <run_number>6236</run_number>
+            <start>2023-06-02 23:02:16</start>
+            <end>2023-06-03 00:02:27</end>
+            <n_events>140286</n_events>
+            <duration>60</duration>
+            <n_files>1</n_files>
+            <fill_number>8865</fill_number>
+            <fill_int_lumi>423924.0</fill_int_lumi>
+            <fill_stable_time>10.6616666666667</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006236</path>
+        </run>
+        <run>
+            <run_number>6237</run_number>
+            <start>2023-06-03 00:04:04</start>
+            <end>2023-06-03 11:01:35</end>
+            <n_events>101981443</n_events>
+            <duration>657</duration>
+            <n_files>102</n_files>
+            <fill_number>8865</fill_number>
+            <fill_int_lumi>423924.0</fill_int_lumi>
+            <fill_stable_time>10.6616666666667</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006237</path>
+        </run>
+        <run>
+            <run_number>6239</run_number>
+            <start>2023-06-03 11:06:20</start>
+            <end>2023-06-03 12:31:01</end>
+            <n_events>150283</n_events>
+            <duration>84</duration>
+            <n_files>1</n_files>
+            <fill_number>8866</fill_number>
+            <fill_int_lumi>69386.3359375</fill_int_lumi>
+            <fill_stable_time>1.52472222222222</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006239</path>
+        </run>
+        <run>
+            <run_number>6240</run_number>
+            <start>2023-06-03 12:33:08</start>
+            <end>2023-06-03 20:54:31</end>
+            <n_events>17793619</n_events>
+            <duration>501</duration>
+            <n_files>18</n_files>
+            <fill_number>8866</fill_number>
+            <fill_int_lumi>69386.3359375</fill_int_lumi>
+            <fill_stable_time>1.52472222222222</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006240</path>
+        </run>
+        <run>
+            <run_number>6245</run_number>
+            <start>2023-06-03 22:33:05</start>
+            <end>2023-06-03 23:25:12</end>
+            <n_events>175560</n_events>
+            <duration>52</duration>
+            <n_files>1</n_files>
+            <fill_number>8870</fill_number>
+            <fill_int_lumi>480928.8125</fill_int_lumi>
+            <fill_stable_time>10.2855555555556</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006245</path>
+        </run>
+        <run>
+            <run_number>6246</run_number>
+            <start>2023-06-03 23:27:14</start>
+            <end>2023-06-04 10:07:37</end>
+            <n_events>115970218</n_events>
+            <duration>640</duration>
+            <n_files>116</n_files>
+            <fill_number>8870</fill_number>
+            <fill_int_lumi>480928.8125</fill_int_lumi>
+            <fill_stable_time>10.2855555555556</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006246</path>
+        </run>
+        <run>
+            <run_number>6249</run_number>
+            <start>2023-06-04 11:43:58</start>
+            <end>2023-06-04 13:54:53</end>
+            <n_events>212471</n_events>
+            <duration>131</duration>
+            <n_files>1</n_files>
+            <fill_number>8872</fill_number>
+            <fill_int_lumi>195430.609375</fill_int_lumi>
+            <fill_stable_time>3.09777777777778</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006249</path>
+        </run>
+        <run>
+            <run_number>6250</run_number>
+            <start>2023-06-04 13:56:28</start>
+            <end>2023-06-04 17:25:02</end>
+            <n_events>48021641</n_events>
+            <duration>208</duration>
+            <n_files>49</n_files>
+            <fill_number>8872</fill_number>
+            <fill_int_lumi>195430.609375</fill_int_lumi>
+            <fill_stable_time>3.09777777777778</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006250</path>
+        </run>
+        <run>
+            <run_number>6251</run_number>
+            <start>2023-06-04 17:26:28</start>
+            <end>2023-06-04 19:05:32</end>
+            <n_events>161711</n_events>
+            <duration>99</duration>
+            <n_files>1</n_files>
+            <fill_number>8873</fill_number>
+            <fill_int_lumi>685099.3125</fill_int_lumi>
+            <fill_stable_time>12.6627777777778</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006251</path>
+        </run>
+        <run>
+            <run_number>6252</run_number>
+            <start>2023-06-04 19:07:11</start>
+            <end>2023-06-05 08:04:51</end>
+            <n_events>163319532</n_events>
+            <duration>777</duration>
+            <n_files>164</n_files>
+            <fill_number>8873</fill_number>
+            <fill_int_lumi>685099.3125</fill_int_lumi>
+            <fill_stable_time>12.6627777777778</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006252</path>
+        </run>
+        <run>
+            <run_number>6258</run_number>
+            <start>2023-06-05 11:34:04</start>
+            <end>2023-06-05 12:45:01</end>
+            <n_events>113612</n_events>
+            <duration>70</duration>
+            <n_files>1</n_files>
+            <fill_number>8877</fill_number>
+            <fill_int_lumi>552784.5</fill_int_lumi>
+            <fill_stable_time>10.0494444444444</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006258</path>
+        </run>
+        <run>
+            <run_number>6259</run_number>
+            <start>2023-06-05 12:47:20</start>
+            <end>2023-06-05 23:48:43</end>
+            <n_events>131918222</n_events>
+            <duration>661</duration>
+            <n_files>132</n_files>
+            <fill_number>8877</fill_number>
+            <fill_int_lumi>552784.5</fill_int_lumi>
+            <fill_stable_time>10.0494444444444</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006259</path>
+        </run>
+        <run>
+            <run_number>6263</run_number>
+            <start>2023-06-06 02:30:56</start>
+            <end>2023-06-06 03:28:47</end>
+            <n_events>170373</n_events>
+            <duration>58</duration>
+            <n_files>1</n_files>
+            <fill_number>8880</fill_number>
+            <fill_int_lumi>824061.518829346</fill_int_lumi>
+            <fill_stable_time>16.0675</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006263</path>
+        </run>
+        <run>
+            <run_number>6264</run_number>
+            <start>2023-06-06 03:30:23</start>
+            <end>2023-06-06 19:53:22</end>
+            <n_events>195828638</n_events>
+            <duration>983</duration>
+            <n_files>196</n_files>
+            <fill_number>8880</fill_number>
+            <fill_int_lumi>824061.518829346</fill_int_lumi>
+            <fill_stable_time>16.0675</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006264</path>
+        </run>
+        <run>
+            <run_number>6268</run_number>
+            <start>2023-06-06 22:17:15</start>
+            <end>2023-06-07 16:50:49</end>
+            <n_events>151954618</n_events>
+            <duration>1113</duration>
+            <n_files>152</n_files>
+            <fill_number>8882</fill_number>
+            <fill_int_lumi>None</fill_int_lumi>
+            <fill_stable_time>None</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006268</path>
+        </run>
+        <run>
+            <run_number>6279</run_number>
+            <start>2023-06-08 21:10:18</start>
+            <end>2023-06-09 02:33:01</end>
+            <n_events>78232960</n_events>
+            <duration>322</duration>
+            <n_files>79</n_files>
+            <fill_number>8887</fill_number>
+            <fill_int_lumi>None</fill_int_lumi>
+            <fill_stable_time>None</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006279</path>
+        </run>
+        <run>
+            <run_number>6285</run_number>
+            <start>2023-06-09 10:25:11</start>
+            <end>2023-06-09 12:50:53</end>
+            <n_events>154145</n_events>
+            <duration>145</duration>
+            <n_files>1</n_files>
+            <fill_number>8891</fill_number>
+            <fill_int_lumi>776323.954727173</fill_int_lumi>
+            <fill_stable_time>14.0277777777778</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006285</path>
+        </run>
+        <run>
+            <run_number>6286</run_number>
+            <start>2023-06-09 12:52:27</start>
+            <end>2023-06-10 03:12:43</end>
+            <n_events>184394831</n_events>
+            <duration>860</duration>
+            <n_files>185</n_files>
+            <fill_number>8891</fill_number>
+            <fill_int_lumi>776323.954727173</fill_int_lumi>
+            <fill_stable_time>14.0277777777778</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006286</path>
+        </run>
+        <run>
+            <run_number>6289</run_number>
+            <start>2023-06-10 04:59:24</start>
+            <end>2023-06-10 06:53:55</end>
+            <n_events>127898</n_events>
+            <duration>114</duration>
+            <n_files>1</n_files>
+            <fill_number>8894</fill_number>
+            <fill_int_lumi>616879.731491089</fill_int_lumi>
+            <fill_stable_time>10.44</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006289</path>
+        </run>
+        <run>
+            <run_number>6290</run_number>
+            <start>2023-06-10 06:55:32</start>
+            <end>2023-06-10 19:34:58</end>
+            <n_events>146583773</n_events>
+            <duration>759</duration>
+            <n_files>147</n_files>
+            <fill_number>8894</fill_number>
+            <fill_int_lumi>616879.731491089</fill_int_lumi>
+            <fill_stable_time>10.44</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006290</path>
+        </run>
+        <run>
+            <run_number>6291</run_number>
+            <start>2023-06-10 19:36:31</start>
+            <end>2023-06-10 23:42:53</end>
+            <n_events>180989</n_events>
+            <duration>246</duration>
+            <n_files>1</n_files>
+            <fill_number>8895</fill_number>
+            <fill_int_lumi>565221.83215332</fill_int_lumi>
+            <fill_stable_time>8.8675</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006291</path>
+        </run>
+        <run>
+            <run_number>6292</run_number>
+            <start>2023-06-10 23:44:27</start>
+            <end>2023-06-11 08:57:46</end>
+            <n_events>134690162</n_events>
+            <duration>553</duration>
+            <n_files>135</n_files>
+            <fill_number>8895</fill_number>
+            <fill_int_lumi>565221.83215332</fill_int_lumi>
+            <fill_stable_time>8.8675</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006292</path>
+        </run>
+        <run>
+            <run_number>6294</run_number>
+            <start>2023-06-11 09:03:49</start>
+            <end>2023-06-11 11:08:36</end>
+            <n_events>136672</n_events>
+            <duration>125</duration>
+            <n_files>1</n_files>
+            <fill_number>8896</fill_number>
+            <fill_int_lumi>531339.379150391</fill_int_lumi>
+            <fill_stable_time>8.19527777777778</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006294</path>
+        </run>
+        <run>
+            <run_number>6295</run_number>
+            <start>2023-06-11 11:10:16</start>
+            <end>2023-06-11 22:15:58</end>
+            <n_events>126866869</n_events>
+            <duration>665</duration>
+            <n_files>127</n_files>
+            <fill_number>8896</fill_number>
+            <fill_int_lumi>531339.379150391</fill_int_lumi>
+            <fill_stable_time>8.19527777777778</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006295</path>
+        </run>
+        <run>
+            <run_number>6296</run_number>
+            <start>2023-06-11 22:17:45</start>
+            <end>2023-06-12 09:09:38</end>
+            <n_events>154619351</n_events>
+            <duration>652</duration>
+            <n_files>155</n_files>
+            <fill_number>8897</fill_number>
+            <fill_int_lumi>649763.0</fill_int_lumi>
+            <fill_stable_time>10.4794444444444</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006296</path>
+        </run>
+        <run>
+            <run_number>6305</run_number>
+            <start>2023-06-13 02:09:25</start>
+            <end>2023-06-13 09:04:07</end>
+            <n_events>103583982</n_events>
+            <duration>415</duration>
+            <n_files>104</n_files>
+            <fill_number>8901</fill_number>
+            <fill_int_lumi>433426.5625</fill_int_lumi>
+            <fill_stable_time>6.59472222222222</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006305</path>
+        </run>
+        <run>
+            <run_number>6512</run_number>
+            <start>2023-06-30 10:49:45</start>
+            <end>2023-06-30 20:13:15</end>
+            <n_events>4173303</n_events>
+            <duration>564</duration>
+            <n_files>5</n_files>
+            <fill_number>9007</fill_number>
+            <fill_int_lumi>15896.8948867321</fill_int_lumi>
+            <fill_stable_time>8.94666666666667</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006512</path>
+        </run>
+        <run>
+            <run_number>6536</run_number>
+            <start>2023-07-01 16:20:08</start>
+            <end>2023-07-01 22:06:41</end>
+            <n_events>2023722</n_events>
+            <duration>346</duration>
+            <n_files>3</n_files>
+            <fill_number>9017</fill_number>
+            <fill_int_lumi>6092.19799232483</fill_int_lumi>
+            <fill_stable_time>5.32527777777778</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006536</path>
+        </run>
+        <run>
+            <run_number>6542</run_number>
+            <start>2023-07-02 03:06:10</start>
+            <end>2023-07-02 10:16:55</end>
+            <n_events>24251430</n_events>
+            <duration>430</duration>
+            <n_files>25</n_files>
+            <fill_number>9019</fill_number>
+            <fill_int_lumi>98794.2735214233</fill_int_lumi>
+            <fill_stable_time>6.8</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006542</path>
+        </run>
+        <run>
+            <run_number>6549</run_number>
+            <start>2023-07-02 16:05:08</start>
+            <end>2023-07-02 21:30:00</end>
+            <n_events>40647440</n_events>
+            <duration>324</duration>
+            <n_files>41</n_files>
+            <fill_number>9022</fill_number>
+            <fill_int_lumi>166857.765625</fill_int_lumi>
+            <fill_stable_time>5.13416666666667</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006549</path>
+        </run>
+        <run>
+            <run_number>6552</run_number>
+            <start>2023-07-02 23:40:33</start>
+            <end>2023-07-03 11:53:40</end>
+            <n_events>42999736</n_events>
+            <duration>733</duration>
+            <n_files>43</n_files>
+            <fill_number>9023</fill_number>
+            <fill_int_lumi>173615.479385376</fill_int_lumi>
+            <fill_stable_time>3.48444444444444</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006552</path>
+        </run>
+        <run>
+            <run_number>6562</run_number>
+            <start>2023-07-03 22:57:03</start>
+            <end>2023-07-04 12:49:05</end>
+            <n_events>133636983</n_events>
+            <duration>832</duration>
+            <n_files>134</n_files>
+            <fill_number>9029</fill_number>
+            <fill_int_lumi>549787.029499248</fill_int_lumi>
+            <fill_stable_time>13.2972222222222</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006562</path>
+        </run>
+        <run>
+            <run_number>6565</run_number>
+            <start>2023-07-04 12:54:40</start>
+            <end>2023-07-04 13:11:57</end>
+            <n_events>212971</n_events>
+            <duration>17</duration>
+            <n_files>1</n_files>
+            <fill_number>9029</fill_number>
+            <fill_int_lumi>549787.029499248</fill_int_lumi>
+            <fill_stable_time>13.2972222222222</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006565</path>
+        </run>
+        <run>
+            <run_number>6566</run_number>
+            <start>2023-07-04 15:52:57</start>
+            <end>2023-07-04 16:01:26</end>
+            <n_events>102783</n_events>
+            <duration>9</duration>
+            <n_files>1</n_files>
+            <fill_number>9031</fill_number>
+            <fill_int_lumi>728385.076858521</fill_int_lumi>
+            <fill_stable_time>13.3141666666667</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006566</path>
+        </run>
+        <run>
+            <run_number>6567</run_number>
+            <start>2023-07-04 16:07:31</start>
+            <end>2023-07-04 16:44:52</end>
+            <n_events>1336879</n_events>
+            <duration>37</duration>
+            <n_files>2</n_files>
+            <fill_number>9031</fill_number>
+            <fill_int_lumi>728385.076858521</fill_int_lumi>
+            <fill_stable_time>13.3141666666667</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006567</path>
+        </run>
+        <run>
+            <run_number>6568</run_number>
+            <start>2023-07-04 16:45:48</start>
+            <end>2023-07-05 06:20:42</end>
+            <n_events>268422113</n_events>
+            <duration>815</duration>
+            <n_files>269</n_files>
+            <fill_number>9031</fill_number>
+            <fill_int_lumi>728385.076858521</fill_int_lumi>
+            <fill_stable_time>13.3141666666667</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006568</path>
+        </run>
+        <run>
+            <run_number>6573</run_number>
+            <start>2023-07-05 09:29:45</start>
+            <end>2023-07-05 10:42:51</end>
+            <n_events>1209162</n_events>
+            <duration>73</duration>
+            <n_files>2</n_files>
+            <fill_number>9035</fill_number>
+            <fill_int_lumi>687562.365341187</fill_int_lumi>
+            <fill_stable_time>12.0602777777778</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006573</path>
+        </run>
+        <run>
+            <run_number>6574</run_number>
+            <start>2023-07-05 10:44:36</start>
+            <end>2023-07-05 23:14:26</end>
+            <n_events>253151203</n_events>
+            <duration>750</duration>
+            <n_files>254</n_files>
+            <fill_number>9035</fill_number>
+            <fill_int_lumi>687562.365341187</fill_int_lumi>
+            <fill_stable_time>12.0602777777778</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006574</path>
+        </run>
+        <run>
+            <run_number>6576</run_number>
+            <start>2023-07-05 23:19:49</start>
+            <end>2023-07-06 00:58:49</end>
+            <n_events>1597686</n_events>
+            <duration>99</duration>
+            <n_files>2</n_files>
+            <fill_number>9036</fill_number>
+            <fill_int_lumi>779319.15461731</fill_int_lumi>
+            <fill_stable_time>12.9547222222222</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006576</path>
+        </run>
+        <run>
+            <run_number>6577</run_number>
+            <start>2023-07-06 01:00:33</start>
+            <end>2023-07-06 14:23:47</end>
+            <n_events>286093280</n_events>
+            <duration>803</duration>
+            <n_files>287</n_files>
+            <fill_number>9036</fill_number>
+            <fill_int_lumi>779319.15461731</fill_int_lumi>
+            <fill_stable_time>12.9547222222222</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006577</path>
+        </run>
+        <run>
+            <run_number>6579</run_number>
+            <start>2023-07-06 14:28:33</start>
+            <end>2023-07-06 14:58:23</end>
+            <n_events>367102</n_events>
+            <duration>30</duration>
+            <n_files>1</n_files>
+            <fill_number>9036</fill_number>
+            <fill_int_lumi>779319.15461731</fill_int_lumi>
+            <fill_stable_time>12.9547222222222</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006579</path>
+        </run>
+        <run>
+            <run_number>6589</run_number>
+            <start>2023-07-07 09:51:14</start>
+            <end>2023-07-07 10:50:17</end>
+            <n_events>1072179</n_events>
+            <duration>59</duration>
+            <n_files>2</n_files>
+            <fill_number>9043</fill_number>
+            <fill_int_lumi>851331.867614746</fill_int_lumi>
+            <fill_stable_time>14.7102777777778</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006589</path>
+        </run>
+        <run>
+            <run_number>6590</run_number>
+            <start>2023-07-07 10:51:52</start>
+            <end>2023-07-08 01:58:29</end>
+            <n_events>313299585</n_events>
+            <duration>907</duration>
+            <n_files>314</n_files>
+            <fill_number>9043</fill_number>
+            <fill_int_lumi>851331.867614746</fill_int_lumi>
+            <fill_stable_time>14.7102777777778</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006590</path>
+        </run>
+        <run>
+            <run_number>6591</run_number>
+            <start>2023-07-08 02:00:17</start>
+            <end>2023-07-08 02:29:11</end>
+            <n_events>358354</n_events>
+            <duration>29</duration>
+            <n_files>1</n_files>
+            <fill_number>9043</fill_number>
+            <fill_int_lumi>851331.867614746</fill_int_lumi>
+            <fill_stable_time>14.7102777777778</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006591</path>
+        </run>
+        <run>
+            <run_number>6592</run_number>
+            <start>2023-07-08 02:30:25</start>
+            <end>2023-07-08 03:43:59</end>
+            <n_events>1294113</n_events>
+            <duration>73</duration>
+            <n_files>2</n_files>
+            <fill_number>9044</fill_number>
+            <fill_int_lumi>804052.456924439</fill_int_lumi>
+            <fill_stable_time>13.5983333333333</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006592</path>
+        </run>
+        <run>
+            <run_number>6593</run_number>
+            <start>2023-07-08 03:46:11</start>
+            <end>2023-07-08 17:53:27</end>
+            <n_events>298149392</n_events>
+            <duration>847</duration>
+            <n_files>299</n_files>
+            <fill_number>9044</fill_number>
+            <fill_int_lumi>804052.456924439</fill_int_lumi>
+            <fill_stable_time>13.5983333333333</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006593</path>
+        </run>
+        <run>
+            <run_number>6595</run_number>
+            <start>2023-07-08 18:02:31</start>
+            <end>2023-07-08 19:21:33</end>
+            <n_events>1290199</n_events>
+            <duration>79</duration>
+            <n_files>2</n_files>
+            <fill_number>9045</fill_number>
+            <fill_int_lumi>775779.820388794</fill_int_lumi>
+            <fill_stable_time>13.4808333333333</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006595</path>
+        </run>
+        <run>
+            <run_number>6596</run_number>
+            <start>2023-07-08 19:23:07</start>
+            <end>2023-07-09 09:10:53</end>
+            <n_events>286184267</n_events>
+            <duration>827</duration>
+            <n_files>287</n_files>
+            <fill_number>9045</fill_number>
+            <fill_int_lumi>775779.820388794</fill_int_lumi>
+            <fill_stable_time>13.4808333333333</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006596</path>
+        </run>
+        <run>
+            <run_number>6597</run_number>
+            <start>2023-07-09 09:12:31</start>
+            <end>2023-07-09 10:40:14</end>
+            <n_events>1390718</n_events>
+            <duration>88</duration>
+            <n_files>2</n_files>
+            <fill_number>9046</fill_number>
+            <fill_int_lumi>344905.226715088</fill_int_lumi>
+            <fill_stable_time>4.98388888888889</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006597</path>
+        </run>
+        <run>
+            <run_number>6598</run_number>
+            <start>2023-07-09 10:42:16</start>
+            <end>2023-07-09 16:05:53</end>
+            <n_events>128218330</n_events>
+            <duration>323</duration>
+            <n_files>129</n_files>
+            <fill_number>9046</fill_number>
+            <fill_int_lumi>344905.226715088</fill_int_lumi>
+            <fill_stable_time>4.98388888888889</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006598</path>
+        </run>
+        <run>
+            <run_number>6604</run_number>
+            <start>2023-07-09 17:50:12</start>
+            <end>2023-07-09 18:48:29</end>
+            <n_events>972150</n_events>
+            <duration>58</duration>
+            <n_files>1</n_files>
+            <fill_number>9049</fill_number>
+            <fill_int_lumi>562784.161712647</fill_int_lumi>
+            <fill_stable_time>8.92277777777778</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006604</path>
+        </run>
+        <run>
+            <run_number>6605</run_number>
+            <start>2023-07-09 18:50:11</start>
+            <end>2023-07-10 04:23:16</end>
+            <n_events>207840481</n_events>
+            <duration>573</duration>
+            <n_files>208</n_files>
+            <fill_number>9049</fill_number>
+            <fill_int_lumi>562784.161712647</fill_int_lumi>
+            <fill_stable_time>8.92277777777778</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006605</path>
+        </run>
+        <run>
+            <run_number>6606</run_number>
+            <start>2023-07-10 04:25:09</start>
+            <end>2023-07-10 08:33:52</end>
+            <n_events>3089090</n_events>
+            <duration>248</duration>
+            <n_files>4</n_files>
+            <fill_number>9049</fill_number>
+            <fill_int_lumi>562784.161712647</fill_int_lumi>
+            <fill_stable_time>8.92277777777778</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006606</path>
+        </run>
+        <run>
+            <run_number>6607</run_number>
+            <start>2023-07-10 08:35:06</start>
+            <end>2023-07-10 08:46:01</end>
+            <n_events>134570</n_events>
+            <duration>10</duration>
+            <n_files>1</n_files>
+            <fill_number>9050</fill_number>
+            <fill_int_lumi>386794.75</fill_int_lumi>
+            <fill_stable_time>5.64777777777778</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006607</path>
+        </run>
+        <run>
+            <run_number>6609</run_number>
+            <start>2023-07-10 08:50:33</start>
+            <end>2023-07-10 12:08:23</end>
+            <n_events>2664948</n_events>
+            <duration>198</duration>
+            <n_files>3</n_files>
+            <fill_number>9050</fill_number>
+            <fill_int_lumi>386794.75</fill_int_lumi>
+            <fill_stable_time>5.64777777777778</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006609</path>
+        </run>
+        <run>
+            <run_number>6610</run_number>
+            <start>2023-07-10 12:10:37</start>
+            <end>2023-07-10 21:22:23</end>
+            <n_events>145110388</n_events>
+            <duration>552</duration>
+            <n_files>146</n_files>
+            <fill_number>9050</fill_number>
+            <fill_int_lumi>386794.75</fill_int_lumi>
+            <fill_stable_time>5.64777777777778</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006610</path>
+        </run>
+        <run>
+            <run_number>6616</run_number>
+            <start>2023-07-11 01:40:56</start>
+            <end>2023-07-11 02:59:49</end>
+            <n_events>1273253</n_events>
+            <duration>79</duration>
+            <n_files>2</n_files>
+            <fill_number>9055</fill_number>
+            <fill_int_lumi>34711.6369171143</fill_int_lumi>
+            <fill_stable_time>0.785</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006616</path>
+        </run>
+        <run>
+            <run_number>6617</run_number>
+            <start>2023-07-11 03:01:24</start>
+            <end>2023-07-11 04:17:34</end>
+            <n_events>15782503</n_events>
+            <duration>76</duration>
+            <n_files>16</n_files>
+            <fill_number>9055</fill_number>
+            <fill_int_lumi>34711.6369171143</fill_int_lumi>
+            <fill_stable_time>0.785</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006617</path>
+        </run>
+        <run>
+            <run_number>6618</run_number>
+            <start>2023-07-11 04:19:45</start>
+            <end>2023-07-11 05:54:36</end>
+            <n_events>1182710</n_events>
+            <duration>95</duration>
+            <n_files>2</n_files>
+            <fill_number>9056</fill_number>
+            <fill_int_lumi>11120.0834503174</fill_int_lumi>
+            <fill_stable_time>0.317777777777778</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006618</path>
+        </run>
+        <run>
+            <run_number>6619</run_number>
+            <start>2023-07-11 05:56:33</start>
+            <end>2023-07-11 06:58:45</end>
+            <n_events>1005456</n_events>
+            <duration>62</duration>
+            <n_files>2</n_files>
+            <fill_number>9056</fill_number>
+            <fill_int_lumi>11120.0834503174</fill_int_lumi>
+            <fill_stable_time>0.317777777777778</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006619</path>
+        </run>
+        <run>
+            <run_number>6620</run_number>
+            <start>2023-07-11 07:00:33</start>
+            <end>2023-07-11 07:44:23</end>
+            <n_events>6415728</n_events>
+            <duration>44</duration>
+            <n_files>7</n_files>
+            <fill_number>9056</fill_number>
+            <fill_int_lumi>11120.0834503174</fill_int_lumi>
+            <fill_stable_time>0.317777777777778</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006620</path>
+        </run>
+        <run>
+            <run_number>6621</run_number>
+            <start>2023-07-11 07:45:47</start>
+            <end>2023-07-11 09:19:44</end>
+            <n_events>1421274</n_events>
+            <duration>94</duration>
+            <n_files>2</n_files>
+            <fill_number>9057</fill_number>
+            <fill_int_lumi>586331.494827271</fill_int_lumi>
+            <fill_stable_time>9.32861111111111</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006621</path>
+        </run>
+        <run>
+            <run_number>6622</run_number>
+            <start>2023-07-11 09:21:18</start>
+            <end>2023-07-11 20:52:22</end>
+            <n_events>220188453</n_events>
+            <duration>691</duration>
+            <n_files>221</n_files>
+            <fill_number>9057</fill_number>
+            <fill_int_lumi>586331.494827271</fill_int_lumi>
+            <fill_stable_time>9.32861111111111</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006622</path>
+        </run>
+        <run>
+            <run_number>6626</run_number>
+            <start>2023-07-11 21:23:42</start>
+            <end>2023-07-11 23:33:48</end>
+            <n_events>1850905</n_events>
+            <duration>130</duration>
+            <n_files>2</n_files>
+            <fill_number>9059</fill_number>
+            <fill_int_lumi>137430.995605469</fill_int_lumi>
+            <fill_stable_time>2.31666666666667</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006626</path>
+        </run>
+        <run>
+            <run_number>6627</run_number>
+            <start>2023-07-11 23:35:23</start>
+            <end>2023-07-12 04:22:32</end>
+            <n_events>54599341</n_events>
+            <duration>287</duration>
+            <n_files>55</n_files>
+            <fill_number>9059</fill_number>
+            <fill_int_lumi>137430.995605469</fill_int_lumi>
+            <fill_stable_time>2.31666666666667</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006627</path>
+        </run>
+        <run>
+            <run_number>6635</run_number>
+            <start>2023-07-12 07:54:02</start>
+            <end>2023-07-12 12:09:28</end>
+            <n_events>3452806</n_events>
+            <duration>255</duration>
+            <n_files>4</n_files>
+            <fill_number>9062</fill_number>
+            <fill_int_lumi>151393.722747803</fill_int_lumi>
+            <fill_stable_time>2.28805555555556</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006635</path>
+        </run>
+        <run>
+            <run_number>6636</run_number>
+            <start>2023-07-12 12:11:06</start>
+            <end>2023-07-12 14:58:41</end>
+            <n_events>59623174</n_events>
+            <duration>167</duration>
+            <n_files>60</n_files>
+            <fill_number>9062</fill_number>
+            <fill_int_lumi>151393.722747803</fill_int_lumi>
+            <fill_stable_time>2.28805555555556</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006636</path>
+        </run>
+        <run>
+            <run_number>6637</run_number>
+            <start>2023-07-12 15:00:22</start>
+            <end>2023-07-12 15:08:51</end>
+            <n_events>104691</n_events>
+            <duration>8</duration>
+            <n_files>1</n_files>
+            <fill_number>9063</fill_number>
+            <fill_int_lumi>992001.897735596</fill_int_lumi>
+            <fill_stable_time>19.9822222222222</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006637</path>
+        </run>
+        <run>
+            <run_number>6639</run_number>
+            <start>2023-07-12 15:13:42</start>
+            <end>2023-07-12 17:14:15</end>
+            <n_events>1733587</n_events>
+            <duration>121</duration>
+            <n_files>2</n_files>
+            <fill_number>9063</fill_number>
+            <fill_int_lumi>992001.897735596</fill_int_lumi>
+            <fill_stable_time>19.9822222222222</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006639</path>
+        </run>
+        <run>
+            <run_number>6640</run_number>
+            <start>2023-07-12 17:16:11</start>
+            <end>2023-07-13 21:04:51</end>
+            <n_events>369364945</n_events>
+            <duration>1668</duration>
+            <n_files>370</n_files>
+            <fill_number>9063</fill_number>
+            <fill_int_lumi>992001.897735596</fill_int_lumi>
+            <fill_stable_time>19.9822222222222</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006640</path>
+        </run>
+        <run>
+            <run_number>6650</run_number>
+            <start>2023-07-14 05:49:42</start>
+            <end>2023-07-14 07:19:47</end>
+            <n_events>1429049</n_events>
+            <duration>90</duration>
+            <n_files>2</n_files>
+            <fill_number>9066</fill_number>
+            <fill_int_lumi>63031.1368408203</fill_int_lumi>
+            <fill_stable_time>1.17138888888889</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006650</path>
+        </run>
+        <run>
+            <run_number>6651</run_number>
+            <start>2023-07-14 07:21:23</start>
+            <end>2023-07-14 22:00:04</end>
+            <n_events>36110913</n_events>
+            <duration>879</duration>
+            <n_files>37</n_files>
+            <fill_number>9066</fill_number>
+            <fill_int_lumi>63031.1368408203</fill_int_lumi>
+            <fill_stable_time>1.17138888888889</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006651</path>
+        </run>
+        <run>
+            <run_number>6652</run_number>
+            <start>2023-07-14 22:01:15</start>
+            <end>2023-07-14 22:15:58</end>
+            <n_events>181067</n_events>
+            <duration>14</duration>
+            <n_files>1</n_files>
+            <fill_number>9067</fill_number>
+            <fill_int_lumi>39577.4071960449</fill_int_lumi>
+            <fill_stable_time>0.786388888888889</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006652</path>
+        </run>
+        <run>
+            <run_number>6654</run_number>
+            <start>2023-07-14 22:20:33</start>
+            <end>2023-07-15 00:49:06</end>
+            <n_events>2064049</n_events>
+            <duration>149</duration>
+            <n_files>3</n_files>
+            <fill_number>9067</fill_number>
+            <fill_int_lumi>39577.4071960449</fill_int_lumi>
+            <fill_stable_time>0.786388888888889</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006654</path>
+        </run>
+        <run>
+            <run_number>6655</run_number>
+            <start>2023-07-15 00:50:40</start>
+            <end>2023-07-15 02:04:29</end>
+            <n_events>16983193</n_events>
+            <duration>74</duration>
+            <n_files>17</n_files>
+            <fill_number>9067</fill_number>
+            <fill_int_lumi>39577.4071960449</fill_int_lumi>
+            <fill_stable_time>0.786388888888889</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006655</path>
+        </run>
+        <run>
+            <run_number>6656</run_number>
+            <start>2023-07-15 02:05:53</start>
+            <end>2023-07-15 04:53:01</end>
+            <n_events>2294599</n_events>
+            <duration>167</duration>
+            <n_files>3</n_files>
+            <fill_number>9068</fill_number>
+            <fill_int_lumi>187821.004180908</fill_int_lumi>
+            <fill_stable_time>2.7675</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006656</path>
+        </run>
+        <run>
+            <run_number>6657</run_number>
+            <start>2023-07-15 04:54:37</start>
+            <end>2023-07-15 11:54:21</end>
+            <n_events>73498386</n_events>
+            <duration>420</duration>
+            <n_files>74</n_files>
+            <fill_number>9068</fill_number>
+            <fill_int_lumi>187821.004180908</fill_int_lumi>
+            <fill_stable_time>2.7675</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006657</path>
+        </run>
+        <run>
+            <run_number>6660</run_number>
+            <start>2023-07-15 14:10:32</start>
+            <end>2023-07-15 15:22:25</end>
+            <n_events>886430</n_events>
+            <duration>72</duration>
+            <n_files>1</n_files>
+            <fill_number>9070</fill_number>
+            <fill_int_lumi>748010.127746582</fill_int_lumi>
+            <fill_stable_time>11.6052777777778</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006660</path>
+        </run>
+        <run>
+            <run_number>6662</run_number>
+            <start>2023-07-15 15:26:53</start>
+            <end>2023-07-15 16:57:47</end>
+            <n_events>1383069</n_events>
+            <duration>91</duration>
+            <n_files>2</n_files>
+            <fill_number>9070</fill_number>
+            <fill_int_lumi>748010.127746582</fill_int_lumi>
+            <fill_stable_time>11.6052777777778</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006662</path>
+        </run>
+        <run>
+            <run_number>6663</run_number>
+            <start>2023-07-15 16:59:20</start>
+            <end>2023-07-16 04:58:40</end>
+            <n_events>273997211</n_events>
+            <duration>719</duration>
+            <n_files>274</n_files>
+            <fill_number>9070</fill_number>
+            <fill_int_lumi>748010.127746582</fill_int_lumi>
+            <fill_stable_time>11.6052777777778</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006663</path>
+        </run>
+        <run>
+            <run_number>6666</run_number>
+            <start>2023-07-16 06:31:40</start>
+            <end>2023-07-16 07:39:41</end>
+            <n_events>1100555</n_events>
+            <duration>68</duration>
+            <n_files>2</n_files>
+            <fill_number>9072</fill_number>
+            <fill_int_lumi>802757.024734497</fill_int_lumi>
+            <fill_stable_time>12.5075</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006666</path>
+        </run>
+        <run>
+            <run_number>6667</run_number>
+            <start>2023-07-16 07:42:11</start>
+            <end>2023-07-16 20:35:56</end>
+            <n_events>331887282</n_events>
+            <duration>773</duration>
+            <n_files>332</n_files>
+            <fill_number>9072</fill_number>
+            <fill_int_lumi>802757.024734497</fill_int_lumi>
+            <fill_stable_time>12.5075</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006667</path>
+        </run>
+        <run>
+            <run_number>6669</run_number>
+            <start>2023-07-16 20:40:33</start>
+            <end>2023-07-16 20:54:39</end>
+            <n_events>174689</n_events>
+            <duration>14</duration>
+            <n_files>1</n_files>
+            <fill_number>9072</fill_number>
+            <fill_int_lumi>802757.024734497</fill_int_lumi>
+            <fill_stable_time>12.5075</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006669</path>
+        </run>
+        <run>
+            <run_number>6670</run_number>
+            <start>2023-07-16 20:55:53</start>
+            <end>2023-07-16 22:26:42</end>
+            <n_events>1402927</n_events>
+            <duration>91</duration>
+            <n_files>2</n_files>
+            <fill_number>9073</fill_number>
+            <fill_int_lumi>7363.2734375</fill_int_lumi>
+            <fill_stable_time>0.168333333333333</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006670</path>
+        </run>
+        <run>
+            <run_number>6671</run_number>
+            <start>2023-07-16 22:28:34</start>
+            <end>2023-07-18 08:08:21</end>
+            <n_events>30351691</n_events>
+            <duration>2020</duration>
+            <n_files>31</n_files>
+            <fill_number>9073</fill_number>
+            <fill_int_lumi>7363.2734375</fill_int_lumi>
+            <fill_stable_time>0.168333333333333</fill_stable_time>
+            <path>/eos/experiment/sndlhc/raw_data/physics/2023/run_006671</path>
+        </run>
+    </runs>
+</runlist>

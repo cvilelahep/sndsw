@@ -9,8 +9,8 @@
 
 namespace snd::analysis_cuts {
 
-  DSActivityCut::DSActivityCut(TChain * tree) : MuFilterBaseCut(tree) {
-    cutName = "If there are DS hits, all US planes must be hit";
+  DSActivityCut::DSActivityCut() : MuFilterBaseCut() {
+    processName = "If there are DS hits, all US planes must be hit";
     
     shortName = "NUSPlanesHitIfDSHit";
     nbins = std::vector<int>{5};
@@ -20,7 +20,7 @@ namespace snd::analysis_cuts {
 
   }
 
-  bool DSActivityCut::passCut(){
+  void DSActivityCut::process(){
     MuFilterHit * hit;
     TIter hitIterator(muFilterDigiHitCollection);
 
@@ -37,11 +37,11 @@ namespace snd::analysis_cuts {
     
     if (not ds) {
       plot_var[0] = -1;
-      return false;
+      passed_cut = false; return;
     }
 
     plot_var[0] = std::accumulate(us.begin(), us.end(), 0);
-    if (plot_var[0] == 5) return true;
-    return false;
+    if (plot_var[0] == 5) {passed_cut = true; return;}
+    passed_cut = false; return;
   }
 }

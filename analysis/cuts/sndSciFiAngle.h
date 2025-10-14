@@ -3,7 +3,7 @@
 #include "sndSciFiBaseCut.h"
 
 #include "TChain.h"
-#include "sndScifiHit.h"
+#include "Scifi.h"
 
 #include "TVector3.h"
 #include "TGraph.h"
@@ -17,11 +17,12 @@ namespace snd {
       TVector3 a_, b_;
       TGraph * gv_;
       TGraph * gh_;
+      Scifi * scifiDet;
     public :
-      scifiAngle(double intercept, double slope, double max_chi2, TChain * ch);
+      scifiAngle(double intercept, double slope, double max_chi2);
       ~scifiAngle(){;}
 
-      bool passCut();
+      void process();
 
     };
   };

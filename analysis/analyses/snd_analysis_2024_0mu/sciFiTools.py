@@ -3,13 +3,12 @@ import ROOT
 min_clock_cycle = -0.5
 max_clock_cycle = 1.2
 
-scifiDet = ROOT.gROOT.GetListOfGlobals().FindObject('Scifi')
-muFilterDet = ROOT.gROOT.GetListOfGlobals().FindObject('MuFilter')
-
 a = ROOT.TVector3()
 b = ROOT.TVector3()
 
 def selectHits(event, MC=False, return_tref=False):
+    scifiDet = ROOT.gROOT.GetListOfGlobals().FindObject('Scifi')
+    muFilterDet = ROOT.gROOT.GetListOfGlobals().FindObject('MuFilter')
 #    return event.Digi_ScifiHits
 
     h = []
@@ -72,6 +71,10 @@ def selectHits(event, MC=False, return_tref=False):
 import bisect
 def getSumDensity(hit_collection, return_position=False, return_2ndhighest=False, return_hv=False, xlims=None, ylims=None, digi=True):
 
+    scifiDet = ROOT.gROOT.GetListOfGlobals().FindObject('Scifi')
+    muFilterDet = ROOT.gROOT.GetListOfGlobals().FindObject('MuFilter')
+
+    
     x = [[] for i in range(10)]
 
     if not digi:
@@ -196,6 +199,10 @@ def getSumDensity(hit_collection, return_position=False, return_2ndhighest=False
     return (*ret,)
 
 def getSciFiAngle(hits):
+
+    scifiDet = ROOT.gROOT.GetListOfGlobals().FindObject('Scifi')
+    muFilterDet = ROOT.gROOT.GetListOfGlobals().FindObject('MuFilter')
+
     
     gv = ROOT.TGraph()
     gh = ROOT.TGraph()
@@ -233,6 +240,10 @@ def getSciFiAngle(hits):
 
 def tdiff(scifi_hits, mufilter_hits, MC = False):
 
+    scifiDet = ROOT.gROOT.GetListOfGlobals().FindObject('Scifi')
+    muFilterDet = ROOT.gROOT.GetListOfGlobals().FindObject('MuFilter')
+
+    
     if MC:
         TDC2ns = 1
     else:

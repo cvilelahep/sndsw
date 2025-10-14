@@ -9,11 +9,11 @@ namespace snd {
   
     class USQDCCut : public snd::analysis_cuts::MuFilterBaseCut {
     private :
-      float qdc_threshold;
+      float qdc_threshold_;
     public :
-      USQDCCut(float threshold, TChain * ch);
+      USQDCCut(float qdc_threshold);
       ~USQDCCut(){;}
-      bool passCut();
+      void process();
     };
 
   }

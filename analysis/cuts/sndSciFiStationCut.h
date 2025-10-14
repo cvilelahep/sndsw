@@ -10,13 +10,13 @@ namespace snd {
 
     class sciFiStationCut : public snd::analysis_cuts::sciFiBaseCut {
     private :
-      float fractionThreshold;
-      std::vector<int> stations_to_exclude;
+      float fraction_threshold_;
+      std::vector<int> excluded_stations_;
     public :
-      sciFiStationCut(float threshold, std::vector<int> excluded_stations, TChain * ch);
+      sciFiStationCut(float threshold, std::vector<int> excluded_stations);
       ~sciFiStationCut(){;}
 
-      bool passCut();
+      void process();
     };
 
   }

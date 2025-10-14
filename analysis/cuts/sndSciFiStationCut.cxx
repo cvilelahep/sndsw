@@ -5,17 +5,16 @@
 #include "TChain.h"
 
 namespace snd::analysis_cuts{
-  sciFiStationCut::sciFiStationCut(float threshold, std::vector<int> excluded_stations, TChain * ch) : sciFiBaseCut(ch){
-    fractionThreshold = threshold;
-    stations_to_exclude = std::vector(excluded_stations);
-    cutName = "Exclude stations";
-    for (int sta : excluded_stations){
-      cutName += " "+std::to_string(sta);
+  sciFiStationCut::sciFiStationCut(float fraction_threshold, std::vector<int> excluded_stations) : sciFiBaseCut(), fraction_threshold_(fraction_threshold), excluded_stations_(excluded_stations){
+
+    processName = "Exclude stations";
+    for (int sta : excluded_stations_){
+      processName += " "+std::to_string(sta);
     }
-    cutName += ". Threshold "+std::to_string(fractionThreshold);
+    processName += ". Threshold "+std::to_string(fraction_threshold_);
 
     shortName = "SciFiStation";
-    for (int sta : excluded_stations) shortName += "_"+std::to_string(sta);
+    for (int sta : excluded_stations_) shortName += "_"+std::to_string(sta);
 
     nbins = std::vector<int>{5};
     range_start = std::vector<double>{1};
@@ -23,17 +22,17 @@ namespace snd::analysis_cuts{
     plot_var = std::vector<double>{-1};
   }
 
-  bool sciFiStationCut::passCut(){
+  void sciFiStationCut::process(){
     initializeEvent();
     
-    int station = snd::analysis_tools::findScifiStation(hits_per_plane_horizontal, hits_per_plane_vertical, fractionThreshold);
+    int station = snd::analysis_tools::findScifiStation(*hits_per_plane_horizontal, *hits_per_plane_vertical, fraction_threshold_);
     
     plot_var[0] = station;
 
-    if (std::find(stations_to_exclude.begin(), stations_to_exclude.end(), station) == stations_to_exclude.end()){
-      return true;
+    if (std::find(excluded_stations_.begin(), excluded_stations_.end(), station) == excluded_stations_.end()){
+      passed_cut = true; return;
     } else {
-      return false;
+      passed_cut = false; return;
     }
   }
 }	     

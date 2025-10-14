@@ -12,9 +12,9 @@ namespace snd {
     class MuFilterBaseCut : public snd::analysis_cuts::baseCut {
 
     protected :
-      static TClonesArray * muFilterDigiHitCollection;
+      TClonesArray * muFilterDigiHitCollection;
 
-      MuFilterBaseCut(TChain * ch);
+      MuFilterBaseCut();
       ~MuFilterBaseCut(){;}
     };
 

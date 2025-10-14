@@ -4,10 +4,12 @@
 
 #include <iostream>
 
+#include "FairLogger.h"
+
 namespace snd::analysis_cuts {
 
-  ip1Cut::ip1Cut(TChain * ch) : EventHeaderBaseCut(ch) {
-    cutName = "IP1 bunch crossing";
+  ip1Cut::ip1Cut() : EventHeaderBaseCut() {
+    processName = "IP1 bunch crossing";
 
     shortName = "IP1";
 
@@ -23,17 +25,20 @@ namespace snd::analysis_cuts {
 
   }
 
-  bool ip1Cut::passCut(){
+  void ip1Cut::process(){
 
-    bool ret = false;
+    if (header->GetBunchType() == -1){
+      LOG(FATAL) << "ERROR ip1Cut: Bunch type not set";
+    }
+    
+    passed_cut = false;
     if (header->isIP1()){
-      ret = true;
+      passed_cut = true;
       plot_var[0] = 0;
     } else if (header->isB1Only()){
       plot_var[0] = 1;
     } else if (header->isB2noB1()){
       plot_var[0] = 2;
     }
-    return ret;
   }
 }

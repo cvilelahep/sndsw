@@ -8,7 +8,6 @@
 #include "TClonesArray.h"
 #include "sndScifiHit.h"
 #include "Scifi.h"
-#include "SNDLHCEventHeader.h"
 #include "TH1D.h"
 
 namespace snd {
@@ -17,30 +16,17 @@ namespace snd {
     class sciFiBaseCut : public snd::analysis_cuts::baseCut {
 
     private : 
-      static TChain * tree;
-      static SNDLHCEventHeader * header;
-      static unsigned long int read_entry;
-      bool select_hits_;
-      double min_clock_cycle_;
-      double max_clock_cycle_;
-      double TDC2ns_;
-      bool isMC_;
+      long long int * read_entry;
       
     protected :
-      static std::vector<TH1D *> hHitTime;
-
-      static TClonesArray * scifiDigiHitCollection;
-      static TClonesArray * scifiDigiHitCollection_raw;
+      TClonesArray * scifiDigiHitCollection;
       
-      static std::vector<int> hits_per_plane_vertical;
-      static std::vector<int> hits_per_plane_horizontal;
+      std::vector<int> * hits_per_plane_vertical;
+      std::vector<int> * hits_per_plane_horizontal;
 
-      static Scifi * scifiDet;
-      
       void initializeEvent();
 
-      sciFiBaseCut(TChain * ch, bool select_hits = false,  double min_clock_cycle = -0.5, double max_clock_cycle = 1.2);
-      ~sciFiBaseCut();
+      sciFiBaseCut();
     };
 
   }

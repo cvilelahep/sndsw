@@ -10,10 +10,10 @@ namespace snd{
     
     class sciFiContinuity : public sciFiBaseCut {
     public :
-      sciFiContinuity(TChain * ch);
+      sciFiContinuity();
       ~sciFiContinuity(){;}
 
-      bool passCut();
+      void process();
 
     };
   };

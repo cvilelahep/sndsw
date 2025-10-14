@@ -10,9 +10,9 @@ namespace snd {
     class ip1Cut : public snd::analysis_cuts::EventHeaderBaseCut {
     private:
     public :
-      ip1Cut(TChain * ch);
+      ip1Cut();
       ~ip1Cut(){;}
-      bool passCut();
+      void process();
     };
 
   }
