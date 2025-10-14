@@ -43,8 +43,7 @@ MuFilterHit::MuFilterHit(Int_t detID, std::vector<MuFilterPoint*> V)
      MuFilter* MuFilterDet = dynamic_cast<MuFilter*> (gROOT->GetListOfGlobals()->FindObject("MuFilter"));
      // get parameters from the MuFilter detector for simulating the digitized information
      nSiPMs  = MuFilterDet->GetnSiPMs(detID);
-     if (floor(detID/10000)==3&&detID%1000>59) nSides = MuFilterDet->GetnSides(detID) - 1;
-     else nSides = MuFilterDet->GetnSides(detID);
+     nSides = MuFilterDet->GetnSides(detID);
 
      Float_t timeResol = MuFilterDet->GetConfParF("MuFilter/timeResol");
 
@@ -59,7 +58,11 @@ MuFilterHit::MuFilterHit(Int_t detID, std::vector<MuFilterPoint*> V)
               propspeed = MuFilterDet->GetConfParF("MuFilter/DsPropSpeed");
      }
      else { 
-              attLength = MuFilterDet->GetConfParF("MuFilter/VandUpAttenuationLength");
+              if (floor(detID/10000)==1 && nSides==1){
+                 // top readout with mirror on bottom
+                 attLength = 2*MuFilterDet->GetConfParF("MuFilter/VandUpAttenuationLength");
+              }
+              else {attLength = MuFilterDet->GetConfParF("MuFilter/VandUpAttenuationLength");}
               siPMcalibration = MuFilterDet->GetConfParF("MuFilter/VandUpSiPMcalibration");
               siPMcalibrationS = MuFilterDet->GetConfParF("MuFilter/VandUpSiPMcalibrationS");
               propspeed = MuFilterDet->GetConfParF("MuFilter/VandUpPropSpeed");
@@ -86,8 +89,9 @@ MuFilterHit::MuFilterHit(Int_t detID, std::vector<MuFilterPoint*> V)
         MuFilterDet->GetPosition(fDetectorID,vLeft, vRight);
         Double_t distance_Left    =  (vLeft-impact).Mag();
         Double_t distance_Right =  (vRight-impact).Mag();
-        signalLeft+=signal*TMath::Exp(-distance_Left/attLength);
-        signalRight+=signal*TMath::Exp(-distance_Right/attLength);
+        // Simple model: divide signal between nSides
+        signalLeft+=signal/nSides*TMath::Exp(-distance_Left/attLength);
+        signalRight+=signal/nSides*TMath::Exp(-distance_Right/attLength);
 
       // for the timing, find earliest particle and smear with time resolution
         Double_t ptime    = (*p)->GetTime();
@@ -99,7 +103,7 @@ MuFilterHit::MuFilterHit(Int_t detID, std::vector<MuFilterPoint*> V)
      // shortSiPM = {3,6,11,14,19,22,27,30,35,38,43,46,51,54,59,62,67,70,75,78}; - counting from 1!
      // In the SndlhcHit class the 'signals' array starts from 0.
      for (unsigned int j=0; j<nSiPMs; ++j){
-        if (j==2 or j==5){
+        if ( floor(detID/10000)==2 && (j==2 or j==5)){                 // only US has small SiPMs
            signals[j] = signalLeft/float(nSiPMs) * siPMcalibrationS;   // most simplest model, divide signal individually. Small SiPMS special
            times[j] = gRandom->Gaus(earliestToAL, timeResol);
         }else{
@@ -133,7 +137,10 @@ Float_t MuFilterHit::GetEnergy()
 }
 
 bool MuFilterHit::isVertical(){
-  if  (floor(fDetectorID/10000)==3&&fDetectorID%1000>59) {return kTRUE;}
+  if  ( (floor(fDetectorID/10000)==3&&fDetectorID%1000>59) ||
+         (floor(fDetectorID/10000)==1&&int(fDetectorID/1000)%10==2) ) {  
+      return kTRUE;
+  }
   else{return kFALSE;}
 }
 

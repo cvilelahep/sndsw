@@ -46,9 +46,11 @@ public:
     void SetConfPar(TString name, Float_t value){conf_floats[name]=value;}
     void SetConfPar(TString name, Int_t value){conf_ints[name]=value;}
     void SetConfPar(TString name, TString value){conf_strings[name]=value;}
+    void SetConfPar(TString name, std::vector<float> values){conf_vectors[name]=values;}
     Float_t  GetConfParF(TString name){return conf_floats[name];} 
     Int_t       GetConfParI(TString name){return conf_ints[name];}
     TString  GetConfParS(TString name){return conf_strings[name];}
+    std::vector<Float_t> GetConfParVector(TString name){return conf_vectors[name];}
     void InitEvent(SNDLHCEventHeader *e);
 
     /**      Initialization of the detector is done here    */
@@ -118,12 +120,13 @@ private:
     std::map<TString,Float_t> conf_floats;
     std::map<TString,Int_t> conf_ints;
     std::map<TString,TString> conf_strings;
+    std::map<TString,std::vector<Float_t>> conf_vectors;
     SNDLHCEventHeader *eventHeader;
 
     // Vector to store runs covered in the geometry file.
     std::vector<int> covered_runs_time_alignment;
     std::vector<int> covered_runs_position_alignment;
-    int last_run;
+    int last_run_time, last_run_pos;
     TString last_time_alignment_tag;
     TString last_position_alignment_tag;
     bool alignment_init;

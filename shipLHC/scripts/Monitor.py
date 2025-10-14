@@ -72,14 +72,6 @@ class Monitoring():
         self.TEnd   = -1
         self.MonteCarlo = False
         self.Weight = 1
-# MuFilter mapping of planes and bars 
-        self.systemAndPlanes  = {1:2,2:5,3:7}
-        self.systemAndBars     = {1:7,2:10,3:60}
-        self.systemAndChannels     = {1:[8,0],2:[6,2],3:[1,0]}
-        self.sdict                     = {0:'Scifi',1:'Veto',2:'US',3:'DS'}
-
-        self.freq      =  160.316E6
-        self.TDC2ns = 1E9/self.freq
 
         path     = options.path
         self.myclient = None
@@ -93,19 +85,39 @@ class Monitoring():
         else:                                         self.snd_geo = SndlhcGeo.GeoInterface(options.geoFile[3:])
         self.MuFilter = self.snd_geo.modules['MuFilter']
         self.Scifi       = self.snd_geo.modules['Scifi']
+
+# MuFilter mapping of planes and bars 
+        self.systemAndPlanes   = {1:self.MuFilter.GetConfParI("MuFilter/NVetoPlanes"),
+                     2:self.MuFilter.GetConfParI("MuFilter/NUpstreamPlanes"),
+                     3:2*self.MuFilter.GetConfParI("MuFilter/NDownstreamPlanes")-1} # to arrive at 7 DS planes
+        self.systemAndBars     = {1:self.MuFilter.GetConfParI("MuFilter/NVetoBars"),
+                     2:self.MuFilter.GetConfParI("MuFilter/NUpstreamBars"),
+                     3:self.MuFilter.GetConfParI("MuFilter/NDownstreamBars")}
+        self.systemAndChannels = {1:[self.MuFilter.GetConfParI("MuFilter/VetonSiPMs"),0],
+                     2:[self.MuFilter.GetConfParI("MuFilter/UpstreamnSiPMs")-2,2],
+                     3:[self.MuFilter.GetConfParI("MuFilter/DownstreamnSiPMs"),0]}
+        self.sdict                     = {0:'Scifi',1:'Veto',2:'US',3:'DS'}
+
+        self.freq      =  160.316E6
+        self.TDC2ns = 1E9/self.freq
+
         self.zPos = self.getAverageZpositions()
 
         self.h = {}   # histogram storage
 
         self.runNr   = str(options.runNumber).zfill(6)
 # presenter file
-        name = 'run'+self.runNr+'.root'
+        if hasattr(self, "saveTo") and options.saveTo!="":
+          name = options.saveTo+'run'+self.runNr+'_'+str(options.nStart//1000000)+'.root'
+        else:
+           name = 'run'+self.runNr+'.root'
         if options.interactive: name = 'I-'+name
         self.presenterFile = ROOT.TFile(name,'recreate')
-        self.presenterFile.mkdir('scifi')
-        self.presenterFile.mkdir('mufilter')
-        self.presenterFile.mkdir('daq')
-        self.presenterFile.mkdir('eventdisplay')
+        for role in ['','shifter', 'expert']:
+          self.presenterFile.mkdir('scifi/'+role)
+          self.presenterFile.mkdir('mufilter/'+role)
+          self.presenterFile.mkdir('daq/'+role)
+          if options.interactive: self.presenterFile.mkdir('eventdisplay/'+role)
         self.FairTasks = {}
         for x in FairTasks:   #  keeps extended methods if from python class
                  self.FairTasks[x.GetName()] = x
@@ -136,6 +148,12 @@ class Monitoring():
                    self.clusScifi       = T.clusScifi
                else: T.Init()
             self.run = self.converter.run
+            if self.eventTree.EventHeader.GetAccMode()==12: # ion runs
+               self.Nbunches = 1782
+               self.div = 8
+            else: # proton runs
+               self.Nbunches = 3564
+               self.div = 4
             return
         else:
             if options.fname:
@@ -215,6 +233,14 @@ class Monitoring():
            self.snd_geo.modules['Scifi'].InitEvent(eventChain.EventHeader)
            self.snd_geo.modules['MuFilter'].InitEvent(eventChain.EventHeader)
 
+        # define the number of bunches in the LHC
+        if eventChain.EventHeader.GetAccMode()==12: # ion runs
+          self.Nbunches = 1782
+          self.div = 8
+        else: # proton runs
+          self.Nbunches = 3564
+          self.div = 4
+        
         # get filling scheme, only necessary if not encoded in EventHeader, before 2022 reprocessing
         self.hasBunchInfo = False
         self.fsdict = False
@@ -235,8 +261,9 @@ class Monitoring():
            print('extract bunch info from filling scheme')
         if self.fsdict or self.hasBunchInfo: 
           for x in ['B1only','B2noB1','noBeam']:
-             self.presenterFile.mkdir('mufilter/'+x)
-             self.presenterFile.mkdir('scifi/'+x)
+            for role in ['shifter', 'expert']:
+             self.presenterFile.mkdir('mufilter/'+role+'/'+x)
+             self.presenterFile.mkdir('scifi/'+role+'/'+x)
 
    def GetEntries(self):
        if  self.options.online:
@@ -312,7 +339,11 @@ class Monitoring():
               self.snd_geo.modules['Scifi'].InitEvent(self.eventTree.EventHeader)
               self.snd_geo.modules['MuFilter'].InitEvent(self.eventTree.EventHeader)
             if self.MonteCarlo: self.Weight = self.eventTree.MCTrack[0].GetWeight()
-            for t in self.FairTasks: self.FairTasks[t].ExecuteTask()
+            for t in self.FairTasks:
+              if t =='simpleTracking':
+                 self.FairTasks[t].ExecuteTask(self.options.trackType)
+              else:
+                 self.FairTasks[t].ExecuteTask()
       self.EventNumber = n
 
 # check for bunch xing type
@@ -328,9 +359,9 @@ class Monitoring():
              self.xing['noBeam']  = binfo.isNoBeam()
       elif self.fsdict:
              T   = self.eventTree.EventHeader.GetEventTime()
-             bunchNumber = (T%(4*3564))//4
-             nb1 = (3564 + bunchNumber - self.fsdict['phaseShift1'])%3564
-             nb2 = (3564 + bunchNumber - self.fsdict['phaseShift1']- self.fsdict['phaseShift2'])%3564
+             bunchNumber = int((T%(self.div*self.Nbunches))/self.div+0.5)
+             nb1 = (self.Nbunches + bunchNumber - self.fsdict['phaseShift1'])%self.Nbunches
+             nb2 = (self.Nbunches + bunchNumber - self.fsdict['phaseShift1']- self.fsdict['phaseShift2'])%self.Nbunches
              b1 = nb1 in self.fsdict['B1']
              b2 = nb2 in self.fsdict['B2']
              IP1 = False
@@ -391,7 +422,7 @@ class Monitoring():
 
    def updateHtml(self):
       if self.options.online: destination="online"
-      elif self.options.path.find('2022'): destination="reprocessing"
+      elif self.options.path.find('2022')>0: destination="reprocessing"
       else: destination="offline"
       rc = os.system("xrdcp -f "+os.environ['EOSSHIP']+"/eos/experiment/sndlhc/www/"+destination+".html  . ")
       old = open(destination+".html")
@@ -506,7 +537,7 @@ class Monitoring():
                 p = plane//2
              self.MuFilter.GetPosition(s*10000+p*1000+bar,A,B)
              zPos['MuFilter'][s*10+plane] = (A.Z()+B.Z())/2.
-      for s in range(1,6):
+      for s in range(1,self.Scifi.GetConfParI("Scifi/nscifi")+1):
          mat   = 1
          sipm = 1
          channel = 64
@@ -635,7 +666,8 @@ class Monitoring():
 
    def myPrint(self,tc,name,subdir='',withRootFile=True):
      srun = 'run'+str(self.options.runNumber)
-     tc.Update()
+     if isinstance(tc, ROOT.TCanvas) :
+       tc.Update()
      if withRootFile:
          self.presenterFile.cd(subdir)
          tc.Write()
@@ -704,6 +736,8 @@ class TrackSelector():
                 self.MonteCarlo = True
                 partitions = []
         rc = eventChain.GetEvent(0)
+        self.snd_geo.modules['Scifi'].InitEvent(eventChain.EventHeader)
+        self.snd_geo.modules['MuFilter'].InitEvent(eventChain.EventHeader)
 # start FairRunAna
         self.run  = ROOT.FairRunAna()
         ioman = ROOT.FairRootManager.Instance()

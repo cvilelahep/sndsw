@@ -2,6 +2,7 @@
 import os
 import sys
 import ROOT
+import numpy as np
 
 import shipunit as u
 import shipRoot_conf
@@ -21,6 +22,8 @@ parser = ArgumentParser()
 
 parser.add_argument("--H6",   dest="testbeam",   help="use geometry of H8/H6 testbeam setup", action="store_true")
 parser.add_argument("--HX",   dest="testbeam2023",   help="use geometry of 2023 testbeam setup", action="store_true")
+parser.add_argument("--H4",   dest="testbeam2024",   help="use geometry of 2024 testbeam setup", action="store_true")
+parser.add_argument("--target", help="target material for the 2024 testbeam setup", choices=["W","Fe"], default="W", type = str)
 parser.add_argument("--Genie",   dest="genie",   help="Genie for reading and processing neutrino interactions (1 standard, 2 FLUKA, 3 Pythia, 4 GENIE geometry driver)", required=False, default = 0, type = int)
 parser.add_argument("--Ntuple",  dest="ntuple",  help="Use ntuple as input", required=False, action="store_true")
 parser.add_argument("--MuonBack",dest="muonback",  help="Generate events from muon background file, --Cosmics=0 for cosmic generator data", required=False, action="store_true")
@@ -29,9 +32,16 @@ parser.add_argument("--PG",      dest="pg",      help="Use Particle Gun", requir
 parser.add_argument("--pID",     dest="pID",     help="id of particle used by the gun (default=22)", required=False, default=22, type=int)
 parser.add_argument("--Estart",  dest="Estart",  help="start of energy range of particle gun for muflux detector (default=10 GeV)", required=False, default=10, type=float)
 parser.add_argument("--Eend",    dest="Eend",    help="end of energy range of particle gun for muflux detector (default=10 GeV)", required=False, default=10, type=float)
-parser.add_argument("--EVx",    dest="EVx",    help="particle gun xpos", required=False, default=0, type=float)
-parser.add_argument("--EVy",    dest="EVy",    help="particle gun ypos", required=False, default=0, type=float)
-parser.add_argument("--EVz",    dest="EVz",    help="particle gun zpos", required=False, default=0, type=float)
+
+parser.add_argument("--multiplePGSources", help="Multiple particle guns in a x-y plane at a fixed z or in a 3D volume", action="store_true")
+parser.add_argument("--EVx", dest="EVx", help="particle gun start xpos", required=False, default=0, type=float)
+parser.add_argument("--EVy", dest="EVy", help="particle gun start ypos", required=False, default=0, type=float)
+parser.add_argument("--EVz", dest="EVz", help="particle gun start zpos", required=False, default=0, type=float)
+parser.add_argument("--Dx", help="size of the full uniform spread of PG xpos", type=float)
+parser.add_argument("--Dy", help="size of the full uniform spread of PG ypos", type=float)
+parser.add_argument("--nZSlices", help="number of z slices for the PG sources", type=int)
+parser.add_argument("--zSliceStep", help="distance between the z slices for the PG sources", type=float)
+
 parser.add_argument("--FollowMuon",dest="followMuon", help="Make muonshield active to follow muons", required=False, action="store_true")
 parser.add_argument("--FastMuon",  dest="fastMuon",  help="Only transport muons for a fast muon only background estimate", required=False, action="store_true")
 parser.add_argument('--eMin', type=float, help="energy cut", dest='ecut', default=-1.)
@@ -50,6 +60,7 @@ parser.add_argument("--debug",   dest="debug",   help="debugging mode, check for
 parser.add_argument("-D", "--display", dest="eventDisplay", help="store trajectories", required=False, action="store_true")
 parser.add_argument("--EmuDet","--nuTargetActive",dest="nuTargetPassive",help="activate emulsiondetector", required=False,action="store_false")
 parser.add_argument("--NagoyaEmu","--useNagoyaEmulsions",dest="useNagoyaEmulsions",help="use bricks of 57 Nagoya emulsion films instead of 60 Slavich", required=False,action="store_true")
+parser.add_argument("-y", dest="year", help="specify the year to generate the respective TI18 detector setup", required=False, type=int, default=2024)
 
 options = parser.parse_args()
 
@@ -110,10 +121,15 @@ if options.testbeam:
 elif options.testbeam2023:
   snd_geo = ConfigRegistry.loadpy("$SNDSW_ROOT/geometry/sndLHC_HXgeom_config.py",
                                    tb_2023_mc = options.testbeam2023)
+elif options.testbeam2024:
+  snd_geo = ConfigRegistry.loadpy("$SNDSW_ROOT/geometry/sndLHC_H4geom_config.py",
+                                   tb_2024_mc = options.testbeam2024,
+                                   target_material = options.target)
 else:
-  snd_geo = ConfigRegistry.loadpy("$SNDSW_ROOT/geometry/sndLHC_geom_config.py",
+  snd_geo = ConfigRegistry.loadpy("$SNDSW_ROOT/geometry/sndLHC_TI18geom_config.py",
                                    nuTargetPassive = options.nuTargetPassive,
-                                   useNagoyaEmulsions = options.useNagoyaEmulsions)
+                                   useNagoyaEmulsions = options.useNagoyaEmulsions,
+                                   year=options.year)
 
 if simEngine == "PG": tag = simEngine + "_"+str(options.pID)+"-"+mcEngine
 else: tag = simEngine+"-"+mcEngine
@@ -160,9 +176,27 @@ if simEngine == "PG":
   myPgun = ROOT.FairBoxGenerator(options.pID,1)
   myPgun.SetPRange(options.Estart,options.Eend)
   myPgun.SetPhiRange(0, 360) # // Azimuth angle range [degree]
-  myPgun.SetXYZ(options.EVx*u.cm, options.EVy*u.cm, options.EVz*u.cm) 
   myPgun.SetThetaRange(0,0) # // Polar angle in lab system range [degree]
+  if options.multiplePGSources:
+    # multiple PG sources in the x-y plane; z is always the same!
+    myPgun.SetBoxXYZ(options.EVx*u.cm,
+                     options.EVy*u.cm,
+                     (options.EVx+options.Dx)*u.cm,
+                     (options.EVy+options.Dy)*u.cm,
+                     options.EVz*u.cm)
+  else:
+     # point source
+     myPgun.SetXYZ(options.EVx*u.cm, options.EVy*u.cm, options.EVz*u.cm)
   primGen.AddGenerator(myPgun)
+  # To generate particle guns along the z axis, create z *target* layers with a set step
+  # For an **unknown** reason simply setting target z thickness doesn't produce the expected result
+  if options.multiplePGSources:
+    targetZpos = np.array(np.arange(options.nZSlices)*options.zSliceStep*u.cm, dtype='d')
+    primGen.SetMultTarget(len(targetZpos), targetZpos, 0*u.cm) # dummy thickness set to 0
+  print('===> Setting particle gun sources starting at (x1,y1,z1)='
+        f'({options.EVx},{options.EVy},{options.EVz})[cm × cm × cm] \n'
+        f'with a uniform x-y spread of (Dx,Dy)=({options.Dx},{options.Dy})[cm × cm]'
+        f' and {options.nZSlices} z slices in steps of {options.zSliceStep}[cm].')
   ROOT.FairLogger.GetLogger().SetLogScreenLevel("WARNING") # otherwise stupid printout for each event
 # -----muon DIS Background------------------------
 if simEngine == "muonDIS":

@@ -1,5 +1,13 @@
 #!/usr/bin/env python
+import atexit
 firstEvent = 0
+
+def pyExit():
+       "nasty hack"
+       # This is needed to bypass seg violation with exiting cpp digitization
+       # Most likely related to file ownership.
+       os.system('kill '+str(os.getpid()))
+atexit.register(pyExit)
 
 import resource
 def mem_monitor():
@@ -31,6 +39,7 @@ parser.add_argument("-tMS", "--thresholdMufiS", dest="tms", type=float, help="th
 parser.add_argument("-no-cls", "--noClusterScifi", action='store_true', help="do not make Scifi clusters")
 parser.add_argument("-cpp", "--digiCPP", action='store_true', dest="FairTask_digi", help="perform digitization using DigiTaskSND")
 parser.add_argument("-d", "--Debug", dest="debug", help="debug", default=False)
+parser.add_argument("--copy-emulsion-points", action='store_true', help="Copy emulsion points from input file (potentially large file size!).")
 
 options = parser.parse_args()
 # rephrase the no-cluster flag
@@ -75,6 +84,9 @@ scifiDet.SetConfPar("Scifi/nphe_min",options.ts)   # threshold
 scifiDet.SetConfPar("Scifi/nphe_max",options.ss) # saturation
 scifiDet.SetConfPar("Scifi/timeResol",150.*u.picosecond) # time resolution in ps
 scifiDet.SetConfPar("MuFilter/timeResol",150.*u.picosecond) # time resolution in ps, first guess
+# in MC productions generated before July 2022 Scifi signal speed is missing from the geofile
+if scifiDet.GetConfParF("Scifi/signalSpeed")==0:
+  scifiDet.SetConfPar("Scifi/signalSpeed", 15*u.cm/u.nanosecond)
 
 
 # Fair digitization task
@@ -102,16 +114,19 @@ if options.FairTask_digi:
   rtdb = run.GetRuntimeDb()
   DigiTask = ROOT.DigiTaskSND()
   DigiTask.withScifiClusters(makeClusterScifi)
+  DigiTask.set_copy_emulsion_points(options.copy_emulsion_points)
   run.AddTask(DigiTask)
   run.Init()
   run.Run(firstEvent, nEvents)
 
 # Digitization using python code SndlhcDigi
 else:
+  if options.copy_emulsion_points:
+      print("ERROR: copying of emulsion points only configurable when using DigiTask")
+
  # import digi task
   import SndlhcDigi
   Sndlhc = SndlhcDigi.SndlhcDigi(outFile,makeClusterScifi)
-
   nEvents   = min(Sndlhc.sTree.GetEntries(),options.nEvents)
 # main loop
   for iEvent in range(firstEvent, nEvents):

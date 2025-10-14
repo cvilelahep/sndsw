@@ -8,7 +8,6 @@ ${CMAKE_SOURCE_DIR}/shipdata
 ${CMAKE_SOURCE_DIR}/shipLHC
 ${CMAKE_SOURCE_DIR}/sndFairTasks
 ${CMAKE_SOURCE_DIR}/veto
-${ROOT_INCLUDE_DIR}
 ${XROOTD_INCLUDE_DIR}
 ${XROOTD_INCLUDE_DIR}/..
 )
@@ -30,6 +29,7 @@ set(SRCS
 DigiTaskSND.cxx
 ConvRawData.cxx
 boardMappingParser.cxx
+MCEventBuilder.cxx
 )
 
 Set(HEADERS)

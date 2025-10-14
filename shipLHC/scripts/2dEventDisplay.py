@@ -14,7 +14,12 @@ import numpy as np
 from datetime import datetime
 from pathlib import Path
 
+import logging
+logging.basicConfig(format='%(levelname)s: %(message)s', level=logging.WARNING)
+logging.basicConfig(format='%(levelname)s: %(message)s', level=logging.FATAL)
+
 ROOT.gStyle.SetPalette(ROOT.kViridis)
+ROOT.gInterpreter.ProcessLine('#include "'+os.environ['SNDSW_ROOT']+'/analysis/tools/sndSciFiTools.h"')
 
 def pyExit():
        "unfortunately need as bypassing an issue related to use xrootd"
@@ -23,7 +28,6 @@ atexit.register(pyExit)
 
 
 A,B = ROOT.TVector3(),ROOT.TVector3()
-freq      =  160.316E6
 
 eventComment = {}   # possibility to add an event comment before moving to next event
 
@@ -32,17 +36,28 @@ from argparse import ArgumentParser
 parser = ArgumentParser()
 parser.add_argument("-r", "--runNumber", dest="runNumber", help="run number", type=int,required=False)
 parser.add_argument("-p", "--path", dest="path", help="path to data file",required=False,default=os.environ["EOSSHIP"]+"/eos/experiment/sndlhc/convertedData/physics/2022/")
-parser.add_argument("-praw", "--pathRaw", dest="pathRaw", help="path to raw data file",required=False,default="/eos/experiment/sndlhc/raw_data/physics/2022/")
 parser.add_argument("-f", "--inputFile", dest="inputFile", help="input file data and MC",default="",required=False)
 parser.add_argument("-g", "--geoFile", dest="geoFile", help="geofile", default=os.environ["EOSSHIP"]+"/eos/experiment/sndlhc/convertedData/physics/2022/geofile_sndlhc_TI18_V0_2022.root")
 parser.add_argument("-P", "--partition", dest="partition", help="partition of data", type=int,required=False,default=-1)
 parser.add_argument("--server", dest="server", help="xrootd server",default=os.environ["EOSSHIP"])
-parser.add_argument("-X", dest="extraInfo", help="print extra event info",default=True)
+parser.add_argument("--no-extraInfo", dest="extraInfo", action="store_false", help="Do not print extra information on the event.")
+
+parser.add_argument("--extension", help="Extension of file to save. E.g. png, pdf, root, etc.", default="png")
+parser.add_argument("--rootbatch", help="Run ROOT in batch mode.", action="store_true")
+
+parser.add_argument("--collision_axis", dest="drawCollAxis", help="Draw collision axis", action="store_true")
 
 parser.add_argument("-par", "--parFile", dest="parFile", help="parameter file", default=os.environ['SNDSW_ROOT']+"/python/TrackingParams.xml")
 parser.add_argument("-hf", "--HoughSpaceFormat", dest="HspaceFormat", help="Hough space representation. Should match the 'Hough_space_format' name in parFile, use quotes", default='linearSlopeIntercept')
 
 options = parser.parse_args()
+
+resolution_factor = 1
+if options.rootbatch:
+   ROOT.gROOT.SetBatch()
+   # Produce figures larger than the screen resolution. E.g., for printing.
+   resolution_factor = 2
+
 options.storePic = ''
 trans2local = False
 runInfo = False
@@ -61,19 +76,20 @@ lsOfGlobals.Add(geo.modules['Scifi'])
 lsOfGlobals.Add(geo.modules['MuFilter'])
 
 detSize = {}
+em = geo.snd_geo.EmulsionDet
 si = geo.snd_geo.Scifi
 detSize[0] =[si.channel_width, si.channel_width, si.scifimat_z ]
 mi = geo.snd_geo.MuFilter
-detSize[1] =[mi.VetoBarX/2,                   mi.VetoBarY/2,            mi.VetoBarZ/2]
-detSize[2] =[mi.UpstreamBarX/2,           mi.UpstreamBarY/2,    mi.UpstreamBarZ/2]
+if hasattr(mi, "Veto3BarX"): vetoXdim = mi.Veto3BarX/2
+else: vetoXdim = mi.VetoBarX/2
+detSize[1] =[vetoXdim, mi.VetoBarY/2, mi.VetoBarZ/2]
+detSize[2] =[mi.UpstreamBarX/2, mi.UpstreamBarY/2, mi.UpstreamBarZ/2]
 detSize[3] =[mi.DownstreamBarX_ver/2,mi.DownstreamBarY/2,mi.DownstreamBarZ/2]
 withDetector = True  # False is useful when using zoom
 with2Points = False  # plot start and end point of straw/bar
 mc = False
 
 firstScifi_z = 300 * u.cm
-TDC2ns = 1E9 / 160.316E6
-
 # Initialize FairLogger: set severity and verbosity
 logger = ROOT.FairLogger.GetLogger()
 logger.SetColoredLog(True)
@@ -247,7 +263,7 @@ def drawLegend(max_density, max_QDC, n_legend_points):
        """Draws legend for hit colour"""
        h['simpleDisplay'].cd(1)
        n_legend_points = 5
-       padLegScifi = ROOT.TPad("legend","legend",0.4,0.15,0.4+0.25, 0.15+0.25)
+       padLegScifi = ROOT.TPad("legend","legend",0.4,0.15,0.4+0.27, 0.15+0.25)
        padLegScifi.SetFillStyle(4000)
        padLegScifi.Draw()
        padLegScifi.cd()
@@ -297,23 +313,55 @@ def loopEvents(
               minSipmMult=1,
               withTiming=False,
               option=None,
-              Setup='',
+              Setup='TI18',
               verbose=0,
               auto=False,
-              hitColour=None
+              hitColour=None,
+              FilterScifiHits=None
               ):
- if 'simpleDisplay' not in h: ut.bookCanvas(h,key='simpleDisplay',title='simple event display',nx=1200,ny=1600,cx=1,cy=2)
+
+ # check the format of FilterScifiHits if set
+ if FilterScifiHits: 
+    important_keys = {"bins_x", "min_x", "max_x", "time_lower_range", "time_upper_range"}
+    all_keys = important_keys.copy()
+    all_keys.add("method")
+    filter_parameters = {"bins_x":52., "min_x":0., "max_x":26.,
+                         "time_lower_range":1E9/(2*u.snd_freq/u.hertz),
+                         "time_upper_range":2E9/(u.snd_freq/u.hertz),
+                         "method":0}
+    if FilterScifiHits!="default" and not important_keys.issubset(FilterScifiHits): 
+       logging.fatal("Invalid FilterScifiHits format. Two options are supported:\n"
+       "#1 FilterScifiHits = 'default'\nwhich sets the default parameters:\n"+
+       str(filter_parameters)+" or\n"
+       "#2 FilterScifiHits = filter_dictionary \nwhere filter_dictionary has all of the following keys\n"+
+       str(important_keys)+"\nAn additional key 'method' exists: its single supported value, also default, is 0.")
+       return
+    if FilterScifiHits!="default" and any(k not in all_keys for k in FilterScifiHits):
+       logging.warning("Ignoring provided keys other than "+str(all_keys))
+
+ if 'simpleDisplay' not in h: 
+    ut.bookCanvas(h,key='simpleDisplay',title='simple event display',nx=1200,ny=1600,cx=1,cy=2)
+
  h['simpleDisplay'].cd(1)
- zStart = 250. # TI18 coordinate system
+ # TI18 coordinate system
+ zStart = 250.
+ zEnd = 600.
+ xStart = -100.
+ yStart =  -30.
  if Setup == 'H6': zStart = 60.
  if Setup == 'TP': zStart = -50. # old coordinate system with origin in middle of target
+ if Setup == 'H4': 
+   xStart = -110.
+   yStart = -10.
+   zStart = 300.
+   zEnd = 430.
  if 'xz' in h: 
     h.pop('xz').Delete()
     h.pop('yz').Delete()
  else:
-    h['xmin'],h['xmax'] = -100.,10.
-    h['ymin'],h['ymax'] = -30.,80.
-    h['zmin'],h['zmax'] = zStart,zStart+350.
+    h['xmin'],h['xmax'] = xStart,xStart+110.
+    h['ymin'],h['ymax'] = yStart,yStart+110.
+    h['zmin'],h['zmax'] = zStart,zEnd
     for d in ['xmin','xmax','ymin','ymax','zmin','zmax']: h['c'+d]=h[d]
  ut.bookHist(h,'xz','; z [cm]; x [cm]',500,h['czmin'],h['czmax'],100,h['cxmin'],h['cxmax'])
  ut.bookHist(h,'yz','; z [cm]; y [cm]',500,h['czmin'],h['czmax'],100,h['cymin'],h['cymax'])
@@ -395,7 +443,29 @@ def loopEvents(
     if nAlltracks > 0: print('total number of tracks: ', nAlltracks)
 
     digis = []
-    if event.FindBranch("Digi_ScifiHits"): digis.append(event.Digi_ScifiHits)
+    if event.FindBranch("Digi_ScifiHits"):
+       method = 0
+       if FilterScifiHits!=None and FilterScifiHits!="default":
+          filter_parameters = {k: FilterScifiHits[k] for k in important_keys if k in FilterScifiHits}
+          method = FilterScifiHits.get("method", 0) # set to the default 0, if item is not provided
+       if FilterScifiHits and (Setup=="TI18" or Setup=="H8" or Setup=="H4"):
+          setup = Setup
+          # Only H8 is explicitly supported in the SciFi tools. However, the same baby SciFi
+          # system was reused in H4. It is then safe to use the SciFi tools for H4 as well.
+          if Setup =="H4":
+            setup ="H8"
+          # Convert the filter_parameters to the needed std.map format
+          selection_parameters = ROOT.std.map('string', 'float')()
+          selection_parameters["bins_x"] = float(filter_parameters["bins_x"])
+          selection_parameters["min_x"] = float(filter_parameters["min_x"])
+          selection_parameters["max_x"] = float(filter_parameters["max_x"])
+          selection_parameters["time_lower_range"] = float(filter_parameters["time_lower_range"])
+          selection_parameters["time_upper_range"] = float(filter_parameters["time_upper_range"])
+          digis.append(ROOT.snd.analysis_tools.filterScifiHits(event.Digi_ScifiHits,selection_parameters,method,setup,mc))
+       else:
+          if FilterScifiHits:
+             logging.warning(Setup+" is not supported for the time-filtering of SciFi hits, using all hits instead.")
+          digis.append(event.Digi_ScifiHits)
     if event.FindBranch("Digi_MuFilterHits"): digis.append(event.Digi_MuFilterHits)
     if event.FindBranch("Digi_MuFilterHit"): digis.append(event.Digi_MuFilterHit)
     empty = True
@@ -404,14 +474,14 @@ def loopEvents(
          if empty: print( "event -> %i"%N)
          empty = False
     if empty: continue
-    h['hitCollectionX']= {'Scifi':[0,ROOT.TGraphErrors()],'DS':[0,ROOT.TGraphErrors()]}
+    h['hitCollectionX']= {'Veto':[0,ROOT.TGraphErrors()],'Scifi':[0,ROOT.TGraphErrors()],'DS':[0,ROOT.TGraphErrors()]}
     h['hitCollectionY']= {'Veto':[0,ROOT.TGraphErrors()],'Scifi':[0,ROOT.TGraphErrors()],'US':[0,ROOT.TGraphErrors()],'DS':[0,ROOT.TGraphErrors()]}
     if hitColour:
-           h['hitColourX'] = {'Scifi': [], 'DS' : []}
+           h['hitColourX'] = {'Veto': [], 'Scifi': [], 'DS' : []}
            h['hitColourY'] = {'Veto': [], 'Scifi' : [], 'US' : [], 'DS' : []}
            h["markerCollection"] = []
 
-    h['firedChannelsX']= {'Scifi':[0,0,0],'DS':[0,0,0]}
+    h['firedChannelsX']= {'Veto':[0,0,0,0],'Scifi':[0,0,0],'DS':[0,0,0]}
     h['firedChannelsY']= {'Veto':[0,0,0,0],'Scifi':[0,0,0],'US':[0,0,0,0],'DS':[0,0,0,0]}
     systems = {1:'Veto',2:'US',3:'DS',0:'Scifi'}
     for collection in ['hitCollectionX','hitCollectionY']:
@@ -424,7 +494,7 @@ def loopEvents(
 
     #Do we still use these lines? Seems no. 
     #And for events having all negative QDCs minT[1] is returned empty and the display crashes.
-    #dTs = "%5.2Fns"%(dT/freq*1E9)
+    #dTs = "%5.2Fns"%(dT/u.snd_freq*1E9)
     # find detector which triggered
     #minT = firstTimeStamp(event)
     #dTs+= "    " + str(minT[1].GetDetectorID())
@@ -432,6 +502,10 @@ def loopEvents(
        rc = h[ 'simpleDisplay'].cd(p)
        h[proj[p]].Draw('b')
 
+    if options.drawCollAxis:
+       for k in proj:
+          drawCollisionAxis(h['simpleDisplay'], k)
+       
     if withDetector:
       drawDetectors()
     for D in digis:
@@ -568,18 +642,20 @@ def loopEvents(
     if verbose>0: dumpChannels()
     userProcessing(event)
 
-    if save: h['simpleDisplay'].Print('{:0>2d}-event_{:04d}'.format(runId,N)+'.png')
+    if save:
+        h['simpleDisplay'].Print('{:0>2d}-event_{:04d}'.format(runId, N) + '.' + options.extension)
     if auto:
-        h['simpleDisplay'].Print(options.storePic+str(runId)+'-event_'+str(event.EventHeader.GetEventNumber())+'.png')
+        h['simpleDisplay'].Print(options.storePic + str(runId) + '-event_' + str(event.EventHeader.GetEventNumber()) + '.' + options.extension)
     if not auto:
        rc = input("hit return for next event or p for print or q for quit: ")
        if rc=='p': 
-             h['simpleDisplay'].Print(options.storePic+str(runId)+'-event_'+str(event.EventHeader.GetEventNumber())+'.png')
+           h['simpleDisplay'].Print(options.storePic + str(runId) + '-event_' + str(event.EventHeader.GetEventNumber()) + '.' + options.extension)
        elif rc == 'q':
           break
        else:
           eventComment[f"{runId}-event_{event.EventHeader.GetEventNumber()}"] = rc
- if save: os.system("convert -delay 60 -loop 0 event*.png animated.gif")
+ if save:
+     os.system("convert -delay 60 -loop 0 event*." + options.extension + " animated.gif")
 
 def addTrack(OT,scifi=False):
    xax = h['xz'].GetXaxis()
@@ -720,30 +796,34 @@ def twoTrackEvent(sMin=10,dClMin=7,minDistance=1.5,sepDistance=0.5):
 
 def drawDetectors():
    nodes = {'volMuFilter_1/volFeBlockEnd_1':ROOT.kGreen-6}
-   for i in range(2):
+   for i in range(mi.NVetoPlanes):
       nodes['volVeto_1/volVetoPlane_{}_{}'.format(i, i)]=ROOT.kRed
-      for j in range(7):
-         nodes['volVeto_1/volVetoPlane_{}_{}/volVetoBar_1{}{:0>3d}'.format(i, i, i, j)]=ROOT.kRed
-      nodes['volVeto_1/subVetoBox_{}'.format(i)]=ROOT.kGray+1
-   for i in range(4):
-      nodes['volMuFilter_1/volMuDownstreamDet_{}_{}'.format(i, i+7)]=ROOT.kBlue+1
-      for j in range(60):
-         nodes['volMuFilter_1/volMuDownstreamDet_{}_{}/volMuDownstreamBar_ver_3{}{:0>3d}'.format(i, i+7, i, j+60)]=ROOT.kBlue+1
-         if i < 3:
-            nodes['volMuFilter_1/volMuDownstreamDet_{}_{}/volMuDownstreamBar_hor_3{}{:0>3d}'.format(i, i+7, i, j)]=ROOT.kBlue+1
-   for i in range(4):
-      nodes['volMuFilter_1/subDSBox_{}'.format(i+7)]=ROOT.kGray+1
-   for i in range(5):
+      for j in range(mi.NVetoBars):
+         if i<2: nodes['volVeto_1/volVetoPlane_{}_{}/volVetoBar_1{}{:0>3d}'.format(i, i, i, j)]=ROOT.kRed
+         if i==2: nodes['volVeto_1/volVetoPlane_{}_{}/volVetoBar_ver_1{}{:0>3d}'.format(i, i, i, j)]=ROOT.kRed
+      if i<2: nodes['volVeto_1/subVetoBox_{}'.format(i)]=ROOT.kGray+1
+      if i==2: nodes['volVeto_1/subVeto3Box_{}'.format(i)]=ROOT.kGray+1
+   for i in range(si.nscifi): # number of scifi stations
       nodes['volTarget_1/ScifiVolume{}_{}000000'.format(i+1, i+1)]=ROOT.kBlue+1
-      nodes['volTarget_1/volWallborder_{}'.format(i)]=ROOT.kGray
-      nodes['volMuFilter_1/subUSBox_{}'.format(i+2)]=ROOT.kGray+1
-      nodes['volMuFilter_1/volMuUpstreamDet_{}_{}'.format(i, i+2)]=ROOT.kBlue+1
-      # iron blocks btw SciFi planes in the testbeam 2023 det layout
+      # iron blocks btw SciFi planes in the testbeam 2023-2024 det layout
       nodes['volTarget_1/volFeTarget{}_1'.format(i+1)]=ROOT.kGreen-6
-      for j in range(10):
-         nodes['volMuFilter_1/volMuUpstreamDet_{}_{}/volMuUpstreamBar_2{}00{}'.format(i, i+2, i, j)]=ROOT.kBlue+1
+   for i in range(em.wall): # number of target walls
+      nodes['volTarget_1/volWallborder_{}'.format(i)]=ROOT.kGray
+   for i in range(mi.NDownstreamPlanes):
+      nodes['volMuFilter_1/volMuDownstreamDet_{}_{}'.format(i, i+mi.NVetoPlanes+mi.NUpstreamPlanes)]=ROOT.kBlue+1
+      for j in range(mi.NDownstreamBars):
+         nodes['volMuFilter_1/volMuDownstreamDet_{}_{}/volMuDownstreamBar_ver_3{}{:0>3d}'.format(i, i+mi.NVetoPlanes+mi.NUpstreamPlanes, i, j+mi.NDownstreamBars)]=ROOT.kBlue+1
+         if i < 3:
+            nodes['volMuFilter_1/volMuDownstreamDet_{}_{}/volMuDownstreamBar_hor_3{}{:0>3d}'.format(i, i+mi.NVetoPlanes+mi.NUpstreamPlanes, i, j)]=ROOT.kBlue+1
+   for i in range(mi.NDownstreamPlanes):
+      nodes['volMuFilter_1/subDSBox_{}'.format(i+mi.NVetoPlanes+mi.NUpstreamPlanes)]=ROOT.kGray+1
+   for i in range(mi.NUpstreamPlanes):
+      nodes['volMuFilter_1/subUSBox_{}'.format(i+mi.NVetoPlanes)]=ROOT.kGray+1
+      nodes['volMuFilter_1/volMuUpstreamDet_{}_{}'.format(i, i+mi.NVetoPlanes)]=ROOT.kBlue+1
+      for j in range(mi.NUpstreamBars):
+         nodes['volMuFilter_1/volMuUpstreamDet_{}_{}/volMuUpstreamBar_2{}00{}'.format(i, i+mi.NVetoPlanes, i, j)]=ROOT.kBlue+1
       nodes['volMuFilter_1/volFeBlock_{}'.format(i)]=ROOT.kGreen-6
-   for i in range(7,10):
+   for i in range(mi.NVetoPlanes+mi.NUpstreamPlanes,mi.NVetoPlanes+mi.NUpstreamPlanes+mi.NDownstreamPlanes):
       nodes['volMuFilter_1/volFeBlock_{}'.format(i)]=ROOT.kGreen-6
    passNodes = {'Block', 'Wall', 'FeTarget'}
    xNodes = {'UpstreamBar', 'VetoBar', 'hor'}
@@ -767,7 +847,7 @@ def drawDetectors():
             ox,oy,oz = S.GetOrigin()[0],S.GetOrigin()[1],S.GetOrigin()[2]
             P = {}
             M = {}
-            if p=='X' and not any(xNode in node for xNode in xNodes):
+            if p=='X' and (not any(xNode in node for xNode in xNodes) or 'VetoBar_ver' in node):
                P['LeftBottom'] = array('d',[-dx+ox,oy,-dz+oz])
                P['LeftTop'] = array('d',[dx+ox,oy,-dz+oz])
                P['RightBottom'] = array('d',[-dx+ox,oy,dz+oz])
@@ -957,7 +1037,7 @@ def timingOfEvent(makeCluster=False,debug=False):
           pos = (A[0]+B[0])/2.
           L = abs(A[1]-B[1])/2.
        for i in range(nmax):
-            corTime = geo.modules['MuFilter'].GetCorrectedTime(detID, i, aHit.GetTime(i)*TDC2ns, 0)- (z-firstScifi_z)/u.speedOfLight
+            corTime = geo.modules['MuFilter'].GetCorrectedTime(detID, i, aHit.GetTime(i)*u.snd_TDC2ns, 0)- (z-firstScifi_z)/u.speedOfLight
             h['evTimeDS'].Fill(corTime)
             if debug: print(detID,i,corTime,pos)
    tc=h['tevTime'].cd()
@@ -1082,7 +1162,6 @@ def drawInfo(pad, k, run, event, timestamp,moreEventInfo=[]):
       padLogo.Draw()
       logo = ROOT.TImage.Open('$SNDSW_ROOT/shipLHC/Large__SND_Logo_black_cut.png')
       logo.SetConstRatio(True)
-      logo.DrawText(0, 0, 'SND', 98)
       padLogo.cd()
       logo.Draw()
       pad.cd(k)
@@ -1125,3 +1204,22 @@ def drawInfo(pad, k, run, event, timestamp,moreEventInfo=[]):
         textInfo.DrawLatex(0.4, 0.9-dely*i, moreEventInfo[i])
       pad.cd(k)
 
+def drawCollisionAxis(pad, k):
+   line_name = "collision_axis_line_" + str(k)
+   h[line_name] = ROOT.TLine(h["zmin"], 0, h["zmax"], 0)
+   h[line_name].SetLineColor(ROOT.kRed)
+   h[line_name].SetLineStyle(2)
+
+   text_name = "collision_axis_text_" + str(k)
+   h[text_name] = ROOT.TText(h["zmin"] + 8, 0 + 2, "Collision axis")
+   h[text_name].SetTextAlign(12)
+   h[text_name].SetTextFont(43)
+   h[text_name].SetTextSize(13 * resolution_factor)
+   h[text_name].SetTextColor(ROOT.kRed)   
+   
+   pad.cd(k)
+   h[line_name].Draw()
+   h[text_name].Draw()
+
+   
+       
