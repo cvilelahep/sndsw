@@ -10,9 +10,9 @@ namespace snd {
     class stableBeamsCut : public snd::analysis_cuts::EventHeaderBaseCut {
     private:
     public :
-      stableBeamsCut(TChain * ch);
+      stableBeamsCut();
       ~stableBeamsCut(){;}
-      bool passCut();
+      void process();
     };
 
   }

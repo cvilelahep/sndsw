@@ -6,16 +6,14 @@
 
 namespace snd {
   namespace analysis_cuts {
-
     class eventDeltatCut : public snd::analysis_cuts::EventHeaderBaseCut {
     private:
-      int delta_t;
-      int delta_e;
+      int delta_event_;
+      int delta_timestamp_;
     public :
-      eventDeltatCut(int delta_event, int delta_timestamp, TChain * ch);
+      eventDeltatCut(int delta_event, int delta_timestamp);
       ~eventDeltatCut(){;}
-      bool passCut();
+      void process();
     };
-
   }
 }

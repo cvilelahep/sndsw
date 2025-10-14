@@ -9,12 +9,12 @@ namespace snd {
   namespace analysis_cuts {
     class avgDSFiducialCut : public snd::analysis_cuts::MuFilterBaseCut {
     private :
-      double vertical_min, vertical_max, horizontal_min, horizontal_max;
+      double vertical_min_, vertical_max_, horizontal_min_, horizontal_max_;
     public :
-      avgDSFiducialCut(double vertical_min_cut, double vertical_max_cut, double horizontal_min_cut, double horizontal_max_cut, TChain * tree);
+      avgDSFiducialCut(double vertical_min, double vertical_max, double horizontal_min, double horizontal_max);
       ~avgDSFiducialCut(){;}
 
-      bool passCut();
+      void process();
 
     };
 
