@@ -9,12 +9,12 @@ namespace snd {
   namespace analysis_cuts {
     class minSciFiHits : public snd::analysis_cuts::sciFiBaseCut {
     private :
-      int hitThreshold;
+      int hit_threshold_;
     public :
-      minSciFiHits(int threshold, TChain * ch);
+      minSciFiHits(int hit_threshold);
       ~minSciFiHits(){;}
 
-      bool passCut();
+      void process();
 
     };
 

@@ -3,26 +3,21 @@
 #include <stdexcept>
 
 #include "SNDLHCEventHeader.h"
+
+#include "TROOT.h"
 #include "TChain.h"
 
 #include <iostream>
 
 namespace snd::analysis_cuts {
-
-  SNDLHCEventHeader * EventHeaderBaseCut::header = 0;
-  TChain * EventHeaderBaseCut::tree = 0;
-
-  EventHeaderBaseCut::EventHeaderBaseCut(TChain * ch){
-    if (header == 0){
-      header = new SNDLHCEventHeader();
-      ch->SetBranchAddress("EventHeader", &header);
-      ch->GetEntry(0);
-      if (header->GetEventTime() == -1) {
-	ch->SetBranchAddress("EventHeader.", &header);
-	ch->GetEntry(0);
-	if (header->GetEventTime() == -1) throw std::runtime_error("Invalid event header");
-      }
-      tree = ch;
-    }
+  
+  EventHeaderBaseCut::EventHeaderBaseCut(){
+    tree = dynamic_cast<TChain*>(gROOT->GetListOfGlobals()->FindObject("rawConv"));
+    if (tree == 0) tree = dynamic_cast<TChain*>(gROOT->GetListOfGlobals()->FindObject("cbmsim"));
+    
+    header = dynamic_cast<SNDLHCEventHeader*>(gROOT->GetListOfGlobals()->FindObject("EventHeader"));
+    if (header == 0) header = dynamic_cast<SNDLHCEventHeader*>(gROOT->GetListOfGlobals()->FindObject("EventHeader."));
+    
   }
 }
+

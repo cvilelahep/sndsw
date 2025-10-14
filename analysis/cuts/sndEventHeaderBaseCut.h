@@ -13,10 +13,10 @@ namespace snd {
     class EventHeaderBaseCut : public snd::analysis_cuts::baseCut {
 
     protected :
-      static SNDLHCEventHeader * header;
-      static TChain * tree;
+      TChain * tree;
+      SNDLHCEventHeader * header;
 
-      EventHeaderBaseCut(TChain * ch);
+      EventHeaderBaseCut();
       ~EventHeaderBaseCut(){;}
     };
 

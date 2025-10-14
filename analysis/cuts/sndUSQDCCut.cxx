@@ -11,9 +11,8 @@
 
 namespace snd::analysis_cuts {
 
-  USQDCCut::USQDCCut(float threshold, TChain * tree) : MuFilterBaseCut(tree) {
-    qdc_threshold = threshold;
-    cutName = "Total US QDC > "+std::to_string(qdc_threshold);
+  USQDCCut::USQDCCut(float qdc_threshold) : MuFilterBaseCut(), qdc_threshold_(qdc_threshold) {
+    processName = "Total US QDC > "+std::to_string(qdc_threshold_);
 
     shortName = "USQDC";
     nbins = std::vector<int>{100};
@@ -22,25 +21,25 @@ namespace snd::analysis_cuts {
     plot_var = std::vector<double>{-1};
   }
 
-  bool USQDCCut::passCut(){
-    MuFilterHit * hit;
-    TIter hitIterator(muFilterDigiHitCollection);
+  void USQDCCut::process(){
 
     float totQDC = 0.;
-
-    bool ds = false;
+    
     std::vector<bool> us = std::vector<bool>(5, false); 
     
-    while ( (hit = (MuFilterHit*) hitIterator.Next()) ){
+    for (TObject * obj : *muFilterDigiHitCollection){
+      MuFilterHit * hit = dynamic_cast<MuFilterHit*>(obj);
+      
       if (!hit->isValid()) continue;
       if (hit->GetSystem() == 2) {
+	// TO DO: Implement flag to skip small SiPMs
 	for (const auto& [key, value] : hit->GetAllSignals()) {
 	  totQDC += value;
 	}
       }
     }
     plot_var[0] = totQDC;
-    if (totQDC >= qdc_threshold) return true;
-    return false;
+    if (totQDC >= qdc_threshold_) {passed_cut = true; return;}
+    passed_cut = false; return;
   }
 }

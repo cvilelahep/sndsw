@@ -10,23 +10,30 @@
 #pragma link C++ namespace snd::analysis_cuts;
 #pragma link C++ defined_in namespace snd::analysis_cuts;
 
-#pragma link C++ class snd::analysis_cuts::avgDSFiducialCut+;
-#pragma link C++ class snd::analysis_cuts::avgSciFiFiducialCut+;
-#pragma link C++ class snd::analysis_cuts::baseCut+;
-#pragma link C++ class snd::analysis_cuts::DSActivityCut+;
-#pragma link C++ class snd::analysis_cuts::eventDeltatCut+;
-#pragma link C++ class snd::analysis_cuts::EventHeaderBaseCut+;
-#pragma link C++ class snd::analysis_cuts::minSciFiConsecutivePlanes+;
-#pragma link C++ class snd::analysis_cuts::minSciFiHits+;
-#pragma link C++ class snd::analysis_cuts::MuFilterBaseCut+;
-#pragma link C++ class snd::analysis_cuts::sciFiBaseCut+;
-#pragma link C++ class snd::analysis_cuts::sciFiStationCut+;
-#pragma link C++ class snd::analysis_cuts::USQDCCut+;
-#pragma link C++ class snd::analysis_cuts::vetoCut+;
-#pragma link C++ class snd::analysis_cuts::DSVetoCut+;
-#pragma link C++ class snd::analysis_cuts::ip1Cut+;
-#pragma link C++ class snd::analysis_cuts::sciFiContinuity+;
-#pragma link C++ class snd::analysis_cuts::stableBeamsCut+;
-#pragma link C++ class snd::analysis_cuts::USPlanesHit+;
+
+#pragma link C++ class snd::analysis_cuts::sndMuFilterBaseCut+;
+#pragma link C++ class snd::analysis_cuts::sndMinSciFiHitsCut+;
+#pragma link C++ class snd::analysis_cuts::sndSciFiStationCut+;
+#pragma link C++ class snd::analysis_cuts::sndVetoCut+;
+#pragma link C++ class snd::analysis_cuts::sndMinSciFiConsecutivePlanes+;
+#pragma link C++ class snd::analysis_cuts::sndDSActivityCut+;
+#pragma link C++ class snd::analysis_cuts::sndUSQDCCut+;
+#pragma link C++ class snd::analysis_cuts::sndEventHeaderBaseCut+;
+#pragma link C++ class snd::analysis_cuts::sndEventDeltat+;
+#pragma link C++ class snd::analysis_cuts::sndAvgSciFiFiducialCut+;
+#pragma link C++ class snd::analysis_cuts::sndAvgDSFiducialCut+;
+#pragma link C++ class snd::analysis_cuts::sndDSVetoCut+;
+#pragma link C++ class snd::analysis_cuts::sndSciFiContinuity+;
+#pragma link C++ class snd::analysis_cuts::sndUSPlanesHit+;
+#pragma link C++ class snd::analysis_cuts::sndUSBarsVeto+;
+#pragma link C++ class snd::analysis_cuts::sndSciFiAngle+;
+#pragma link C++ class snd::analysis_cuts::sndStableBeams+;
+#pragma link C++ class snd::analysis_cuts::sndIP1+;
+#pragma link C++ class snd::analysis_cuts::sndPrescale+;
+#pragma link C++ class snd::analysis_cuts::sndNtrackCut+;
+#pragma link C++ class snd::analysis_cuts::sndEventDirectionCut+;
+#pragma link C++ class snd::analysis_cuts::sndTrackFiducialCut+;
+#pragma link C++ class snd::analysis_cuts::sndTrackSciFiDOCA+;
+#pragma link C++ class snd::analysis_cuts::sndMaxDShits+;
 
 #endif

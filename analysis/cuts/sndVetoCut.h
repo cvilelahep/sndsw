@@ -9,9 +9,9 @@ namespace snd {
   
     class vetoCut : public snd::analysis_cuts::MuFilterBaseCut {
     public :
-      vetoCut(TChain * ch);
+      vetoCut();
       ~vetoCut(){;}
-      bool passCut();
+      void process();
     };
 
   }

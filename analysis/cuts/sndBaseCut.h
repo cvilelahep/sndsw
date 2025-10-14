@@ -1,22 +1,35 @@
 #pragma once
 
+#include "sndFilterProcessBase.h"
+          
 #include <string>
 #include <vector>
 
 namespace snd {
   namespace analysis_cuts{
-    class baseCut{
+    class baseCut: public snd::analysis_core::baseProcess {
     protected :
-      std::string cutName;
       std::string shortName;
       std::vector<int> nbins;
       std::vector<double> range_start;
       std::vector<double> range_end;
       std::vector<double> plot_var;
+      bool passed_cut;
+      bool inverted_ = false;
     public :
-      virtual bool passCut() = 0;
-      std::string getName() {return cutName;}
+      bool passCut(){
+	if (!inverted_) {
+	  return passed_cut;
+	} else {
+	  return (!passed_cut);
+	}
+      }
 
+      void setInverted(){
+	inverted_ = true;
+	processName += " Inverted";
+      }
+      
       // For histograms
       std::string getShortName() {return shortName;}
       std::vector<int> getNbins() {return nbins;}

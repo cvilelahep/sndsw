@@ -4,38 +4,35 @@
 
 namespace snd::analysis_cuts {
 
-  eventDeltatCut::eventDeltatCut(int delta_event, int delta_timestamp, TChain * ch) : EventHeaderBaseCut(ch) {
-    delta_e = delta_event;
-    delta_t = delta_timestamp;
+  eventDeltatCut::eventDeltatCut(int delta_event, int delta_timestamp) : EventHeaderBaseCut(), delta_event_(delta_event), delta_timestamp_(delta_timestamp) {
 
-    cutName = std::to_string(delta_e)+" event more than "+std::to_string(delta_t)+" clock cycles away";
+    processName = std::to_string(delta_event_)+" event more than "+std::to_string(delta_timestamp_)+" clock cycles away";
 
     shortName = "EventDeltat_";
-    shortName += std::to_string(delta_event);
+    shortName += std::to_string(delta_event_);
     shortName += "_";
-    shortName += std::to_string(delta_timestamp);
+    shortName += std::to_string(delta_timestamp_);
     nbins = std::vector<int>{1000};
     range_start = std::vector<double>{0};
     range_end = std::vector<double>{1000};
     plot_var = std::vector<double>{-1};
-
   }
 
-  bool eventDeltatCut::passCut(){
+  void eventDeltatCut::process(){
     unsigned long int current_entry = tree->GetReadEntry();
     long int current_time = header->GetEventTime();
 
     bool passes = true;
-    tree->GetEntry(current_entry + delta_e);
+    tree->GetEntry(current_entry + delta_event_);
 
-    int sign = (delta_e > 0) - (delta_e < 0);
+    int sign = (delta_event_ > 0) - (delta_event_ < 0);
 
-    if (-sign*(current_time - header->GetEventTime()) <= delta_t) passes = false;
+    if (-sign*(current_time - header->GetEventTime()) <= delta_timestamp_) passes = false;
 
     plot_var[0] = abs(current_time - header->GetEventTime());
     
     // Get current entry back
     tree->GetEntry(current_entry);
-    return passes;
+    passed_cut = passes;
   }
 }

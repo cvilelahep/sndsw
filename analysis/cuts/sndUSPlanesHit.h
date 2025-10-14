@@ -9,11 +9,11 @@ namespace snd{
   
     class USPlanesHit : public MuFilterBaseCut {
     private :
-      std::vector<int> planes_hit;
+      std::vector<int> planes_hit_;
     public :
-      USPlanesHit(std::vector<int> planes, TChain * tree);
+      USPlanesHit(std::vector<int> planes_hit);
       ~USPlanesHit(){;}
-      bool passCut();
+      void process();
     };
     
   }
