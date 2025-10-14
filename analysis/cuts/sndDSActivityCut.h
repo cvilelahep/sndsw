@@ -9,9 +9,9 @@ namespace snd {
 
     class DSActivityCut : public snd::analysis_cuts::MuFilterBaseCut {
     public :
-      DSActivityCut(TChain * ch);
+      DSActivityCut();
       ~DSActivityCut(){;}
-      bool passCut();
+      void process();
     };
 
   }

@@ -3,13 +3,9 @@
 #include "TChain.h"
 
 namespace snd::analysis_cuts {
-  avgDSFiducialCut::avgDSFiducialCut(double vertical_min_cut, double vertical_max_cut, double horizontal_min_cut, double horizontal_max_cut, TChain * tree) : MuFilterBaseCut(tree){
-    vertical_min = vertical_min_cut;
-    vertical_max = vertical_max_cut;
-    horizontal_min = horizontal_min_cut;
-    horizontal_max = horizontal_max_cut;
+  avgDSFiducialCut::avgDSFiducialCut(double vertical_min, double vertical_max, double horizontal_min, double horizontal_max) : MuFilterBaseCut(), vertical_min_(vertical_min), vertical_max_(vertical_max), horizontal_min_(horizontal_min), horizontal_max_(horizontal_max) {
     
-    cutName = "Avg DS Ver bar in ["+std::to_string(vertical_min)+","+std::to_string(vertical_max)+"] Hor in ["+std::to_string(horizontal_min)+","+std::to_string(horizontal_max)+"]";
+    processName = "Avg DS Ver bar in ["+std::to_string(vertical_min_)+","+std::to_string(vertical_max_)+"] Hor in ["+std::to_string(horizontal_min_)+","+std::to_string(horizontal_max_)+"]";
 
     shortName = "AvgDSbar";
     nbins = std::vector<int>{60, 60};
@@ -18,7 +14,7 @@ namespace snd::analysis_cuts {
     plot_var = std::vector<double>{-1, -1};
   }
 
-  bool avgDSFiducialCut::passCut(){
+  void avgDSFiducialCut::process(){
     
     double avg_ver = 0.;
     unsigned int n_ver = 0;
@@ -47,7 +43,7 @@ namespace snd::analysis_cuts {
     if ((n_ver+n_hor) == 0) {
       plot_var[0] = -1;
       plot_var[1] = -1;
-      return false;
+      passed_cut = false; return;
     }
     
     if (n_ver) {
@@ -64,14 +60,14 @@ namespace snd::analysis_cuts {
       plot_var[1] = -1;
     }
 
-    if (n_ver == 0) return false;
-    if (n_hor == 0) return false;
+    if (n_ver == 0) {passed_cut = false; return;}
+    if (n_hor == 0) {passed_cut = false; return;}
 
-    if (avg_hor < horizontal_min) return false;
-    if (avg_hor > horizontal_max) return false;
-    if (avg_ver < vertical_min) return false;
-    if (avg_ver > vertical_max) return false;
+    if (avg_hor < horizontal_min_) {passed_cut = false; return;}
+    if (avg_hor > horizontal_max_) {passed_cut = false; return;}
+    if (avg_ver < vertical_min_) {passed_cut = false; return;}
+    if (avg_ver > vertical_max_) {passed_cut = false; return;}
 
-    return true;
+    passed_cut = true; return;
   }
 }	     

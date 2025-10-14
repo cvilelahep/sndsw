@@ -6,8 +6,8 @@
 
 namespace snd::analysis_cuts {
 
-  vetoCut::vetoCut(TChain * tree) : MuFilterBaseCut(tree) {
-    cutName = "No hits in veto";
+  vetoCut::vetoCut() : MuFilterBaseCut() {
+    processName = "No hits in veto";
 
     shortName = "NoVetoHits";
     nbins = std::vector<int>{16};
@@ -17,18 +17,15 @@ namespace snd::analysis_cuts {
 
   }
 
-  bool vetoCut::passCut(){
-    MuFilterHit * hit;
-    TIter hitIterator(muFilterDigiHitCollection);
-    
+  void vetoCut::process(){
     plot_var[0] = 0;
 
-
-    while ( (hit = (MuFilterHit*) hitIterator.Next()) ){
+    for (TObject * obj : *muFilterDigiHitCollection){
+      MuFilterHit * hit = dynamic_cast<MuFilterHit*>(obj);
       if (hit->GetSystem() == 1) plot_var[0] += 1;
     }
-
-    if (plot_var[0] > 0) return false;
-    return true;
+    
+    if (plot_var[0] > 0) {passed_cut = false; return;}
+    passed_cut = true; return;
   }
 }
