@@ -129,18 +129,19 @@ float snd::analysis_tools::peakScifiTiming(const TClonesArray &digiHits, int bin
 {
 
    if (digiHits.GetEntries() <= 0) {
-      LOG(warning) << "digiHits has no valid SciFi Hits and as such no maximum for the timing distribution.";
+      //LOG(warning) << "digiHits has no valid SciFi Hits and as such no maximum for the timing distribution.";
       return -1.;
    }
 
    TH1F ScifiTiming("Timing", "Scifi Timing", bins, min_x, max_x);
 
-   Scifi *ScifiDet = dynamic_cast<Scifi *>(gROOT->GetListOfGlobals()->FindObject("Scifi"));
+   Scifi *ScifiDet = dynamic_cast<Scifi*> (gROOT->GetListOfGlobals()->FindObject("Scifi") );
    std::cout << "Passed the Scifi loading part" << std::endl;
-   if (!ScifiDet) {
+   if (!ScifiDet){
       std::cout << "ScifiDet did not load as predicted and the check worked." << std::endl;
    }
-   auto *hit = static_cast<sndScifiHit *>(digiHits[0]);
+   auto* hit = static_cast<sndScifiHit*>(digiHits[0]);
+
    int refStation = hit->GetStation();
    bool refOrientation = hit->isVertical();
    float hitTime = -1.0;
