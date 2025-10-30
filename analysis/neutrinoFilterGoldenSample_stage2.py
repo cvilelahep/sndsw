@@ -1,8 +1,12 @@
 import ROOT
+from ROOT import TSpectrum
 import numpy as np
+import rootUtils as ut
+import shipunit as u
+ROOT.gInterpreter.ProcessLine('#include "/afs/cern.ch/user/g/gmachadosnd/private/SNDJul2024/sndsw/analysis/tools/sndSciFiTools.h"')
 
 import SndlhcGeo
-import shipunit as u
+
 
 import argparse
 parser = argparse.ArgumentParser()
@@ -176,7 +180,7 @@ cuts.append(["Event direction", direction, "event_dir", 60, -30, 30])
 ################################################################################
 # Track intercepts first SciFi plane within 5 cm of the edge
 ################################################################################
-d_scifi_fiducial = 5
+d_scifi_fiducial = 5 # \pm 0.1
 def trackInScifiFiducial(event) :
     if len(event.Reco_MuonTracks) < 1 :
         return False, -999
@@ -216,7 +220,7 @@ cuts.append(["Track intercepts first SciFi plane < {0} cm from edge".format(d_sc
 ################################################################################
 # SciFi hit to DS track DOCA per plane < 3 cm for both projections
 ################################################################################
-sum_min_dca_cut = 3
+sum_min_dca_cut = 3 #Baseline is 3\pm0.292
 def sum_min_dca(event) :
     if len(event.Reco_MuonTracks) < 1 :
         return False, 999
@@ -234,10 +238,17 @@ def sum_min_dca(event) :
 
     min_dca_ver = [1e10]*5
     min_dca_hor = [1e10]*5
-    
-    for hit in event.Digi_ScifiHits :
-        if not hit.isValid() :
-            continue
+
+    filterParameters = ROOT.std.map("string", "float")()
+    filterParameters["bins_x"]=52.
+    filterParameters["min_x"]=0.
+    filterParameters["max_x"]=26.
+    filterParameters["time_lower_range"]=TDC2ns/2
+    filterParameters["time_upper_range"]=1.2*TDC2ns
+
+    filteredHits = ROOT.snd.analysis_tools.filterScifiHits(event.Digi_ScifiHits, filterParameters, 0, "TI18", isMC)
+
+    for hit in filteredHits :
             
         scifiDet.GetSiPMPosition(hit.GetDetectorID(), a, b)
 
@@ -282,23 +293,33 @@ cuts.append(["Sum of min DOCA per station < {0} cm".format(sum_min_dca_cut), sum
 ################################################################################
 # At least 35 SciFi hits
 ################################################################################
-min_scifi_hits_cut = 35
+min_scifi_hits_cut = 35 #Default=35; \pm 5 or \pm 1
 def min_scifi_hits(event) :
     n_hits = 0
     ret = False
-    for hit in event.Digi_ScifiHits :
-        if hit.isValid() :
-            n_hits += 1
-            if n_hits > 35 :
-                ret = True
+
+    filterParameters = ROOT.std.map("string", "float")()
+    filterParameters["bins_x"]=52.
+    filterParameters["min_x"]=0.
+    filterParameters["max_x"]=26.
+    filterParameters["time_lower_range"]=TDC2ns/2
+    filterParameters["time_upper_range"]=1.2*TDC2ns
+
+    filteredHits = ROOT.snd.analysis_tools.filterScifiHits(event.Digi_ScifiHits, filterParameters, 0, "TI18", isMC)
+
+    n_hits = len(filteredHits)
+    if len(filteredHits) > min_scifi_hits_cut: ret = True
     return ret, n_hits
+
+
 cuts.append(["More than {0} SciFi hits".format(min_scifi_hits_cut), min_scifi_hits, "scifi_nhits", 100, 0, 3000])
 
 ################################################################################
 # Min QDC
 ################################################################################
 min_QDC_data = 600
-min_QDC_MC = 700
+min_QDC_MC = 700 # Baseline is 700, used 600 for efficiency checking
+QDCfactor = 1 #default should be 1; SF 100 is 1/1.804, 180 is 1/2.646 and 300 is 1/2.701
 def min_US_QDC(event) :
     US_QDC = 0
     ret = False
@@ -310,6 +331,7 @@ def min_US_QDC(event) :
         for key, value in hit.GetAllSignals() :
 #            if (key >= 8) and (hit.GetPlane() == 1) : 
 #                continue
+            if isMC: value = value*QDCfactor
             US_QDC += value
             if isMC and (US_QDC > min_QDC_MC) :
                 ret = True
@@ -324,7 +346,7 @@ cuts.append(["US QDC larger than {0} ({1}) for data (MC)".format(min_QDC_data, m
 ################################################################################
 # Max DS activity < 10
 ################################################################################
-max_DS_hits_cut = 10
+max_DS_hits_cut = 10 #default is 10\pm1
 def max_DS_hits(event) :
     DS_hits = 0.
     ret = True
