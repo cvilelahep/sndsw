@@ -3,7 +3,12 @@ from ROOT import TSpectrum
 import numpy as np
 import rootUtils as ut
 import shipunit as u
-ROOT.gInterpreter.ProcessLine('#include "/afs/cern.ch/user/g/gmachadosnd/private/SNDJul2024/sndsw/analysis/tools/sndSciFiTools.h"')
+##############################################
+#                                            #        
+# Always put the correct path in this script #
+#                                            #
+##############################################
+ROOT.gInterpreter.ProcessLine('#include "/afs/cern.ch/user/g/gmachadosnd/private/SNDAnalysis/sndsw/analysis/tools/sndSciFiTools.h"')
 
 import SndlhcGeo
 
