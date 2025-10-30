@@ -11,6 +11,7 @@
 #include "Scifi.h"
 #include "TROOT.h"
 #include "ROOT/RRangeCast.hxx"
+#include "TSpectrum.h"
 
 void snd::analysis_tools::getSciFiHitsPerStation(const TClonesArray *digiHits, std::vector<int> &horizontal_hits,
                                                  std::vector<int> &vertical_hits)
@@ -134,8 +135,12 @@ float snd::analysis_tools::peakScifiTiming(const TClonesArray &digiHits, int bin
 
    TH1F ScifiTiming("Timing", "Scifi Timing", bins, min_x, max_x);
 
-   Scifi *ScifiDet = dynamic_cast<Scifi*> (gROOT->GetListOfGlobals()->FindObject("Scifi") );
-   auto* hit = static_cast<sndScifiHit*>(digiHits[0]);
+   Scifi *ScifiDet = dynamic_cast<Scifi *>(gROOT->GetListOfGlobals()->FindObject("Scifi"));
+   std::cout << "Passed the Scifi loading part" << std::endl;
+   if (!ScifiDet) {
+      std::cout << "ScifiDet did not load as predicted and the check worked." << std::endl;
+   }
+   auto *hit = static_cast<sndScifiHit *>(digiHits[0]);
    int refStation = hit->GetStation();
    bool refOrientation = hit->isVertical();
    float hitTime = -1.0;
@@ -149,10 +154,11 @@ float snd::analysis_tools::peakScifiTiming(const TClonesArray &digiHits, int bin
       if (!validateHit(hit, refStation, refOrientation)) {
          continue;
       }
-      hitTime = hit->GetTime() * timeConversion;
-      if (!isMC){
-        int id_hit = hit ->GetDetectorID();
-        hitTime = ScifiDet->GetCorrectedTime(id_hit, hitTime, 0);
+      if (!isMC && ScifiDet) {
+         int id_hit = hit->GetDetectorID();
+         hitTime = ScifiDet->GetCorrectedTime(id_hit, hitTime, 0);
+      } else {
+         hitTime = hit->GetTime() * timeConversion;
       }
       if (hitTime < min_x || hitTime > max_x) {
          continue;
@@ -162,6 +168,23 @@ float snd::analysis_tools::peakScifiTiming(const TClonesArray &digiHits, int bin
    }
 
    float peakTiming = (ScifiTiming.GetMaximumBin() - 0.5) * (max_x - min_x) / bins + min_x;
+
+   TSpectrum spectrum;
+   int nfound = spectrum.Search(&ScifiTiming, 1, "", 0.4);
+   // sigma=1 bins smoothing, threshold=0.05 (5% of max height)
+
+   // if there is more than 1 peak we want to check if the others appear earlier
+   if (nfound > 1) {
+
+      double *xpos = spectrum.GetPositionX();
+
+      for (int j = 0; j < spectrum.GetNPeaks(); j++) {
+
+         if (std::abs(static_cast<float>(xpos[j] - peakTiming)) >= 5) {
+            peakTiming = std::min(static_cast<float>(xpos[j]), peakTiming);
+         }
+      }
+   }
 
    return peakTiming;
 }
@@ -192,11 +215,10 @@ snd::analysis_tools::getScifiHits(const TClonesArray &digiHits, int station, boo
 // make_selection == true allows you to first perform a selection of the relevant hits, and only
 // afterwards apply the filter. This is recomended for when the selection has not been made
 // previously
-std::unique_ptr<TClonesArray> snd::analysis_tools::selectScifiHits(const TClonesArray &digiHits, int station,
-                                                                   bool orientation, int bins_x, float min_x,
-                                                                   float max_x, float time_lower_range,
-                                                                   float time_upper_range, bool make_selection,
-								   bool isMC)
+std::unique_ptr<TClonesArray>
+snd::analysis_tools::selectScifiHits(const TClonesArray &digiHits, int station, bool orientation, int bins_x,
+                                     float min_x, float max_x, float time_lower_range, float time_upper_range,
+                                     bool make_selection, bool isMC)
 {
 
    if (bins_x < 1) {
@@ -277,7 +299,7 @@ std::unique_ptr<TClonesArray> snd::analysis_tools::selectScifiHits(const TClones
 std::unique_ptr<TClonesArray>
 snd::analysis_tools::selectScifiHits(const TClonesArray &digiHits, int station, bool orientation,
                                      const std::map<std::string, float> &selection_parameters, bool make_selection,
-				     bool isMC)
+                                     bool isMC)
 {
 
    if ((selection_parameters.find("bins_x") == selection_parameters.end()) ||
@@ -300,8 +322,7 @@ snd::analysis_tools::selectScifiHits(const TClonesArray &digiHits, int station, 
 
    return selectScifiHits(digiHits, station, orientation, int(selection_parameters.at("bins_x")),
                           selection_parameters.at("min_x"), selection_parameters.at("max_x"),
-                          selection_parameters.at("time_lower_range"), time_upper_range, make_selection,
-			  isMC);
+                          selection_parameters.at("time_lower_range"), time_upper_range, make_selection, isMC);
 }
 
 std::unique_ptr<TClonesArray>
@@ -563,7 +584,7 @@ int snd::analysis_tools::showerInteractionWall(const TClonesArray &digiHits, int
    return showerInteractionWall(digiHits, selection_parameters, method, setup);
 }
 
-double computeMean(const std::vector<double>& values)
+double computeMean(const std::vector<double> &values)
 {
    double sum = std::accumulate(values.begin(), values.end(), 0.0);
    double mean = sum / values.size();
@@ -571,12 +592,12 @@ double computeMean(const std::vector<double>& values)
 }
 
 std::pair<double, double>
-snd::analysis_tools::findCentreOfGravityPerStation(const TClonesArray* digiHits, int station, Scifi* ScifiDet)
+snd::analysis_tools::findCentreOfGravityPerStation(const TClonesArray *digiHits, int station, Scifi *ScifiDet)
 {
    if (!digiHits) {
       LOG(ERROR) << "Error: digiHits is null in findCentreOfGravityPerStation";
    }
-   
+
    auto [x_positions, y_positions] = snd::analysis_tools::hitPositionVectorsPerStation(digiHits, station, ScifiDet);
 
    if (x_positions.empty()) {
@@ -590,25 +611,27 @@ snd::analysis_tools::findCentreOfGravityPerStation(const TClonesArray* digiHits,
    return {meanX, meanY};
 }
 
-std::pair<std::vector<double>,std::vector<double>> snd::analysis_tools::hitPositionVectorsPerStation(const TClonesArray *digiHits, int station, Scifi* ScifiDet){
-     /*This function returns the hit vector position for the digiHits in both orientations
-       Arguments:
-         digiHits: A TClonesArray containing the hits in the SciFi detector.
-         station: The station number for which to retrieve the hit positions.
-         ScifiDet: A pointer to the Scifi detector object to retrieve SiPM positions.
-       Returns:
-         A pair of vectors containing the x and y positions of the hits in the specified station.
-       If no hits are found, it returns empty vectors and logs an error message.
-     */
+std::pair<std::vector<double>, std::vector<double>>
+snd::analysis_tools::hitPositionVectorsPerStation(const TClonesArray *digiHits, int station, Scifi *ScifiDet)
+{
+   /*This function returns the hit vector position for the digiHits in both orientations
+     Arguments:
+       digiHits: A TClonesArray containing the hits in the SciFi detector.
+       station: The station number for which to retrieve the hit positions.
+       ScifiDet: A pointer to the Scifi detector object to retrieve SiPM positions.
+     Returns:
+       A pair of vectors containing the x and y positions of the hits in the specified station.
+     If no hits are found, it returns empty vectors and logs an error message.
+   */
 
-     if (!digiHits) {
-       LOG(ERROR) << "Error: digiHits is null";
-    }
-    std::vector<double> x_positions;
-    std::vector<double> y_positions;
+   if (!digiHits) {
+      LOG(ERROR) << "Error: digiHits is null";
+   }
+   std::vector<double> x_positions;
+   std::vector<double> y_positions;
 
-    TVector3 A, B;
-    for (auto* hit : ROOT::RRangeCast<sndScifiHit*, false, decltype(*digiHits)>(*digiHits)) {
+   TVector3 A, B;
+   for (auto *hit : ROOT::RRangeCast<sndScifiHit *, false, decltype(*digiHits)>(*digiHits)) {
       if (!hit || !hit->isValid()) {
          continue;
       }
@@ -618,113 +641,114 @@ std::pair<std::vector<double>,std::vector<double>> snd::analysis_tools::hitPosit
       ScifiDet->GetSiPMPosition(hit->GetDetectorID(), A, B);
       if (hit->isVertical()) {
          x_positions.push_back((A.X() + B.X()) * 0.5);
-      }
-      else {
+      } else {
          y_positions.push_back((A.Y() + B.Y()) * 0.5);
       }
-    }
-    if (x_positions.empty()) {
-       LOG(ERROR) << "Error: No hits enter.";
-    }
-    if (y_positions.empty()) {
-       LOG(ERROR) << "Error: No hits enter.";
-    }
-    return {x_positions, y_positions};
+   }
+   if (x_positions.empty()) {
+      LOG(ERROR) << "Error: No hits enter.";
+   }
+   if (y_positions.empty()) {
+      LOG(ERROR) << "Error: No hits enter.";
+   }
+   return {x_positions, y_positions};
 }
-  
 
-double hitWeightComputation(std::vector<double> hit_position) {
-    /* This function returns the summation of the hit weights 
-    where a hit weight is the number of neighbouring hits within 1 cm position (default width).
+double hitWeightComputation(std::vector<double> hit_position)
+{
+   /* This function returns the summation of the hit weights
+   where a hit weight is the number of neighbouring hits within 1 cm position (default width).
 
-    Arguments: 
-        hit_position: A vector containing the positions of the hits in a specific SciFi station.
-    
-    Returns: 
-        The sum of the weights of the hits in the vector.
-        Returns 0 if the vector is empty or if the sum of weights is 0.
+   Arguments:
+       hit_position: A vector containing the positions of the hits in a specific SciFi station.
+
+   Returns:
+       The sum of the weights of the hits in the vector.
+       Returns 0 if the vector is empty or if the sum of weights is 0.
+   */
+
+   if (hit_position.empty()) {
+      LOG(INFO) << "Warning: The hit position vector is empty." << std::endl;
+      return 0; // Return 0 if the vector is empty
+   }
+
+   int n_hits = hit_position.size();
+   double width = 1.0;          // Width around the hit to consider as a neighbour, in cm
+   std::vector<double> weights; // Vector to store the weights of each hit
+
+   // Sorting the hits for efficient neighbour counting
+   std::sort(hit_position.begin(), hit_position.end());
+
+   // Initialize pointers for the sliding window.
+   // Both pointers will only move forward (or stay put) across the outer loop iterations.
+   int left_ptr = 0;
+   int right_ptr = 0;
+
+   // Loop through each hit position to calculate its neighbour count
+   for (int i = 0; i < n_hits; i++) {
+      double specific_hit = hit_position[i];
+
+      // Move right_ptr forward to include all hits within (specific_hit + width).
+      // It will point to the first element *just outside* the right boundary of the window.
+      while (right_ptr < n_hits && hit_position[right_ptr] <= specific_hit + width) {
+         right_ptr++;
+      }
+
+      // Move left_ptr forward to exclude all hits *less than* (specific_hit - width).
+      // It will point to the first element *just inside* or at the left boundary of the window.
+      while (left_ptr < n_hits && hit_position[left_ptr] < specific_hit - width) {
+         left_ptr++;
+      }
+
+      // Calculate neighbouring hits within the window:
+      // The number of hits in the current window is (right_ptr - left_ptr).
+      // This count includes the 'specific_hit' itself.
+      double count_in_window = right_ptr - left_ptr;
+
+      // Subtract 1 to exclude the 'specific_hit' itself from the neighbour count.
+      // We must ensure that 'specific_hit' (hit_position[i]) is actually within the window
+      // defined by left_ptr and right_ptr. Since the array is sorted and we are iterating
+      // through 'i', hit_position[i] will always be between hit_position[left_ptr] and
+      // hit_position[right_ptr-1] (if left_ptr <= i < right_ptr).
+      double neighbour_no_of_hits = count_in_window - 1;
+
+      // Ensure the neighbour count is non-negative
+      if (neighbour_no_of_hits < 0) {
+         neighbour_no_of_hits = 0;
+      }
+
+      weights.push_back(neighbour_no_of_hits);
+   }
+
+   // Calculate the sum of all computed weights
+   double sum_weights = std::accumulate(weights.begin(), weights.end(), 0.0);
+
+   return sum_weights;
+}
+
+std::pair<double, double>
+snd::analysis_tools::hitDensityPerStation(const TClonesArray *digiHits, int station, Scifi *ScifiDet)
+{
+   /*
+    This function returns the hit density which is described as the summation of the hit weights
+    where a hit weigth is the number of neighbouring hits within 1 cm postion (default width)
+    arguments: hit position vector : vector ontaining the positions of the hits in a specific SciFi station
+    returns: the sum of the weights of the hits in the vector
+    If the vector is empty, it returns 0.
+    If the sum of weights is 0, it returns 0.
     */
+   std::pair<std::vector<double>, std::vector<double>> hit_position_vec =
+      hitPositionVectorsPerStation(digiHits, station, ScifiDet);
+   std::vector<double> hit_position_x = hit_position_vec.first;  // Assuming we are interested in X positions
+   std::vector<double> hit_position_y = hit_position_vec.second; // Assuming we are interested in Y positions
 
-    if (hit_position.empty()) {
-        LOG(INFO) << "Warning: The hit position vector is empty." << std::endl;
-        return 0; // Return 0 if the vector is empty
-    }
+   if (hit_position_x.size() == 0 && hit_position_y.size() == 0) {
+      LOG(INFO) << "Warning: The hit position vector is empty." << std::endl;
+      return {0.0, 0.0}; // Check if the vector is empty
+   }
 
-    int n_hits = hit_position.size();
-    double width = 1.0; // Width around the hit to consider as a neighbour, in cm
-    std::vector<double> weights; // Vector to store the weights of each hit
+   double sum_weights_x = hitWeightComputation(hit_position_x);
+   double sum_weights_y = hitWeightComputation(hit_position_y);
 
-    // Sorting the hits for efficient neighbour counting
-    std::sort(hit_position.begin(), hit_position.end());
-
-    // Initialize pointers for the sliding window.
-    // Both pointers will only move forward (or stay put) across the outer loop iterations.
-    int left_ptr = 0; 
-    int right_ptr = 0; 
-
-    // Loop through each hit position to calculate its neighbour count
-    for (int i = 0; i < n_hits; i++) {
-        double specific_hit = hit_position[i];
-        
-        // Move right_ptr forward to include all hits within (specific_hit + width).
-        // It will point to the first element *just outside* the right boundary of the window.
-        while (right_ptr < n_hits && hit_position[right_ptr] <= specific_hit + width) {
-            right_ptr++;
-        }
-        
-        // Move left_ptr forward to exclude all hits *less than* (specific_hit - width).
-        // It will point to the first element *just inside* or at the left boundary of the window.
-        while (left_ptr < n_hits && hit_position[left_ptr] < specific_hit - width) {
-            left_ptr++;
-        }
-        
-        // Calculate neighbouring hits within the window:
-        // The number of hits in the current window is (right_ptr - left_ptr).
-        // This count includes the 'specific_hit' itself.
-        double count_in_window = right_ptr - left_ptr;
-        
-        // Subtract 1 to exclude the 'specific_hit' itself from the neighbour count.
-        // We must ensure that 'specific_hit' (hit_position[i]) is actually within the window
-        // defined by left_ptr and right_ptr. Since the array is sorted and we are iterating
-        // through 'i', hit_position[i] will always be between hit_position[left_ptr] and 
-        // hit_position[right_ptr-1] (if left_ptr <= i < right_ptr).
-        double neighbour_no_of_hits = count_in_window - 1; 
-
-        // Ensure the neighbour count is non-negative
-        if (neighbour_no_of_hits < 0) {
-            neighbour_no_of_hits = 0; 
-        }
-        
-        weights.push_back(neighbour_no_of_hits);
-    }
-
-    // Calculate the sum of all computed weights
-    double sum_weights = std::accumulate(weights.begin(), weights.end(), 0.0);
-
-    return sum_weights;
+   return {sum_weights_x, sum_weights_y};
 }
-
-std::pair<double,double> snd::analysis_tools::hitDensityPerStation(const TClonesArray *digiHits, int station, Scifi* ScifiDet){
-    /* 
-     This function returns the hit density which is described as the summation of the hit weights 
-     where a hit weigth is the number of neighbouring hits within 1 cm postion (default width)
-     arguments: hit position vector : vector ontaining the positions of the hits in a specific SciFi station
-     returns: the sum of the weights of the hits in the vector
-     If the vector is empty, it returns 0.
-     If the sum of weights is 0, it returns 0.
-     */
-    std::pair<std::vector<double>, std::vector<double>> hit_position_vec = hitPositionVectorsPerStation(digiHits, station, ScifiDet);
-    std::vector<double> hit_position_x = hit_position_vec.first; // Assuming we are interested in X positions
-    std::vector<double> hit_position_y = hit_position_vec.second; // Assuming we are interested in Y positions
-
-    if (hit_position_x.size()==0 && hit_position_y.size()==0) {
-        LOG(INFO)<< "Warning: The hit position vector is empty." << std::endl;
-        return {0.0,0.0}; // Check if the vector is empty
-    }
-
-    double sum_weights_x = hitWeightComputation(hit_position_x);
-    double sum_weights_y = hitWeightComputation(hit_position_y);
-
-    return {sum_weights_x, sum_weights_y};
-}
-
