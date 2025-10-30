@@ -34,4 +34,4 @@ Set(DEPENDENCIES shipLHC)
 
 GENERATE_LIBRARY()
 
-target_link_libraries(snd_analysis_tools -lROOTTPython -lMatrix -lMathCore -lCore)
+target_link_libraries(snd_analysis_tools -lROOTTPython -lMatrix -lMathCore -lCore Spectrum)
