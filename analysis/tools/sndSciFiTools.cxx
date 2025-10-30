@@ -11,6 +11,7 @@
 #include "Scifi.h"
 #include "TROOT.h"
 #include "ROOT/RRangeCast.hxx"
+#include "TSpectrum.h"
 
 void snd::analysis_tools::getSciFiHitsPerStation(const TClonesArray *digiHits, std::vector<int> &horizontal_hits,
                                                  std::vector<int> &vertical_hits)
@@ -128,13 +129,17 @@ float snd::analysis_tools::peakScifiTiming(const TClonesArray &digiHits, int bin
 {
 
    if (digiHits.GetEntries() <= 0) {
-      LOG(warning) << "digiHits has no valid SciFi Hits and as such no maximum for the timing distribution.";
+      //LOG(warning) << "digiHits has no valid SciFi Hits and as such no maximum for the timing distribution.";
       return -1.;
    }
 
    TH1F ScifiTiming("Timing", "Scifi Timing", bins, min_x, max_x);
 
    Scifi *ScifiDet = dynamic_cast<Scifi*> (gROOT->GetListOfGlobals()->FindObject("Scifi") );
+   std::cout << "Passed the Scifi loading part" << std::endl;
+   if (!ScifiDet){
+      std::cout << "ScifiDet did not load as predicted and the check worked." << std::endl;
+   }
    auto* hit = static_cast<sndScifiHit*>(digiHits[0]);
    int refStation = hit->GetStation();
    bool refOrientation = hit->isVertical();
@@ -149,10 +154,12 @@ float snd::analysis_tools::peakScifiTiming(const TClonesArray &digiHits, int bin
       if (!validateHit(hit, refStation, refOrientation)) {
          continue;
       }
-      hitTime = hit->GetTime() * timeConversion;
-      if (!isMC){
+      if (!isMC && ScifiDet){
         int id_hit = hit ->GetDetectorID();
         hitTime = ScifiDet->GetCorrectedTime(id_hit, hitTime, 0);
+      }
+      else {
+	hitTime = hit->GetTime() * timeConversion;
       }
       if (hitTime < min_x || hitTime > max_x) {
          continue;
@@ -162,6 +169,23 @@ float snd::analysis_tools::peakScifiTiming(const TClonesArray &digiHits, int bin
    }
 
    float peakTiming = (ScifiTiming.GetMaximumBin() - 0.5) * (max_x - min_x) / bins + min_x;
+
+   TSpectrum spectrum;
+   int nfound = spectrum.Search( &ScifiTiming, 1, "", 0.4);
+   // sigma=1 bins smoothing, threshold=0.05 (5% of max height)
+   
+   // if there is more than 1 peak we want to check if the others appear earlier
+   if (nfound > 1){
+	
+	double* xpos = spectrum.GetPositionX();
+
+	for (int j = 0; j < spectrum.GetNPeaks(); j++){
+
+	    if (std::abs(static_cast<float>(xpos[j] - peakTiming)) >= 5) {
+		peakTiming = std::min(static_cast<float>(xpos[j]), peakTiming);
+	    }
+	}
+   }
 
    return peakTiming;
 }
