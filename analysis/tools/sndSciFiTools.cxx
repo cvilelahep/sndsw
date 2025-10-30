@@ -129,7 +129,7 @@ float snd::analysis_tools::peakScifiTiming(const TClonesArray &digiHits, int bin
 {
 
    if (digiHits.GetEntries() <= 0) {
-      // LOG(warning) << "digiHits has no valid SciFi Hits and as such no maximum for the timing distribution.";
+      LOG(warning) << "digiHits has no valid SciFi Hits and as such no maximum for the timing distribution.";
       return -1.;
    }
 
