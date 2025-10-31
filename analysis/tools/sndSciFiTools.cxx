@@ -136,10 +136,6 @@ float snd::analysis_tools::peakScifiTiming(const TClonesArray &digiHits, int bin
    TH1F ScifiTiming("Timing", "Scifi Timing", bins, min_x, max_x);
 
    Scifi *ScifiDet = dynamic_cast<Scifi *>(gROOT->GetListOfGlobals()->FindObject("Scifi"));
-   std::cout << "Passed the Scifi loading part" << std::endl;
-   if (!ScifiDet) {
-      std::cout << "ScifiDet did not load as predicted and the check worked." << std::endl;
-   }
    auto *hit = static_cast<sndScifiHit *>(digiHits[0]);
 
    int refStation = hit->GetStation();
