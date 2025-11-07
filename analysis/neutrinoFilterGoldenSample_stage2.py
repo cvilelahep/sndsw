@@ -438,7 +438,6 @@ for this_cut_name, cut_function, short_name, nbins, range_start, range_end in cu
     n_minus_1_var_histos.append(ROOT.TH1D("n_minus_1_"+short_name+"_0", short_name,
                                           nbins, range_start, range_end))
 
-
 #import matplotlib.pyplot as plt
 
 #dca_for_hist = []
@@ -477,7 +476,7 @@ with open("nu_candidates_summary.txt", "w") as output_nu_cand_summary :
                     break
     #        for i_hist in range(len(cut_by_cut_var_histos[seq_cut+1])) :
             for i_cut_var, this_cut_var in enumerate(cut_var) :
-                cut_by_cut_var_histos[seq_cut+1][i_cut_var].Fill(this_cut_var)
+                cut_by_cut_var_histos[seq_cut+1][i_cut_var].Fill(float(this_cut_var))
             if isMC :
                 this_species = -1
                 if len(event.MCTrack) < 2 :
@@ -508,7 +507,7 @@ with open("nu_candidates_summary.txt", "w") as output_nu_cand_summary :
         # N-1
         for i_cut in range(len(passes_cut)) :
             if ((not passes_cut[i_cut] and n_cuts_passed == (len(passes_cut)-1))) or (n_cuts_passed == len(passes_cut)) :
-                n_minus_1_var_histos[i_cut].Fill(cut_var[i_cut])
+                n_minus_1_var_histos[i_cut].Fill(float(cut_var[i_cut]))
     
         if (n_cuts_passed == len(passes_cut)) :
             print("EVENT {0}".format(i_pass))
@@ -589,6 +588,10 @@ with open("nu_candidates_summary.txt", "w") as output_nu_cand_summary :
 #plt.hist(dts, bins = 100)
 #plt.show()
 
+# Set up noMCTracksHistogram
+if f.Get("No_MCTracks"):
+    no_MCTracks = f.Get("No_MCTracks")
+    no_MCTracks.Write()
 cut_flow_extended.Write()
 output_file.Write()
 output_file.Close()
