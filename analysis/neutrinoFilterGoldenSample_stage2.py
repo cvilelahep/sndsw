@@ -495,7 +495,7 @@ with open("nu_candidates_summary.txt", "w") as output_nu_cand_summary :
                     this_species = 3
                 else :
                     this_species = 4
-                if len(event.MCTrack == 0): continue
+                if len(event.MCTrack) == 0: continue
                 cut_by_cut_truth_histos[this_species][seq_cut+1][0].Fill(event.MCTrack[0].GetEnergy())
                 if this_species < 4 :
                     cut_by_cut_truth_histos[this_species][seq_cut+1][1].Fill(event.MCTrack[1].GetEnergy())
