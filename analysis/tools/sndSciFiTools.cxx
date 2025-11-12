@@ -166,7 +166,7 @@ float snd::analysis_tools::peakScifiTiming(const TClonesArray &digiHits, int bin
    float peakTiming = (ScifiTiming.GetMaximumBin() - 0.5) * (max_x - min_x) / bins + min_x;
 
    TSpectrum spectrum;
-   int nfound = spectrum.Search(&ScifiTiming, 1, "", 0.4);
+   int nfound = spectrum.Search(&ScifiTiming, 1, "goff", 0.4);
    // sigma=1 bins smoothing, threshold=0.05 (5% of max height)
 
    // if there is more than 1 peak we want to check if the others appear earlier
