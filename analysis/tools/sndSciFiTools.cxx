@@ -151,11 +151,10 @@ float snd::analysis_tools::peakScifiTiming(const TClonesArray &digiHits, int bin
       if (!validateHit(hit, refStation, refOrientation)) {
          continue;
       }
+      hitTime = hit->GetTime() * timeConversion;
       if (!isMC && ScifiDet) {
          int id_hit = hit->GetDetectorID();
          hitTime = ScifiDet->GetCorrectedTime(id_hit, hitTime, 0);
-      } else {
-         hitTime = hit->GetTime() * timeConversion;
       }
       if (hitTime < min_x || hitTime > max_x) {
          continue;
