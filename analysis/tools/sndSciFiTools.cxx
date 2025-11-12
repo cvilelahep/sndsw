@@ -341,10 +341,13 @@ snd::analysis_tools::filterScifiHits(const TClonesArray &digiHits,
    TClonesArray supportArray("sndScifiHit", 0);
    auto filteredHits = std::make_unique<TClonesArray>("sndScifiHit", digiHits.GetEntries());
    int filteredHitsIndex = 0;
-   int ScifiStations = 5;
+   int ScifiStations;
    if (setup == "H8") {
       ScifiStations = 4;
+   } else if (setup == "TI18") {
+      ScifiStations = 5;
    } else {
+      ScifiStations = 5;
       LOG(info) << "\"TI18\" setup will be used by default, please provide \"H8\" for the Testbeam setup.";
    }
 
@@ -527,10 +530,13 @@ int snd::analysis_tools::showerInteractionWall(const TClonesArray &digiHits,
                                                std::string setup)
 {
 
-   int totalScifiStations = 5;
+   int totalScifiStations;
    if (setup == "H8") {
       totalScifiStations = 4;
+   } else if (setup == "TI18"){
+      totalScifiStations = 5;
    } else {
+      totalScifiStations = 5;
       LOG(info) << "\"TI18\" setup will be used by default, please provide \"H8\" for the Testbeam setup.";
    }
 
