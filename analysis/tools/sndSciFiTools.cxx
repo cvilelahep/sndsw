@@ -239,11 +239,11 @@ snd::analysis_tools::selectScifiHits(const TClonesArray &digiHits, int station, 
       LOG(FATAL) << "In selection_parameters time_upper_range <= 0.0. Value should always be positive, in ns.";
    }
 
+   Scifi *ScifiDet = dynamic_cast<Scifi *>(gROOT->GetListOfGlobals()->FindObject("Scifi"));
    auto filteredHits = std::make_unique<TClonesArray>("sndScifiHit", digiHits.GetEntries());
-
    float peakTiming = -1.0;
-
    float timeConversion = 1.;
+   float hitTime = -1.0;
    if (!isMC) {
       timeConversion = 1E9 / (ShipUnit::snd_freq / ShipUnit::hertz);
    }
@@ -260,8 +260,14 @@ snd::analysis_tools::selectScifiHits(const TClonesArray &digiHits, int station, 
          if (!validateHit(hit, station, orientation)) {
             continue;
          }
-         if ((peakTiming - time_lower_range > hit->GetTime() * timeConversion) ||
-             (hit->GetTime() * timeConversion > peakTiming + time_upper_range)) {
+	 hitTime = -1.0;
+	 hitTime = hit->GetTime() * timeConversion;
+         if (!isMC && ScifiDet) {
+            int id_hit = hit->GetDetectorID();
+            hitTime = ScifiDet->GetCorrectedTime(id_hit, hitTime, 0);
+         }
+         if ((peakTiming - time_lower_range > hitTime) ||
+             (hitTime > peakTiming + time_upper_range)) {
             continue;
          }
          new ((*filteredHits)[i++]) sndScifiHit(*hit);
@@ -278,8 +284,14 @@ snd::analysis_tools::selectScifiHits(const TClonesArray &digiHits, int station, 
          if (!validateHit(hit, station, orientation)) {
             continue;
          }
-         if ((peakTiming - time_lower_range > hit->GetTime() * timeConversion) ||
-             (hit->GetTime() * timeConversion > peakTiming + time_upper_range)) {
+	 hitTime = -1.0;
+	 hitTime = hit->GetTime() * timeConversion;
+         if (!isMC && ScifiDet) {
+            int id_hit = hit->GetDetectorID();
+            hitTime = ScifiDet->GetCorrectedTime(id_hit, hitTime, 0);
+         }
+         if ((peakTiming - time_lower_range > hitTime) ||
+             (hitTime > peakTiming + time_upper_range)) {
             continue;
          }
          new ((*filteredHits)[i++]) sndScifiHit(*hit);
