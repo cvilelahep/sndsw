@@ -336,7 +336,6 @@ snd::analysis_tools::filterScifiHits(const TClonesArray &digiHits,
       LOG(info) << "\"TI18\" setup will be used by default, please provide \"H8\" for the Testbeam setup.";
    }
 
-   sndScifiHit *hit;
    TIter hitIterator(&supportArray);
 
    if (method == 0) {
