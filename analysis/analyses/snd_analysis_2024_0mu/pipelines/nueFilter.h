@@ -2,6 +2,8 @@
 
 #include "sndFilterProcessBase.h"
 
+#include "sndSciFiHitFilter.h"
+
 #include "sndStableBeams.h"
 #include "sndIP1.h"
 #include "sndEventDeltat.h"
@@ -30,6 +32,9 @@ if (not isMC) {
   pipeline.push_back( new snd::analysis_cuts::ip1Cut());
   pipeline.push_back( new snd::analysis_cuts::eventDeltatCut(-1, 100)); // J. Previous event more than 100 clock cycles away. To avoid deadtime issues.
  }
+
+pipeline.push_back(new snd::analysis_processes::sciFiHitFilter(0.5*6.25, 1.2*6.25, 52, 0, 26)); // Select SciFi hits within [-0.5, 1.2] clock cycles of peak time
+
 pipeline.push_back( new snd::analysis_cuts::avgSciFiFiducialCut(200, 1200, 300, 128*12-200)); // E. Average SciFi hit channel number must be within [200, 1200] (ver) and [300, max-200] (hor)
 pipeline.push_back( new snd::analysis_cuts::USBarsVeto(std::vector<std::pair<int, double> >{{0, 2.}, {1, 2.}}, true)); // Reject events with hits in lowest bars in first two US planes
 pipeline.push_back( new snd::analysis_cuts::USBarsVeto(std::vector<std::pair<int, double> >{{0, 8.}, {1, 8.}}, false)); // Reject events with hits in highest bars in first two US planes
